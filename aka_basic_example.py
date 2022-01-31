@@ -118,7 +118,7 @@ class BasicExample:
                 else:
                     tmp[0] = 0x02
                 self._master.slaves[1].output = bytes(tmp)
-                self._master.slaves[1].sdo_write(0x8010, 2, 0x3fff, True)
+                self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 toggle ^= True
 
                 time.sleep(1)
