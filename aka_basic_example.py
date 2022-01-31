@@ -109,6 +109,9 @@ class BasicExample:
         output_len = len(self._master.slaves[1].output)
         print(len(self._master.slaves[1].output))
         tmp = bytearray([0 for i in range(output_len)])
+        rx_map_obj = [0x8010, 0x3fff, 0x8020, 0x7fff]
+        rx_map_obj_bytes = struct.pack(
+            'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(tmp), *tmp)
 
         toggle = True
         try:
@@ -118,7 +121,7 @@ class BasicExample:
                 else:
                     tmp[0] = 0x02
                 self._master.slaves[1].output = bytes(tmp)
-                self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
+                # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 toggle ^= True
 
                 time.sleep(1)
