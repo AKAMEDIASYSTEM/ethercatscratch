@@ -62,7 +62,7 @@ class BasicExample:
     def trySet(self, slave_pos):
         '''Try to set ch1 to middle of range.'''
         slave = self._master.slaves[slave_pos]
-        rx_map_obj = [0x3fff]
+        rx_map_obj = [0x3fff, 0x7fff]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
@@ -110,9 +110,9 @@ class BasicExample:
         print(len(self._master.slaves[1].output))
         print(self._master.slaves[1].output)
         tmp = bytearray([0 for i in range(output_len)])
-        rx_map_obj = [0x8010, 0x3fff, 0x8020, 0x7fff]
+        rx_map_obj = [0x3fff, 0x7fff]
         rx_map_obj_bytes = struct.pack(
-            'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(tmp), *tmp)
+            'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         tmp[0] = bytes(0x8010)
         tmp[1] = bytes(0x3fff)
         tmp[2] = bytes(0x8020)
@@ -124,7 +124,7 @@ class BasicExample:
                     tmp[1] = 0x0000
                 else:
                     tmp[1] = 0x3fff
-                self._master.slaves[1].output = bytes(tmp)
+                self._master.slaves[1].output = rx_map_obj
                 # self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 toggle ^= True
