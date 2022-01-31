@@ -120,9 +120,9 @@ class BasicExample:
         try:
             while 1:
                 if toggle:
-                    tmp[1] = 0x0000
+                    tmp[1] = bytes(0x0000)
                 else:
-                    tmp[1] = 0x3fff
+                    tmp[1] = (bytes(0x3fff)
                 # self._master.slaves[1].output = bytes(tmp)
                 self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
