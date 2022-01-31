@@ -126,7 +126,7 @@ class BasicExample:
                     print('resetting counter to go down')
                     toggle ^= True
                     counter = 0
-                if counter < 0x0000:
+                if counter < 0x0001:
                     print('resetting coutner to go up')
                     toggle ^= True
                     counter = 0
