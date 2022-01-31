@@ -22,7 +22,7 @@ class BasicExample:
     EK1100_PRODUCT_CODE = 0x044c2c52
     EL3002_PRODUCT_CODE = 0x0bba3052
     EL1259_PRODUCT_CODE = 0x04eb3052
-    EL4102_PRODUCE_CODE = 0x10063052 # 2-chan 16-bit
+    EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 16-bit
     EL4008_PRODUCT_CODE = 0x0fa83052 # 8-chan 12-bit
 
     def __init__(self, ifname):
