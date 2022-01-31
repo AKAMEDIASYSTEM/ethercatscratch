@@ -36,36 +36,21 @@ class BasicExample:
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el1259_setup),
-                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
+                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
                                        }
         # self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
         #                                1: SlaveSet('EL3002', self.EL3002_PRODUCT_CODE, None),
         #                                2: SlaveSet('EL1259', self.EL1259_PRODUCT_CODE, self.el1259_setup)}
 
-    def el1259_setup(self, slave_pos):
+    def el4102_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
 
         slave.sdo_write(0x8001, 2, struct.pack('B', 1))
 
-        rx_map_obj = [0x1603,
-                      0x1607,
-                      0x160B,
-                      0x160F,
-                      0x1611,
-                      0x1617,
-                      0x161B,
-                      0x161F,
-                      0x1620,
-                      0x1621,
-                      0x1622,
-                      0x1623,
-                      0x1624,
-                      0x1625,
-                      0x1626,
-                      0x1627]
+        rx_map_obj = [0xf0]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x1c12, 0, rx_map_obj_bytes, True)
+        slave.sdo_write(0x4063, 0, rx_map_obj_bytes, True)
 
         slave.dc_sync(1, 10000000)
 
