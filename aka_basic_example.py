@@ -130,7 +130,7 @@ class BasicExample:
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 toggle ^= True
 
-                time.sleep(0.1)
+                time.sleep(0.01)
 
         except KeyboardInterrupt:
             # ctrl-C abort handling
