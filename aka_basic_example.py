@@ -121,9 +121,10 @@ class BasicExample:
         try:
             while 1:
                 if toggle:
-                    tmp[0] = 0x00
+                    rx_map_obj[0] = 0x0000
                 else:
-                    tmp[0] = 0x02
+                    rx_map_obj[0] = 0x7fff
+                rx_map_obj_bytes = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
