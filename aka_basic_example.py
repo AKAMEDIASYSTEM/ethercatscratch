@@ -103,7 +103,7 @@ class BasicExample:
             time.sleep(0.01)
 
     def _pdo_update_loop(self):
-
+        print('in update_loop')
         self._master.in_op = True
 
         output_len = len(self._master.slaves[1].output)
