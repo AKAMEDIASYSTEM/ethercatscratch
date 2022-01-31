@@ -35,7 +35,7 @@ class BasicExample:
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el1259_setup),
+                                       # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
                                        1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
                                        }
         # self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -52,12 +52,20 @@ class BasicExample:
         # 0x4061:05 is write an abs val to ch1
         # 0x40a1:05 is write abs val to ch2
         # (I think)
+        # rx_map_obj = [0x3fff]
+        # rx_map_obj_bytes = struct.pack(
+        #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
+        # slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
+        slave.dc_sync(1, 10000000)
+        print('done setup EL4102')
+
+    def trySet(self, slave_pos):
+        '''Try to set ch1 to middle of range.'''
+        slave = self._master.slaves[slave_pos]
         rx_map_obj = [0x3fff]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
-
-        slave.dc_sync(1, 10000000)
 
     def el1259_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
@@ -99,7 +107,7 @@ class BasicExample:
         self._master.in_op = True
 
         output_len = len(self._master.slaves[1].output)
-
+        print(self._master.slaves[1].output)
         tmp = bytearray([0 for i in range(output_len)])
 
         toggle = True
@@ -113,7 +121,7 @@ class BasicExample:
 
                 toggle ^= True
 
-                time.sleep(0.5)
+                time.sleep(1)
 
         except KeyboardInterrupt:
             # ctrl-C abort handling
