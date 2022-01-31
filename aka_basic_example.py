@@ -124,7 +124,7 @@ class BasicExample:
                     tmp[0] = 0x00
                 else:
                     tmp[0] = 0x02
-                self._master.slaves[1].output = rx_map_obj
+                self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 toggle ^= True
