@@ -122,6 +122,7 @@ class BasicExample:
         try:
             while 1:
                 if counter > 0x7fff:
+                    print('resetting counter')
                     counter = 0
                 if toggle:
                     rx_map_obj[0] = 0x0000
