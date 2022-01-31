@@ -112,14 +112,17 @@ class BasicExample:
         rx_map_obj = [0x8010, 0x3fff, 0x8020, 0x7fff]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(tmp), *tmp)
-
+        tmp[0] = bytes(0x8010)
+        tmp[1] = bytes(0x3fff)
+        tmp[2] = bytes(0x8020)
+        tmp[3] = bytes(0x7fff)
         toggle = True
         try:
             while 1:
                 if toggle:
-                    tmp[0] = 0x00
+                    tmp[1] = 0x0000
                 else:
-                    tmp[0] = 0x02
+                    tmp[1] = 0x3fff
                 # self._master.slaves[1].output = bytes(tmp)
                 self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
