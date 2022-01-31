@@ -107,7 +107,7 @@ class BasicExample:
         self._master.in_op = True
 
         output_len = len(self._master.slaves[1].output)
-        print(self._master.slaves[1].output)
+        print(len(self._master.slaves[1].output))
         tmp = bytearray([0 for i in range(output_len)])
 
         toggle = True
