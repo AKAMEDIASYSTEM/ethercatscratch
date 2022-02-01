@@ -135,6 +135,7 @@ class BasicExample:
                     toggle ^= True
                     # counter = 0
                 rx_map_obj[0] = counter
+                rx_map_obj[1] - 0x7fff - counter
                 # rx_map_obj[2] = counter
                 rx_map_obj_bytes = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 self._master.slaves[1].output = rx_map_obj_bytes
