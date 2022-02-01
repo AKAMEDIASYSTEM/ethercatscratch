@@ -119,7 +119,7 @@ class BasicExample:
         # tmp[3] = bytes(0x7fff)
         toggle = True
         counter = 0x0000
-        step = 10000
+        step = 1000
         try:
             while 1:
 
@@ -133,7 +133,7 @@ class BasicExample:
                 if counter <= 0x0001:
                     # print('resetting coutner to go up')
                     toggle ^= True
-                    counter = 0
+                    # counter = 0
                 rx_map_obj[0] = counter
                 # rx_map_obj[2] = counter
                 rx_map_obj_bytes = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
