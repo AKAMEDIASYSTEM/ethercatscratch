@@ -119,7 +119,7 @@ class BasicExample:
         # tmp[3] = bytes(0x7fff)
         toggle = True
         counter = 0x0000
-        step = 10000
+        step = 1000
         try:
             while 1:
 
@@ -128,10 +128,10 @@ class BasicExample:
                 else:
                     counter = counter - step
                 if counter >= 0x7fff:
-                    print('resetting counter to go down')
+                    # print('resetting counter to go down')
                     toggle ^= True
                 if counter <= 0x0001:
-                    print('resetting coutner to go up')
+                    # print('resetting coutner to go up')
                     toggle ^= True
                     counter = 0
                 rx_map_obj[0] = counter
