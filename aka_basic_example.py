@@ -125,20 +125,17 @@ class BasicExample:
 
                 if toggle:
                     counter = counter + step
-                    # rx_map_obj[0] = 0x0000
                 else:
                     counter = counter - step
-                    # rx_map_obj[0] = 0x7fff
                 if counter > 0x7fff:
                     print('resetting counter to go down')
                     toggle ^= True
-                    # counter = 0
                 if counter < 0x0001:
                     print('resetting coutner to go up')
                     toggle ^= True
                     counter = 0
                 rx_map_obj[0] = counter
-                rx_map_obj[2] = 0x7fff - counter
+                rx_map_obj[2] = counter
                 rx_map_obj_bytes = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].output = rx_map_obj_bytes
