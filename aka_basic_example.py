@@ -119,7 +119,7 @@ class BasicExample:
         # tmp[3] = bytes(0x7fff)
         toggle = True
         counter = 0x0000
-        step = 1000
+        step = 10000
         try:
             while 1:
 
