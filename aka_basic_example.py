@@ -127,10 +127,10 @@ class BasicExample:
                     counter = counter + step
                 else:
                     counter = counter - step
-                if counter > 0x7fff:
+                if counter >= 0x7fff:
                     print('resetting counter to go down')
                     toggle ^= True
-                if counter < 0x0001:
+                if counter <= 0x0001:
                     print('resetting coutner to go up')
                     toggle ^= True
                     counter = 0
