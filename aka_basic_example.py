@@ -134,7 +134,7 @@ class BasicExample:
                 print(rx_map_obj_bytes)
                 # self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
-                time.sleep(0.01)
+                time.sleep(0.001)
 
         except KeyboardInterrupt:
             # ctrl-C abort handling
