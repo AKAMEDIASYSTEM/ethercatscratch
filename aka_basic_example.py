@@ -59,14 +59,6 @@ class BasicExample:
         slave.dc_sync(1, 10000000)
         print('done setup EL4102')
 
-    def trySet(self, slave_pos):
-        '''Try to set ch1 to middle of range.'''
-        slave = self._master.slaves[slave_pos]
-        rx_map_obj = [0x3fff, 0x7fff]
-        rx_map_obj_bytes = struct.pack(
-            'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
-
     def el1259_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
 
@@ -100,7 +92,7 @@ class BasicExample:
             self._actual_wkc = self._master.receive_processdata(10000)
             if not self._actual_wkc == self._master.expected_wkc:
                 print('incorrect wkc')
-            time.sleep(0.01)
+            time.sleep(0.001)
 
     def _pdo_update_loop(self):
         print('in update_loop')
@@ -119,7 +111,7 @@ class BasicExample:
         # tmp[3] = bytes(0x7fff)
         toggle = True
         counter = 0x0000
-        step = 1000
+        step = 100
         try:
             while 1:
 
