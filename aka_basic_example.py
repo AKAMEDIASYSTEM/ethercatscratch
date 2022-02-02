@@ -114,18 +114,17 @@ class BasicExample:
         step = 3200
         try:
             while 1:
-
                 if toggle:
                     counter = counter + step
                 else:
                     counter = counter - step
+                
                 if counter >= 0x7ffe:
-                    # print('resetting counter to go down')
+                    counter = 0x7ffe
                     toggle ^= True
                 if counter <= 0x0001:
-                    # print('resetting coutner to go up')
+                    counter = 0x001
                     toggle ^= True
-                    # counter = 0
                 rx_map_obj[0] = counter
                 rx_map_obj[1] = max(0x7ffe - counter, 0)
                 # rx_map_obj[2] = counter
