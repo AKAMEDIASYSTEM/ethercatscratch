@@ -98,6 +98,8 @@ class BasicExample:
         output_len = len(self._master.slaves[1].output)
         print(len(self._master.slaves[1].output))
         print(self._master.slaves[1].output)
+        for j in self._master.slaves:
+            print(j)
         tmp = bytearray([0 for i in range(output_len)])
         rx_map_obj = [0x3fff, 0x7fff]
         rx_map_obj_bytes = struct.pack(
