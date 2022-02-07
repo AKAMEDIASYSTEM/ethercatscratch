@@ -41,9 +41,7 @@ class BasicExample:
 
     def el4102_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
-
         # slave.sdo_write(0x8001, 2, struct.pack('B', 1))
-        
         # 0x3fff is 5v, 0x7fff is 10v
         # https://infosys.beckhoff.com/english.php?content=../content/1033/el41xx/1851316619.html#1714645131&id=
         # 0x4061:05 is write an abs val to ch1
