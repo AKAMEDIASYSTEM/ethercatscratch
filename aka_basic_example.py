@@ -38,7 +38,9 @@ class BasicExample:
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None)
                                        1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
-                                       2: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup)
+                                       2: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
+                                       3: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       4: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup)
                                        }
 
     def el4102_setup(self, slave_pos):
