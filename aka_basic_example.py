@@ -116,7 +116,7 @@ class BasicExample:
         print(self._master.slaves[1].output)
         tmp = bytearray([0 for i in range(2*output_len)])
         rx_map_obj = [0x3fff, 0x3fff]
-        rx_map_obj_bytes = struct.pack(
+        tmp = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         # tmp[0] = bytes(0x8010)
         # tmp[1] = bytes(0x3fff)
@@ -142,8 +142,8 @@ class BasicExample:
                 # rx_map_obj[1] = max(0x7ffe - counter, 0)
                 # rx_map_obj[1] = 1024
                 rx_map_obj[2] = counter
-                rx_map_obj_bytes = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-                self._master.slaves[1].output = rx_map_obj_bytes
+                tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
+                self._master.slaves[1].output = tmp
                 # print(rx_map_obj)
                 # print(rx_map_obj_bytes)
                 # self._master.slaves[1].output = rx_map_obj_bytes
