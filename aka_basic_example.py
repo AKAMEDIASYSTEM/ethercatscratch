@@ -57,7 +57,7 @@ class BasicExample:
         # slave.sdo_write(0x1011, 0, struct.pack('B', 1))
         
         # sending this is supposed to factory-default the unit
-        slave.sdo_write(0x1011, 1, bytes(ctypes.c_uint32(0x64616F6C)))
+        # slave.sdo_write(0x1011, 1, bytes(ctypes.c_uint32(0x64616F6C)))
         # sending this should 
         slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         # slave.dc_sync(1, 10000000)
@@ -124,7 +124,7 @@ class BasicExample:
         # tmp[3] = bytes(0x7fff)
         toggle = True
         counter = 0x0000
-        step = 6400 # step size at sleep=0.0005 gets us 1ch of 120hz
+        step = 1024 # 6400 step size at sleep=0.0005 gets us 1ch of 120hz
         try:
             while 1:
                 if toggle:
@@ -138,7 +138,7 @@ class BasicExample:
                 if counter <= 0x0001:
                     counter = 0x001
                     toggle ^= True
-                rx_map_obj[0] = counter
+                rx_map_obj[1] = counter
                 # rx_map_obj[1] = max(0x7ffe - counter, 0)
                 # rx_map_obj[1] = 1024
                 rx_map_obj[1] = counter
