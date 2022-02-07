@@ -53,7 +53,7 @@ class BasicExample:
         # slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
         # slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         # If this object is set to “0x64616F6C” in the set value dialog, all backup objects are reset to their delivery state
-        slave.sdo_write(0x1011, 0, struct.pack('B', 1))
+        # slave.sdo_write(0x1011, 0, struct.pack('B', 1))
         slave.sdo_write(0x1011, 1, struct.pack('B', 0x64616F6C))
         # slave.dc_sync(1, 10000000)
         print('done setup EL4102')
@@ -263,14 +263,14 @@ class BasicExampleError(Exception):
 
 if __name__ == '__main__':
 
-    print('basic_example started')
+    print('aka_basic_example started')
 
     if len(sys.argv) > 1:
         try:
             BasicExample(sys.argv[1]).run()
         except BasicExampleError as expt:
-            print('basic_example failed: ' + expt.message)
+            print('aka_basic_example failed: ' + expt.message)
             sys.exit(1)
     else:
-        print('usage: basic_example ifname')
+        print('usage: aka_basic_example ifname')
         sys.exit(1)
