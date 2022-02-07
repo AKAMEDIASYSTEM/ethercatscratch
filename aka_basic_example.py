@@ -114,7 +114,7 @@ class BasicExample:
 
         output_len = len(self._master.slaves[1].output)
         print(self._master.slaves[1].output)
-        tmp = bytearray([0 for i in range(output_len)])
+        tmp = bytearray([0 for i in range(2*output_len)])
         rx_map_obj = [0x3fff, 0x3fff]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
@@ -124,7 +124,7 @@ class BasicExample:
         # tmp[3] = bytes(0x7fff)
         toggle = True
         counter = 0x0000
-        step = 1024 # 6400 step size at sleep=0.0005 gets us 1ch of 120hz
+        step = 6400 # 6400 step size at sleep=0.0005 gets us 1ch of 120hz
         try:
             while 1:
                 if toggle:
@@ -138,10 +138,10 @@ class BasicExample:
                 if counter <= 0x0001:
                     counter = 0x001
                     toggle ^= True
-                rx_map_obj[1] = counter
+                rx_map_obj[0] = counter
                 # rx_map_obj[1] = max(0x7ffe - counter, 0)
                 # rx_map_obj[1] = 1024
-                rx_map_obj[1] = counter
+                rx_map_obj[2] = counter
                 rx_map_obj_bytes = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 self._master.slaves[1].output = rx_map_obj_bytes
                 # print(rx_map_obj)
