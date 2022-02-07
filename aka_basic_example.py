@@ -10,6 +10,7 @@ import sys
 import struct
 import time
 import threading
+import ctypes
 
 from collections import namedtuple
 
