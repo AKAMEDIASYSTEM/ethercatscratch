@@ -55,7 +55,11 @@ class BasicExample:
         # slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         # If this object is set to “0x64616F6C” in the set value dialog, all backup objects are reset to their delivery state
         # slave.sdo_write(0x1011, 0, struct.pack('B', 1))
+        
+        # sending this is supposed to factory-default the unit
         slave.sdo_write(0x1011, 1, bytes(ctypes.c_uint32(0x64616F6C)))
+        # sending this should 
+        slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         # slave.dc_sync(1, 10000000)
         print('done setup EL4102')
 
