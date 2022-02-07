@@ -52,7 +52,7 @@ class BasicExample:
         #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         # slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
         slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
-        slave.dc_sync(1, 10000000)
+        # slave.dc_sync(1, 10000000)
         print('done setup EL4102')
 
     def el1259_setup(self, slave_pos):
