@@ -51,22 +51,25 @@ class BasicExample:
         # rx_map_obj_bytes = struct.pack(
         #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         # slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
-        slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
+        # slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
+        # If this object is set to “0x64616F6C” in the set value dialog, all backup objects are reset to their delivery state
+        slave.sdo_write(0x1011, 0, struct.pack('B', 1))
+        slave.sdo_write(0x1011, 1, struct.pack('B', 0x64616F6C))
         # slave.dc_sync(1, 10000000)
         print('done setup EL4102')
 
     def el1259_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
-# from the XML reference:
+        # from the XML reference:
 
-# writing "1" to 0x8001:register 2 means "enable manual operation"
-# this makes sense because later in the demo code we toggle this output "manually"
+        # writing "1" to 0x8001:register 2 means "enable manual operation"
+        # this makes sense because later in the demo code we toggle this output "manually"
 
 
-# <AlternativeSmMapping>
-#                                 <Name>Multi-Timestamping 8 Ch. 1x</Name>
-#                                 <Sm No="2">
-#                                 ...the rx_map_obj payload corresponds to this multi-timesampling preset
+        # <AlternativeSmMapping>
+        #                                 <Name>Multi-Timestamping 8 Ch. 1x</Name>
+        #                                 <Sm No="2">
+        #  ...the rx_map_obj payload corresponds to this multi-timesampling preset
 
         slave.sdo_write(0x8001, 2, struct.pack('B', 1))
 
