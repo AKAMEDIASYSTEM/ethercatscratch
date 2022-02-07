@@ -57,7 +57,6 @@ class BasicExample:
 
     def el1259_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
-
 '''
 from the XML reference:
 
@@ -70,7 +69,6 @@ this makes sense because later in the demo code we toggle this output "manually"
                                 <Sm No="2">
                                 ...the rx_map_obj payload corresponds to this multi-timesampling preset
 '''
-
         slave.sdo_write(0x8001, 2, struct.pack('B', 1))
 
         rx_map_obj = [0x1603,
