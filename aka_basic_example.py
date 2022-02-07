@@ -57,18 +57,17 @@ class BasicExample:
 
     def el1259_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
-'''
-from the XML reference:
+# from the XML reference:
 
-writing "1" to 0x8001:register 2 means "enable manual operation"
-this makes sense because later in the demo code we toggle this output "manually"
+# writing "1" to 0x8001:register 2 means "enable manual operation"
+# this makes sense because later in the demo code we toggle this output "manually"
 
 
-<AlternativeSmMapping>
-                                <Name>Multi-Timestamping 8 Ch. 1x</Name>
-                                <Sm No="2">
-                                ...the rx_map_obj payload corresponds to this multi-timesampling preset
-'''
+# <AlternativeSmMapping>
+#                                 <Name>Multi-Timestamping 8 Ch. 1x</Name>
+#                                 <Sm No="2">
+#                                 ...the rx_map_obj payload corresponds to this multi-timesampling preset
+
         slave.sdo_write(0x8001, 2, struct.pack('B', 1))
 
         rx_map_obj = [0x1603,
