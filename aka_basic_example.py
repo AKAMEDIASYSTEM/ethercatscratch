@@ -114,7 +114,8 @@ class BasicExample:
 
         output_len = len(self._master.slaves[1].output)
         print(self._master.slaves[1].output)
-        tmp = bytearray([0 for i in range(2*output_len)])
+        # tmp = bytearray([0 for i in range(2*output_len)])
+        tmp = byterray([0])
         rx_map_obj = [0x3fff, 0x3fff, 0, 0]
         toggle = True
         counter = 0x0000
@@ -133,13 +134,13 @@ class BasicExample:
                     counter = 0x001
                     toggle ^= True
                 rx_map_obj[0] = counter
-                rx_map_obj[1] = max(0x7ffe - counter, 0)
-                rx_map_obj[2] = counter
-                rx_map_obj[3] = max(0x7ffe - counter, 0)
+                # rx_map_obj[1] = max(0x7ffe - counter, 0)
+                # rx_map_obj[2] = counter
+                # rx_map_obj[3] = max(0x7ffe - counter, 0)
                 tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 self._master.slaves[1].output = tmp
-                print(rx_map_obj)
-                print(tmp)
+                # print(rx_map_obj)
+                # print(tmp)
                 # self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 # time.sleep(0.0005)
