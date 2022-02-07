@@ -118,7 +118,7 @@ class BasicExample:
         rx_map_obj = [0x3fff, 0x3fff, 0, 0]
         toggle = True
         counter = 0x0000
-        step = 6400 # 6400 step size at sleep=0.0005 gets us 1ch of 120hz
+        step = 1000 # 6400 step size at sleep=0.0005 gets us 1ch of 120hz
         try:
             while 1:
                 if toggle:
@@ -143,7 +143,7 @@ class BasicExample:
                 # self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 # time.sleep(0.0005)
-                time.sleep(0.01)
+                time.sleep(0.1)
 
         except KeyboardInterrupt:
             # ctrl-C abort handling
