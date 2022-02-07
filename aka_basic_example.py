@@ -115,7 +115,7 @@ class BasicExample:
         output_len = len(self._master.slaves[1].output)
         print(self._master.slaves[1].output)
         # tmp = bytearray([0 for i in range(2*output_len)])
-        tmp = byterray([0])
+        tmp = bytearray([0])
         rx_map_obj = [0x3fff, 0x3fff, 0, 0]
         toggle = True
         counter = 0x0000
