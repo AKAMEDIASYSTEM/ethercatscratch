@@ -35,8 +35,8 @@ class BasicExample:
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None)
-                                       # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
+                                       # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None)
+                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup)
                                        }
 
     def el4102_setup(self, slave_pos):
@@ -53,11 +53,25 @@ class BasicExample:
         # rx_map_obj_bytes = struct.pack(
         #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         # slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
+        slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         slave.dc_sync(1, 10000000)
         print('done setup EL4102')
 
     def el1259_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
+
+'''
+from the XML reference:
+
+writing "1" to 0x8001:register 2 means "enable manual operation"
+this makes sense because later in the demo code we toggle this output "manually"
+
+
+<AlternativeSmMapping>
+                                <Name>Multi-Timestamping 8 Ch. 1x</Name>
+                                <Sm No="2">
+                                ...the rx_map_obj payload corresponds to this multi-timesampling preset
+'''
 
         slave.sdo_write(0x8001, 2, struct.pack('B', 1))
 
