@@ -115,9 +115,6 @@ class BasicExample:
         output_len = len(self._master.slaves[1].output)
         print(self._master.slaves[1].output)
         tmp = bytearray([0 for i in range(2*output_len)])
-        rx_map_obj = [0x3fff, 0x3fff]
-        tmp = struct.pack(
-            'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         # tmp[0] = bytes(0x8010)
         # tmp[1] = bytes(0x3fff)
         # tmp[2] = bytes(0x8020)
