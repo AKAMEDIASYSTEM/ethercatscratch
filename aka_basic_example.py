@@ -64,7 +64,7 @@ class BasicExample:
         # sending this should 
         slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         # slave.dc_sync(1, 10000000)
-        slave.dc_sync(False)
+        slave.dc_sync(0, 10000000)
         print('done setup EL4102')
 
     def el1259_setup(self, slave_pos):
