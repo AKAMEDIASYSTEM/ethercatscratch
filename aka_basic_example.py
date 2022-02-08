@@ -120,7 +120,7 @@ class BasicExample:
         print(self._master.slaves[1].output)
         # tmp = bytearray([0 for i in range(2*output_len)])
         tmp = bytearray([0])
-        rx_map_obj = [0x3fff, 0x3fff, 0, 0]
+        rx_map_obj = [0x3fff, 0x3fff]
         toggle = True
         counter = 0x0000
         step = 1000 # 6400 step size at sleep=0.0005 gets us 1ch of 120hz
