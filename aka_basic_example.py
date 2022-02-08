@@ -145,8 +145,8 @@ class BasicExample:
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = tmp
                 self._master.slaves[4].output = tmp
-                # print(rx_map_obj)
-                print(tmp)
+                print(rx_map_obj)
+                # print(tmp)
                 # self._master.slaves[1].output = rx_map_obj_bytes
                 # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
                 # time.sleep(0.0005)
