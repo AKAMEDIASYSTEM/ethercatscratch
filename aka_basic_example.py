@@ -260,7 +260,7 @@ class BasicExample:
                         BasicExample._check_slave(slave, i)
                 if not self._master.do_check_state:
                     print('OK : all slaves resumed OPERATIONAL.')
-            time.sleep(0.01)
+            time.sleep(0.001)
 
 
 class BasicExampleError(Exception):
