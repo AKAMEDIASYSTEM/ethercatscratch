@@ -65,14 +65,14 @@ class BasicExample:
         # slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         # slave.dc_sync(1, 10000000)
         rx_map_obj = [0x1600,
-                      0x1601
+                      0x1601,
+                      0x7010,
+                      0x7020
                       ]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x3001, 1, bytes(1), True)
-        slave.sdo_write(0x3002,1, bytes(1), True)
-        # slave.sdo_write(0x1c12, 0, rx_map_obj_bytes, True)
-        slave.dc_sync(0, 10000000)
+        slave.sdo_write(0x1c12, 0, rx_map_obj_bytes, True)
+        # slave.dc_sync(0, 10000000)
         print('done setup EL4102')
 
     def el1259_setup(self, slave_pos):
