@@ -134,6 +134,7 @@ class BasicExample:
                 if counter >= 0x7ffe:
                     counter = 0x7ffe
                     toggle ^= True
+                    print(rx_map_obj)
                     print(tmp)
                 if counter <= 0x0001:
                     counter = 0x001
