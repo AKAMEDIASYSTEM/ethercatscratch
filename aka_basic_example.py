@@ -135,7 +135,7 @@ class BasicExample:
                     counter = 0x7ffe
                     toggle ^= True
                     print(rx_map_obj)
-                    print(tmp)
+                    print(str(tmp))
                 if counter <= 0x0001:
                     counter = 0x001
                     toggle ^= True
@@ -144,8 +144,7 @@ class BasicExample:
                 # rx_map_obj[2] = counter
                 # rx_map_obj[3] = max(0x7ffe - counter, 0)
                 # tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-                # tmp = struct.pack('Bx' + ''.join(['h' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-                tmp = struct.pack(B + ''.join(['h' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
+                tmp = struct.pack('Bx' + ''.join(['h' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = tmp
                 self._master.slaves[4].output = tmp
