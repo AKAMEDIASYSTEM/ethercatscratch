@@ -115,9 +115,9 @@ class BasicExample:
     def _pdo_update_loop(self):
         print('in update_loop')
         self._master.in_op = True
-
-        output_len = len(self._master.slaves[1].output)
-        print(self._master.slaves[1].output)
+        for i in range(len(self._master.slaves)):
+            output_len = len(self._master.slaves[i].output)
+            print(self._master.slaves[i].output)
         # tmp = bytearray([0 for i in range(2*output_len)])
         tmp = bytearray([0])
         rx_map_obj = [0x3fff, 0x3fff]
