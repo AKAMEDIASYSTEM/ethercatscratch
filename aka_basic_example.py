@@ -62,15 +62,15 @@ class BasicExample:
         # sending this is supposed to factory-default the unit
         # slave.sdo_write(0x1011, 1, bytes(ctypes.c_uint32(0x64616F6C)))
         # sending this should 
-        slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
+        # slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
         # slave.dc_sync(1, 10000000)
         rx_map_obj = [0x1600,
                       0x1601
                       ]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x3001, 1, 1, True)
-        slave.sdo_write(0x3002,1, 1, True)
+        slave.sdo_write(0x3001, 1, bytes(1), True)
+        slave.sdo_write(0x3002,1, bytes(1), True)
         # slave.sdo_write(0x1c12, 0, rx_map_obj_bytes, True)
         slave.dc_sync(0, 10000000)
         print('done setup EL4102')
@@ -152,7 +152,7 @@ class BasicExample:
                 rx_map_obj[2] = counter
                 rx_map_obj[3] = max(0x7ffe - counter, 0)
                 # tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-                tmp = struct.pack('Bx' + ''.join(['h' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
+                tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = tmp
                 self._master.slaves[4].output = tmp
