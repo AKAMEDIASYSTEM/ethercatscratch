@@ -69,8 +69,8 @@ class BasicExample:
                       ]
         rx_map_obj_bytes = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x1600, 0x3001, 1, True)
-        slave.sdo_write(0x1601, 0x3002, 1, True)
+        slave.sdo_write(0x3001, 1, 1, True)
+        slave.sdo_write(0x3002,1, 1, True)
         # slave.sdo_write(0x1c12, 0, rx_map_obj_bytes, True)
         slave.dc_sync(0, 10000000)
         print('done setup EL4102')
