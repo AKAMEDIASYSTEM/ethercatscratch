@@ -72,7 +72,7 @@ class BasicExample:
         slave.sdo_write(0x1c12, 0x01, struct.pack('I', 0x1600), True)
         slave.sdo_write(0x1c12, 0x02, struct.pack('I', 0x1601), True)
         slave.sdo_write(0x1c12, 0, struct.pack('H', 0x02), True)
-        # slave.dc_sync(1, 10000000)
+        slave.dc_sync(1, 10000000)
         # slave.dc_sync(1, 1000000)
         print('done setup EL4102')
 
