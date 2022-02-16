@@ -71,7 +71,7 @@ class BasicExample:
         # slave.sdo_write(0x1c13, 0, bytes(0), True)
         slave.sdo_write(0x1c12, 1, bytes(0x1600), True)
         slave.sdo_write(0x1c12, 2, bytes(0x1601), True)
-        slave.sdo_write(0x1c12, 0, bytes(0x02), True)
+        # slave.sdo_write(0x1c12, 0, bytes(0x02), True)
         # slave.dc_sync(1, 10000000)
         # slave.dc_sync(1, 1000000)
         print('done setup EL4102')
