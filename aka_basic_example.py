@@ -145,6 +145,7 @@ class BasicExample:
                 if counter <= 0x0001:
                     counter = 0x001
                     toggle ^= True
+                    print(rx_map_obj)
                 rx_map_obj[0] = counter
                 rx_map_obj[1] = max(0x7ffe - counter, 0)
                 rx_map_obj[2] = counter
