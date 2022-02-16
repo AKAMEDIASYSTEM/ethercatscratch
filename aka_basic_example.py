@@ -69,13 +69,8 @@ class BasicExample:
             'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
         # slave.sdo_write(0x1c12, 0, bytes(0), True)
         # slave.sdo_write(0x1c13, 0, bytes(0), True)
-        # slave.sdo_write(0x1c12, 0x01, bytes(0x1600), True)
-        # slave.sdo_write(0x1c12, 0x02, bytes(0x1601), True)
-        slave.sdo_write(0x1c12, 0x01, rx_map_obj_bytes, True)
-        rx_map_obj = [0x1601]
-        rx_map_obj_bytes = struct.pack(
-            'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x1c12, 0x02, rx_map_obj_bytes, True)
+        slave.sdo_write(0x1c12, 0x01, struct.pack('I', 0x1600), True)
+        slave.sdo_write(0x1c12, 0x02, struct.pack('I', 0x1601), True)
         # slave.sdo_write(0x1c12, 0, bytes(0x02), True)
         # slave.dc_sync(1, 10000000)
         # slave.dc_sync(1, 1000000)
