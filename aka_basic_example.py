@@ -186,7 +186,7 @@ class BasicExample:
 
         self._master.config_map()
 
-        if self._master.state_check(pysoem.SAFEOP_STATE, 50000) != pysoem.SAFEOP_STATE:
+        if self._master.state_check(pysoem.SAFEOP_STATE, 500000) != pysoem.SAFEOP_STATE:
             self._master.close()
             raise BasicExampleError('not all slaves reached SAFEOP state')
 
