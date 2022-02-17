@@ -68,8 +68,8 @@ class BasicExample:
         # rx_map_obj = [0x1600]
         # rx_map_obj_bytes = struct.pack(
         #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        # slave.sdo_write(0x1c12, 0, struct.pack('H', 0), True)
-        # slave.sdo_write(0x1c13, 0, struct.pack('H', 0), True)
+        slave.sdo_write(0x1c12, 0, struct.pack('H', 0), True)
+        slave.sdo_write(0x1c13, 0, struct.pack('H', 0), True)
         slave.sdo_write(0x1c12, 0x01, struct.pack('I', 0x1600), True)
         slave.sdo_write(0x1c12, 0x02, struct.pack('I', 0x1601), True)
         # slave.sdo_write(0x1c12, 0x00, struct.pack('H', 0x02), True)
