@@ -37,7 +37,6 @@ class BasicExample:
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None)
                                        1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
                                        2: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
                                        3: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -46,35 +45,7 @@ class BasicExample:
 
     def el4102_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
-        # slave.sdo_write(0x8001, 2, struct.pack('B', 1))
-        # 0x3fff is 5v, 0x7fff is 10v
-        # https://infosys.beckhoff.com/english.php?content=../content/1033/el41xx/1851316619.html#1714645131&id=
-        # 0x4061:05 is write an abs val to ch1
-        # 0x40a1:05 is write abs val to ch2
-        # (I think)
-        # rx_map_obj = [0x3fff]
-        # rx_map_obj_bytes = struct.pack(
-        #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        # slave.sdo_write(0x8010, 2, rx_map_obj_bytes, True)
-        # slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
-        # If this object is set to “0x64616F6C” in the set value dialog, all backup objects are reset to their delivery state
-        # slave.sdo_write(0x1011, 0, struct.pack('B', 1))
-        
-        # sending this is supposed to factory-default the unit
-        # slave.sdo_write(0x1011, 1, bytes(ctypes.c_uint32(0x64616F6C)))
-        # sending this should 
-        # slave.sdo_write(0x1c12, 0, struct.pack('B', 2))
-        # slave.dc_sync(1, 10000000)
-        # rx_map_obj = [0x1600]
-        # rx_map_obj_bytes = struct.pack(
-        #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        # slave.sdo_write(0x1c12, 0, struct.pack('H', 0), True)
-        # slave.sdo_write(0x1c13, 0, struct.pack('H', 0), True)
-        # slave.sdo_write(0x1c12, 0x01, struct.pack('I', 0x1600), True)
-        # slave.sdo_write(0x1c12, 0x02, struct.pack('I', 0x1601), True)
-        # slave.sdo_write(0x1c12, 0x00, struct.pack('H', 0x02), True)
-        # slave.dc_sync(1, 10000000, 1)
-        # slave.dc_sync(1, 1000000)
+        # well it turns out no SDO setup is required if we are not changing default behavior!
         print('done setup EL4102')
 
     def el1259_setup(self, slave_pos):
@@ -144,27 +115,18 @@ class BasicExample:
                 if counter >= 0x7ffe:
                     counter = 0x7ffe
                     toggle ^= True
-                    print(rx_map_obj)
+                    # print(rx_map_obj)
                     # print(struct.unpack(tmp))
                 if counter <= 0x0001:
                     counter = 0x001
                     toggle ^= True
-                    print(rx_map_obj)
+                    # print(rx_map_obj)
                 rx_map_obj[0] = counter
                 rx_map_obj[1] = max(0x7ffe - counter, 0)
-                # rx_map_obj[0] = random.randint(0, counter)
-                # rx_map_obj[1] = random.randint(0, counter)
-                # tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-                # tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = tmp
                 self._master.slaves[4].output = tmp
-                # print(rx_map_obj)
-                # print(tmp)
-                # self._master.slaves[1].output = rx_map_obj_bytes
-                # self._master.slaves[1].sdo_write(0x8010, 2, bytes(0x3fff), True)
-                # time.sleep(0.0005)
                 time.sleep(0.001)
 
         except KeyboardInterrupt:
