@@ -68,10 +68,10 @@ class BasicExample:
         # rx_map_obj = [0x1600]
         # rx_map_obj_bytes = struct.pack(
         #     'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x1c12, 0, struct.pack('H', 0), True)
-        slave.sdo_write(0x1c13, 0, struct.pack('H', 0), True)
-        slave.sdo_write(0x1c12, 0x01, struct.pack('I', 0x1600), True)
-        slave.sdo_write(0x1c12, 0x02, struct.pack('I', 0x1601), True)
+        # slave.sdo_write(0x1c12, 0, struct.pack('H', 0), True)
+        # slave.sdo_write(0x1c13, 0, struct.pack('H', 0), True)
+        # slave.sdo_write(0x1c12, 0x01, struct.pack('I', 0x1600), True)
+        # slave.sdo_write(0x1c12, 0x02, struct.pack('I', 0x1601), True)
         # slave.sdo_write(0x1c12, 0x00, struct.pack('H', 0x02), True)
         # slave.dc_sync(1, 10000000, 1)
         # slave.dc_sync(1, 1000000)
@@ -155,7 +155,8 @@ class BasicExample:
                 rx_map_obj[0] = random.randint(0, counter)
                 rx_map_obj[1] = random.randint(0, counter)
                 # tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-                tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
+                # tmp = struct.pack('Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
+                tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = tmp
                 self._master.slaves[4].output = tmp
