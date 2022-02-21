@@ -45,7 +45,7 @@ class BasicExample:
 
     def el4102_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
-        print(slave.extra_value)
+        print(self._expected_slave_layout[slave_pos].extra_value)
         # well it turns out no SDO setup is required if we are not changing default behavior!
         print('done setup EL4102')
 
