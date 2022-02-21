@@ -37,10 +37,10 @@ class BasicExample:
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup(777)),
-                                       2: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup(999)),
+                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup(extra = 777)),
+                                       2: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup(extra = 999)),
                                        3: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       4: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup('foo'))
+                                       4: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup(extra = 'foo'))
                                        }
 
     def el4102_setup(self, slave_pos, extra):
