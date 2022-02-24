@@ -16,6 +16,7 @@ from collections import namedtuple
 
 import pysoem
 import random
+import luts
 
 
 class BasicExample:
@@ -103,26 +104,15 @@ class BasicExample:
         tmp = bytearray([0])
         rx_map_obj = [0x3fff, 0x3fff]
         toggle = True
-        counter = 0x0000
-        step = 1000 # 6400 step size at sleep=0.0005 gets us 1ch of 120hz
+        counter = 0
         try:
             while 1:
-                if toggle:
-                    counter = counter + step
-                else:
-                    counter = counter - step
+                counter++
                 
-                if counter >= 0x7ffe:
-                    counter = 0x7ffe
-                    toggle ^= True
-                    # print(rx_map_obj)
-                    # print(struct.unpack(tmp))
-                if counter <= 0x0001:
-                    counter = 0x001
-                    toggle ^= True
-                    # print(rx_map_obj)
-                rx_map_obj[0] = counter
-                rx_map_obj[1] = max(0x7ffe - counter, 0)
+                if counter >= MAX_SAMPLES:
+                    counter = 0
+                rx_map_obj[0] = luts.sin_lut[counter]
+                rx_map_obj[1] = 2500
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
                 self._master.slaves[3].output = tmp
