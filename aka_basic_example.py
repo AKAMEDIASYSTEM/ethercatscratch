@@ -113,7 +113,7 @@ class BasicExample:
                 if counter >= MAX_SAMPLES:
                     counter = 0
                 rx_map_obj[0] = luts.sin_lut[counter]
-                rx_map_obj[1] = luts.tri_lut[max(0, counter - phase)]
+                rx_map_obj[1] = luts.tri_lut[int(max(0, counter - phase))]
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
                 self._master.slaves[3].output = tmp
