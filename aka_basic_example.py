@@ -105,6 +105,7 @@ class BasicExample:
         rx_map_obj = [0x3fff, 0x3fff]
         toggle = True
         counter = 0
+        MAX_SAMPLES = len(luts.sin_lut)
         try:
             while 1:
                 counter = counter +1
