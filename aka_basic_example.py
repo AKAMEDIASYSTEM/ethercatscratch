@@ -107,8 +107,7 @@ class BasicExample:
         counter = 0
         try:
             while 1:
-                counter++
-                
+                counter = counter +1
                 if counter >= MAX_SAMPLES:
                     counter = 0
                 rx_map_obj[0] = luts.sin_lut[counter]
