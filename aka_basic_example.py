@@ -106,13 +106,14 @@ class BasicExample:
         toggle = True
         counter = 0
         MAX_SAMPLES = len(luts.sin_lut)
+        phase = len(luts.sin_lut) / 4
         try:
             while 1:
                 counter = counter +1
                 if counter >= MAX_SAMPLES:
                     counter = 0
                 rx_map_obj[0] = luts.sin_lut[counter]
-                rx_map_obj[1] = 2500
+                rx_map_obj[1] = luts.tri_lut[max(0, counter - phase)]
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
                 self._master.slaves[3].output = tmp
