@@ -118,7 +118,7 @@ class BasicExample:
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
-                self._master.slaves[2].output = bigtmp
+                # self._master.slaves[2].output = bigtmp
                 self._master.slaves[4].output = tmp
                 time.sleep(0.001)
 
