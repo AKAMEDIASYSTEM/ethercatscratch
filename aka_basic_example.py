@@ -56,7 +56,7 @@ class BasicExample:
         # well it turns out no SDO setup is required if we are not changing default behavior!
         print('done setup EL4008')
 
-    def eK1100_setup(self, slave_pos):
+    def ek1100_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
         # print(self._expected_slave_layout[slave_pos].extra_value)
         # well it turns out no SDO setup is required if we are not changing default behavior!
