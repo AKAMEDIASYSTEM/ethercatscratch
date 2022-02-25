@@ -36,17 +36,17 @@ class BasicExample:
         self._master = pysoem.Master()
         self._master.in_op = False
         self._master.do_check_state = False
-        SlaveSet = namedtuple('SlaveSet', 'name product_code config_func extra_value')
-        self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None, None),
-                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup, 777),
-                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None, None),
-                                       3: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None, None),
-                                       4: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup, 999)
+        SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
+        self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
+                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       3: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       4: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup)
                                        }
 
     def el4102_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
-        print(self._expected_slave_layout[slave_pos].extra_value)
+        # print(self._expected_slave_layout[slave_pos].extra_value)
         # well it turns out no SDO setup is required if we are not changing default behavior!
         print('done setup EL4102')
 
