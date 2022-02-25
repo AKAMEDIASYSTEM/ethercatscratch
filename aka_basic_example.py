@@ -26,7 +26,7 @@ class BasicExample:
     EL3002_PRODUCT_CODE = 0x0bba3052
     EL1259_PRODUCT_CODE = 0x04eb3052
     EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 16-bit
-    EL4008_PRODUCT_CODE = 0x0fa83052 # 8-chan 12-bit
+    EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 12-bit
 
     def __init__(self, ifname):
         self._ifname = ifname
@@ -37,11 +37,11 @@ class BasicExample:
         self._master.in_op = False
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
-        self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, self.ek1100_setup),
+        self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
                                        2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, self.el4008_setup),
-                                       3: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, self.ek1100_setup),
-                                       4: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup)
+                                       # 3: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       # 4: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup)
                                        }
 
     def el4102_setup(self, slave_pos):
@@ -130,8 +130,8 @@ class BasicExample:
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
-                # self._master.slaves[2].output = bigtmp
-                self._master.slaves[4].output = tmp
+                self._master.slaves[2].output = bigtmp
+                # self._master.slaves[4].output = tmp
                 time.sleep(0.001)
 
         except KeyboardInterrupt:
