@@ -55,7 +55,7 @@ class BasicExample:
         slave = self._master.slaves[slave_pos]
         # print(self._expected_slave_layout[slave_pos].extra_value)
         # well it turns out no SDO setup is required if we are not changing default behavior!
-        # slave.sdo_write(0x1011, 1, struct.pack('L',0x64616F6C))
+        slave.sdo_write(0x1011, 1, struct.pack('L',1684107116 ))
         # slave.dc_sync(0, 10000000)
         print('done setup EL4008')
 
@@ -158,7 +158,7 @@ class BasicExample:
             slave.config_func = self._expected_slave_layout[i].config_func
             slave.is_lost = False
 
-        print(self._master.config_map())
+        self._master.config_map()
 
         if self._master.state_check(pysoem.SAFEOP_STATE, 500000) != pysoem.SAFEOP_STATE:
             self._master.close()
