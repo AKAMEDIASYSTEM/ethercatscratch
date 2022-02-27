@@ -120,20 +120,20 @@ class BasicExample:
         rx_map_obj = [0x3fff, 0x3fff]
         toggle = True
         counter = 0
-        MAX_SAMPLES = len(luts.testo_lut)
-        phase = len(luts.testo_lut) / 4
+        MAX_SAMPLES = len(luts.sin_lut)
+        phase = len(luts.sin_lut) / 4
         try:
             while 1:
                 counter = counter +1
                 if counter >= MAX_SAMPLES:
                     counter = 0
-                rx_map_obj[0] = luts.testo_lut[counter]
-                rx_map_obj[1] = luts.testo_lut[int(max(0, counter - phase))]
+                rx_map_obj[0] = luts.sin_lut[counter]
+                rx_map_obj[1] = luts.sin_lut[int(max(0, counter - phase))]
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
                 bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
-                # self._master.slaves[1].output = bigtmp
                 # self._master.slaves[4].output = bigtmp
                 self._master.slaves[1].output = tmp
+                self._master.slaves[2].output = bigtmp
                 time.sleep(0.001)
 
         except KeyboardInterrupt:
