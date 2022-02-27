@@ -38,7 +38,7 @@ class BasicExample:
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       1: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, self.el4008_setup),
                                        # 2: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        # 3: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
                                        # 4: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
@@ -54,6 +54,7 @@ class BasicExample:
         slave = self._master.slaves[slave_pos]
         # print(self._expected_slave_layout[slave_pos].extra_value)
         # well it turns out no SDO setup is required if we are not changing default behavior!
+        slave.sdo_write(0x1011, 1, bytes(ctypes.c_uint32(0x64616F6C)))
         print('done setup EL4008')
 
     def ek1100_setup(self, slave_pos):
