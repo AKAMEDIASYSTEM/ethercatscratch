@@ -158,7 +158,7 @@ class BasicExample:
             slave.config_func = self._expected_slave_layout[i].config_func
             slave.is_lost = False
 
-        self._master.config_map()
+        print(self._master.config_map())
 
         if self._master.state_check(pysoem.SAFEOP_STATE, 500000) != pysoem.SAFEOP_STATE:
             self._master.close()
