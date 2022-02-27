@@ -54,7 +54,7 @@ class BasicExample:
         slave = self._master.slaves[slave_pos]
         # print(self._expected_slave_layout[slave_pos].extra_value)
         # well it turns out no SDO setup is required if we are not changing default behavior!
-        slave.sdo_write(0x1011, 1, struct.pack('B',0x64616F6C))
+        # slave.sdo_write(0x1011, 1, struct.pack('B',0x64616F6C))
         # slave.dc_sync(0, 10000000)
         print('done setup EL4008')
 
