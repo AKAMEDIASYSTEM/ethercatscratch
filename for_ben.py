@@ -129,7 +129,7 @@ class BasicExample:
                 rx_map_obj[0] = luts.sin_lut[counter]
                 rx_map_obj[1] = luts.sin_lut[int(max(0, counter - phase))]
                 tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
-                bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
+                # bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 self._master.slaves[1].output = tmp
                 time.sleep(0.001)
 
