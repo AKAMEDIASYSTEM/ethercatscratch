@@ -37,9 +37,9 @@ class BasicExample:
         self._master.in_op = False
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
-        self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, self.ek1100_setup),
-                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, self.el4102_setup),
-                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, self.el4008_setup)
+        self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
+                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
                                        # 2: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        
                                        # 4: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
