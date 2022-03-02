@@ -138,7 +138,7 @@ class BasicExample:
                 # self._master.slaves[4].output = bigtmp
                 print(bigtmp)
                 self._master.slaves[1].output = tmp
-                self._master.slaves[2].output = bigtmp
+                self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
                 time.sleep(0.001)
 
         except KeyboardInterrupt:
