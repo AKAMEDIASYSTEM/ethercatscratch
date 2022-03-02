@@ -40,10 +40,7 @@ class BasicExample:
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
                                        2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
-                                       # 2: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       
-                                       # 4: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
-                                        }
+                                       }
 
     def el4102_setup(self, slave_pos):
         slave = self._master.slaves[slave_pos]
@@ -162,6 +159,7 @@ class BasicExample:
             slave.config_func = self._expected_slave_layout[i].config_func
             slave.is_lost = False
 
+        time.sleep(0.5)
         self._master.config_map()
 
         if self._master.state_check(pysoem.SAFEOP_STATE, 500000) != pysoem.SAFEOP_STATE:
