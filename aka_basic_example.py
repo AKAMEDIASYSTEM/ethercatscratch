@@ -260,7 +260,6 @@ class BasicExampleError(Exception):
 if __name__ == '__main__':
 
     print('aka_basic_example started')
-    logging.setLevel(logging.INFO)
     if len(sys.argv) > 1:
         try:
             BasicExample(sys.argv[1]).run()
