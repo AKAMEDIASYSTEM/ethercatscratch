@@ -41,7 +41,7 @@ class BasicExample:
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
-                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
+                                       2: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None)
                                        }
 
     def el4102_setup(self, slave_pos):
@@ -137,7 +137,8 @@ class BasicExample:
                 # self._master.slaves[4].output = bigtmp
                 print(bigtmp)
                 self._master.slaves[1].output = tmp
-                self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
+                # self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
+                self._master.slaves[2].output = struct.pack('4h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 time.sleep(0.001)
 
         except KeyboardInterrupt:
