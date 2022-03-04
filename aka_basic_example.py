@@ -17,6 +17,7 @@ from collections import namedtuple
 import pysoem
 import random
 import luts
+import logging
 
 
 class BasicExample:
@@ -40,8 +41,8 @@ class BasicExample:
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       # 1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None)
+                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
+                                       2: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None)
                                        }
 
     def el4102_setup(self, slave_pos):
@@ -136,9 +137,9 @@ class BasicExample:
                 bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 # self._master.slaves[4].output = bigtmp
                 print(bigtmp)
-                # self._master.slaves[1].output = tmp
+                self._master.slaves[1].output = tmp
                 # self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
-                self._master.slaves[1].output = struct.pack('4h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
+                self._master.slaves[2].output = struct.pack('4h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 time.sleep(0.001)
 
         except KeyboardInterrupt:
@@ -259,7 +260,7 @@ class BasicExampleError(Exception):
 if __name__ == '__main__':
 
     print('aka_basic_example started')
-
+    logging.setLevel(logging.INFO)
     if len(sys.argv) > 1:
         try:
             BasicExample(sys.argv[1]).run()
