@@ -25,8 +25,10 @@ class BasicExample:
     EK1100_PRODUCT_CODE = 0x044c2c52
     EL3002_PRODUCT_CODE = 0x0bba3052
     EL1259_PRODUCT_CODE = 0x04eb3052
-    EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 16-bit
-    EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 12-bit
+    EL4024_PRODUCT_CODE = 0xFB83052 # 4-chan 4mA-20mA 12-bit
+    EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 0-10V 16-bit
+    EL4008_PRODUCT_CODE = 0xFA83052 # 8-chan 0-10V 12-bit
+
 
     def __init__(self, ifname):
         self._ifname = ifname
@@ -159,7 +161,6 @@ class BasicExample:
             slave.config_func = self._expected_slave_layout[i].config_func
             slave.is_lost = False
 
-        time.sleep(0.5)
         self._master.config_map()
 
         if self._master.state_check(pysoem.SAFEOP_STATE, 500000) != pysoem.SAFEOP_STATE:
