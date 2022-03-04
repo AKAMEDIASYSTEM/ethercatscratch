@@ -19,6 +19,7 @@ import random
 import luts
 import logging
 
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 class BasicExample:
 
