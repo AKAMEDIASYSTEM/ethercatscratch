@@ -20,7 +20,6 @@ import luts
 import logging
 
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 class BasicExample:
 
