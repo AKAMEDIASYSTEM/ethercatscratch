@@ -19,7 +19,7 @@ import random
 import luts
 import logging
 
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
+
 
 class BasicExample:
 
@@ -259,6 +259,8 @@ class BasicExampleError(Exception):
 
 
 if __name__ == '__main__':
+
+    logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
     print('aka_basic_example started')
     if len(sys.argv) > 1:
