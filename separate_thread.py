@@ -150,78 +150,10 @@ class ThreadingExample:
                     self._master.slaves[2].output = struct.pack('8h', 0x1333, 0x2000, 0x2CCC, 0x3999, 0x1333, 0x2000, 0x2CCC, 0x3999)
                     print('EL4008: 1.5V, 2.5V, 3.5V, 4.5V, 1.5V, 2.5V, 3.5V, 4.5V')
                 print('**********')
-                if toggle:
-                    # Signed 16bit (Struct: shirt - "h"): -32768 .. 32767
-                    # 4 mA: f6553,4 = d6553 = 0x1999
-                    # 8 mA: f13106,8 = d13106 = 0x3332
-                    # 12 mA: f19660,2 = d19660 = 0x4CCC
-                    # 16 mA: f26213,6 = d26214 = 0x6666
-                    # 20 mA: f32767 = d32767 = 0x7FFF
-                #     self._master.slaves[2].output = struct.pack('4h', 0x1999, 0x3332, 0x4CCC, 0x6666)
-                #     print('EL4114: 4mA, 8mA, 12mA, 16mA')
-                # else:
-                #     self._master.slaves[2].output = struct.pack('4h', 0x3332, 0x1999, 0x6666, 0x4CCC)
-                #     print('EL4114: 8mA, 4mA, 16mA, 12mA')
-                # print('**********')
-                # if toggle:
-                #     self._master.slaves[4].output = struct.pack('B', 0x05)
-                #     print('EL2624: 0x05 = Relais 1 + 3')
-                # else:
-                #     self._master.slaves[4].output = struct.pack('B', 0x0A)
-                #     print('EL2624: 0x0A = Relais 2 + 4')
-                # print('**********')
-                # # Toggle outputs between 1-3-5-7-9-11-13-15 and 2-4-6-8-10-12-14-16
-                # if toggle:
-                #     self._master.slaves[5].output = struct.pack('H', 0xAAAA)
-                #     print('EL2872: 0xAAAA = all right')
-                # else:
-                #     self._master.slaves[5].output = struct.pack('H', 0x5555)
-                #     print('EL2872: 0x5555 = all left')
-
                 print('=================================================')
                 # Wait for propagation of physical signals (especially DO to DI)
                 time.sleep(0.01)
-                '''
-                print('Reading:')
-
-                # Read from INPUTs
-                # EL3144 - 4 Channels, je 16 Bit Analog Value und 16 Bit Status
-                # 16 Bit Status: erstes Bit toggelt zwischen jedem gelesenen Analog-Wert (also zwischen 0x8000 und 0x0000)
-                # print('EL3144: {}'.format(self._master.slaves[3].input.hex()))
-                el3144_ch_all_current_as_bytes = self._master.slaves[3].input
-                el3144_ch_all_current_as_int16_struct = struct.unpack('8h', el3144_ch_all_current_as_bytes)
-
-                el3144_ch_1_state_as_int16 = el3144_ch_all_current_as_int16_struct[0]
-                el3144_ch_1_current_as_int16 = el3144_ch_all_current_as_int16_struct[1]
-                
-                el3144_ch_2_state_as_int16 = el3144_ch_all_current_as_int16_struct[2]
-                el3144_ch_2_current_as_int16 = el3144_ch_all_current_as_int16_struct[3]
-                
-                el3144_ch_3_state_as_int16 = el3144_ch_all_current_as_int16_struct[4]
-                el3144_ch_3_current_as_int16 = el3144_ch_all_current_as_int16_struct[5]
-                
-                el3144_ch_4_state_as_int16 = el3144_ch_all_current_as_int16_struct[6]
-                el3144_ch_4_current_as_int16 = el3144_ch_all_current_as_int16_struct[7]
-                
-                el3144_ch_1_current = el3144_ch_1_current_as_int16 * 10 / 0x8000
-                el3144_ch_2_current = el3144_ch_2_current_as_int16 * 10 / 0x8000
-                el3144_ch_3_current = el3144_ch_3_current_as_int16 * 10 / 0x8000
-                el3144_ch_4_current = el3144_ch_4_current_as_int16 * 10 / 0x8000
-
-                print('EL3144: Ch 1 PDO: {:#06x}; Current: {:.6}; State: {:#06x}'.format(el3144_ch_1_current_as_int16, el3144_ch_1_current, el3144_ch_1_state_as_int16))
-                print('EL3144: Ch 2 PDO: {:#06x}; Current: {:.6}; State: {:#06x}'.format(el3144_ch_2_current_as_int16, el3144_ch_2_current, el3144_ch_2_state_as_int16))
-                print('EL3144: Ch 3 PDO: {:#06x}; Current: {:.6}; State: {:#06x}'.format(el3144_ch_3_current_as_int16, el3144_ch_3_current, el3144_ch_3_state_as_int16))
-                print('EL3144: Ch 4 PDO: {:#06x}; Current: {:.6}; State: {:#06x}'.format(el3144_ch_4_current_as_int16, el3144_ch_4_current, el3144_ch_4_state_as_int16))
-
-                print('**********')
-
-                el1872_ch_all_as_bytes = self._master.slaves[6].input
-                el1872_ch_all_as_int16 = struct.unpack('H', el1872_ch_all_as_bytes)[0]
-                print('EL1872: {:#06x} - {:#018b}'.format(el1872_ch_all_as_int16, el1872_ch_all_as_int16))
-'''
-                print('===========================================================================================')
-
-                # Invert value of toggle
+                                # Invert value of toggle
                 toggle ^= True
                 # Wait 1 sec
                 time.sleep(3)
