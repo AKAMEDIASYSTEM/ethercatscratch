@@ -18,6 +18,7 @@ import pysoem
 import random
 import luts
 import logging
+import json
 
 
 
@@ -268,6 +269,12 @@ if __name__ == '__main__':
 
     print('aka_basic_example started')
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    with open('muscles.json') as msf:
+        muscles = json.load(msf)
+
+    for i in muscles:
+        logging.debug(i['host_type'])
+    
     if len(sys.argv) > 1:
         try:
             BasicExample(sys.argv[1]).run()
