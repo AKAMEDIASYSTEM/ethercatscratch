@@ -146,7 +146,7 @@ class BasicExample:
                 # print(bigtmp)
                 for mod in range(len(self._master.slaves)):
                     # self._master.slaves[mod].output = tmp
-                    logger.debug(mod)
+                    logging.debug(mod)
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = bigtmp
                 # self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
