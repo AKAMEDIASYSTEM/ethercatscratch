@@ -144,9 +144,7 @@ class BasicExample:
                 bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 # self._master.slaves[4].output = bigtmp
                 # print(bigtmp)
-                for mod in range(len(self._master.slaves)):
-                    # self._master.slaves[mod].output = tmp
-                    logging.debug(mod)
+                update_values(self._master.slaves)
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = bigtmp
                 # self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
@@ -215,6 +213,10 @@ class BasicExample:
 
         if not all_slaves_reached_op_state:
             raise BasicExampleError('not all slaves reached OP state')
+
+    def update_values(self, slaveArray):
+        '''update all slave output values.'''
+        logging.debug('in update_values')
 
     @staticmethod
     def _check_slave(slave, pos):
