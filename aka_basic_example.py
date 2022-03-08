@@ -144,7 +144,7 @@ class BasicExample:
                 bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 # self._master.slaves[4].output = bigtmp
                 # print(bigtmp)
-                for mod in range(len(_master.slaves)):
+                for mod in range(len(self._master.slaves)):
                     # self._master.slaves[mod].output = tmp
                     logger.debug(mod)
                 self._master.slaves[1].output = tmp
