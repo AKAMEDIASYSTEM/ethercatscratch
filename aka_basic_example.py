@@ -144,6 +144,9 @@ class BasicExample:
                 bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
                 # self._master.slaves[4].output = bigtmp
                 # print(bigtmp)
+                for mod in range(len(_master.slaves))
+                    # self._master.slaves[mod].output = tmp
+                    logger.debug(mod)
                 self._master.slaves[1].output = tmp
                 self._master.slaves[2].output = bigtmp
                 # self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
@@ -273,8 +276,8 @@ if __name__ == '__main__':
         muscles = json.load(msf)
 
     for i in muscles:
-        logging.debug(i['host_type'])
-    
+        logging.debug("muscle {} on module {} at slave_position {} with phase {}".format(i['muscle_id'], i['host_index'], i['host_pos'], i['phase']))
+
     if len(sys.argv) > 1:
         try:
             BasicExample(sys.argv[1]).run()
