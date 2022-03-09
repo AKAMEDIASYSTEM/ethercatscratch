@@ -58,3 +58,5 @@ for this_slave in slaves:
 		output_buffer.push(the_value)
 	master.slaves[this_slave].output = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(output_buffer))]), len(output_buffer), *output_buffer)
+
+'''
