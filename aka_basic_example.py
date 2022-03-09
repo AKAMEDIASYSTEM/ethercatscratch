@@ -144,7 +144,7 @@ class BasicExample:
                 for this_module in outputs.installed:
                     output_buffer = []
                     for channel in this_module['phase_offsets']:
-                        logging.debug(channel)
+                        logging.debug('channel is {}'.format(channel))
                         output_buffer.append(luts.sin_lut[int(max(0, counter - this_module['phase_offsets'][channel]))])
                 self._master.slaves[this_module].output = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(output_buffer))]), len(output_buffer), *output_buffer)
