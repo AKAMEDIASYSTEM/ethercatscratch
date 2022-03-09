@@ -141,12 +141,12 @@ class BasicExample:
                 counter = counter +1
                 if counter >= MAX_SAMPLES:
                     counter = 0
-                for this_module in outputs.installed:
+                for module_index, this_module in enumerate(outputs.installed):
                     output_buffer = []
                     for c_phase_offset in this_module['phase_offsets']:
                         logging.debug('c_phase_offset is {}'.format(c_phase_offset))
                         output_buffer.append(luts.sin_lut[int(max(0, counter - c_phase_offset))])
-                    self._master.slaves[this_module].output = struct.pack(
+                    self._master.slaves[module_index].output = struct.pack(
             'Bx' + ''.join(['H' for i in range(len(output_buffer))]), len(output_buffer), *output_buffer)
                 # output_buffer[0] = luts.sin_lut[counter]
                 # output_buffer[1] = luts.sin_lut[int(max(0, counter - phase))]
