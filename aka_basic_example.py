@@ -145,13 +145,13 @@ class BasicExample:
                     output_buffer = []
                     for c_phase_offset in this_module['phase_offsets']:
                         output_buffer.append(luts.sin_lut[int(max(0, counter - c_phase_offset))])
-                    self._master.slaves[module_index].output = struct.pack(
-            'Bx' + ''.join(['H' for i in range(len(output_buffer))]), len(output_buffer), *output_buffer)
+                    # self._master.slaves[module_index].output = struct.pack('Bx' + ''.join(['H' for i in range(len(output_buffer))]), len(output_buffer), *output_buffer)
+                    self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                 # output_buffer[0] = luts.sin_lut[counter]
                 # output_buffer[1] = luts.sin_lut[int(max(0, counter - phase))]
                 # tmp = struct.pack('2h', output_buffer[0], output_buffer[1])
                 # bigtmp = struct.pack('8h', output_buffer[0], output_buffer[1], output_buffer[0], output_buffer[1], output_buffer[0], output_buffer[1], output_buffer[0], output_buffer[1])
-                self.update_values(self._master.slaves)
+                # self.update_values(self._master.slaves)
                 # self._master.slaves[1].output = tmp
                 # self._master.slaves[2].output = bigtmp
                 time.sleep(0.001)
