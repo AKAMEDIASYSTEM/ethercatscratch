@@ -145,7 +145,6 @@ class BasicExample:
                     output_buffer = []
                     for c_phase_offset in this_module['phase_offsets']:
                         output_buffer.append(luts.sin_lut[int(max(0, counter - c_phase_offset))])
-                    # self._master.slaves[module_index].output = struct.pack('Bx' + ''.join(['H' for i in range(len(output_buffer))]), len(output_buffer), *output_buffer)
                     self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                 # self.update_values(self._master.slaves)
                 time.sleep(0.001)
