@@ -19,6 +19,7 @@ import random
 import luts
 import logging
 import json
+import outputs
 
 
 
@@ -284,6 +285,9 @@ if __name__ == '__main__':
 
     for i in muscles:
         logging.debug("muscle {} on module {} at slave_position {} with phase {}".format(i['muscle_id'], i['host_index'], i['host_pos'], i['phase']))
+
+    for module in outputs.installed:
+        logging.debug(module.name if len(module.phase_offsets))
 
     if len(sys.argv) > 1:
         try:
