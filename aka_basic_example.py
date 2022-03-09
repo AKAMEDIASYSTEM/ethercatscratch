@@ -128,10 +128,6 @@ class BasicExample:
     def _pdo_update_loop(self):
         print('in update_loop')
         self._master.in_op = True
-        # for i in range(len(self._master.slaves)):
-        #     output_len = len(self._master.slaves[i].output)
-        #     print(self._master.slaves[i].output)
-        tmp = bytearray([0])
         toggle = True
         counter = 0
         MAX_SAMPLES = len(luts.sin_lut)
