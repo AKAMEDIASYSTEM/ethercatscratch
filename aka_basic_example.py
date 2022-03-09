@@ -128,12 +128,10 @@ class BasicExample:
     def _pdo_update_loop(self):
         print('in update_loop')
         self._master.in_op = True
-        for i in range(len(self._master.slaves)):
-            output_len = len(self._master.slaves[i].output)
-            print(self._master.slaves[i].output)
-        # tmp = bytearray([0 for i in range(2*output_len)])
+        # for i in range(len(self._master.slaves)):
+        #     output_len = len(self._master.slaves[i].output)
+        #     print(self._master.slaves[i].output)
         tmp = bytearray([0])
-        rx_map_obj = [0x3fff, 0x3fff]
         toggle = True
         counter = 0
         MAX_SAMPLES = len(luts.sin_lut)
@@ -143,17 +141,19 @@ class BasicExample:
                 counter = counter +1
                 if counter >= MAX_SAMPLES:
                     counter = 0
-                rx_map_obj[0] = luts.sin_lut[counter]
-                rx_map_obj[1] = luts.sin_lut[int(max(0, counter - phase))]
-                tmp = struct.pack('2h', rx_map_obj[0], rx_map_obj[1])
-                bigtmp = struct.pack('8h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
-                # self._master.slaves[4].output = bigtmp
-                # print(bigtmp)
+                for this_module in outputs.installed:
+                    output_buffer = []
+                    for channel in this_module['phase_offsets']:
+                        output_buffer.append(luts.sin_lut[int(max(0, counter - this_module['phase_offsets'][channel]))])
+                self._master.slaves[this_module].output = struct.pack(
+            'Bx' + ''.join(['H' for i in range(len(output_buffer))]), len(output_buffer), *output_buffer)
+                # output_buffer[0] = luts.sin_lut[counter]
+                # output_buffer[1] = luts.sin_lut[int(max(0, counter - phase))]
+                # tmp = struct.pack('2h', output_buffer[0], output_buffer[1])
+                # bigtmp = struct.pack('8h', output_buffer[0], output_buffer[1], output_buffer[0], output_buffer[1], output_buffer[0], output_buffer[1], output_buffer[0], output_buffer[1])
                 self.update_values(self._master.slaves)
-                self._master.slaves[1].output = tmp
-                self._master.slaves[2].output = bigtmp
-                # self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
-                # self._master.slaves[2].output = struct.pack('4h', rx_map_obj[0], rx_map_obj[1], rx_map_obj[0], rx_map_obj[1])
+                # self._master.slaves[1].output = tmp
+                # self._master.slaves[2].output = bigtmp
                 time.sleep(0.001)
 
         except KeyboardInterrupt:
@@ -280,6 +280,7 @@ if __name__ == '__main__':
 
     print('aka_basic_example started')
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
     with open('muscles.json') as msf:
         muscles = json.load(msf)
 
