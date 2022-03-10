@@ -278,8 +278,8 @@ if __name__ == '__main__':
     logging.debug('threaded example started')
 
     for module in outputs.installed:
-    if len(module['phase_offsets']):
-        logging.debug(module['name'])
+        if len(module['phase_offsets']):
+            logging.debug(module['name'])
 
 
     if len(sys.argv) > 1:
