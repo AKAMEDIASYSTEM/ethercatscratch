@@ -42,6 +42,7 @@ class BasicExample:
         self._master = pysoem.Master()
         self._master.in_op = False
         self._master.do_check_state = False
+        self.currentAnimation = {}
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -128,19 +129,25 @@ class BasicExample:
     def _pdo_update_loop(self):
         print('in update_loop')
         self._master.in_op = True
-        toggle = True
-        counter = 0
-        MAX_SAMPLES = len(luts.tri_lut['lut'])
         try:
             while 1:
-                counter = counter +1
-                if counter >= MAX_SAMPLES:
-                    counter = 0
-                for module_index, this_module in enumerate(outputs.installed):
+                counter = 0
+                if(counter):
+                    counter = counter +1
+                    for module_index, this_module in enumerate(outputs.installed):
                     output_buffer = []
                     for c_phase_offset in this_module['phase_offsets']:
-                        output_buffer.append(luts.tri_lut['lut'][int(max(0, counter - c_phase_offset))])
+                        output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                     self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
+                    if(counter >= MAX_SAMPLES):
+                        counter = 0
+                else:
+                    currentAnimation = random.choice(luts.luts)
+                    logging.debug('chose {}'.format(currentAnimation['name']))
+                    MAX_SAMPLES = len(currentAnimation['lut'])
+                    # play silence_lut
+                    # roll the dice to see if we should start an animation
+                        # if so, initialize animation by assigning it to the currentAnimation obj
                 # self.update_values(self._master.slaves)
                 time.sleep(0.001)
 
