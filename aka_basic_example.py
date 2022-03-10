@@ -269,12 +269,6 @@ if __name__ == '__main__':
     print('aka_basic_example started')
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-    with open('muscles.json') as msf:
-        muscles = json.load(msf)
-
-    for i in muscles:
-        logging.debug("muscle {} on module {} at slave_position {} with phase {}".format(i['muscle_id'], i['host_index'], i['host_pos'], i['phase']))
-
     for module in outputs.installed:
         if len(module['phase_offsets']):
             logging.debug(module['name'])

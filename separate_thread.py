@@ -8,6 +8,10 @@ import threading
 from collections import namedtuple
 
 import pysoem
+import random
+import luts
+import logging
+import outputs
 
 class ThreadingExample:
 
@@ -33,8 +37,17 @@ class ThreadingExample:
         self._master.do_check_state = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4102', self.EL4102_PRODUCT_CODE, None),
-                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)}
+                                       1: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
+                                       2: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
+                                       3: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
+                                       4: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
+                                       5: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       6: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       7: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       8: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       9: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       10: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
+                                       }
 
     # Setup function for EL2872
     def el2872_setup(self, slave_pos):
@@ -129,28 +142,20 @@ class ThreadingExample:
         toggle = True
 
         # Try the permanent loop
+        counter = 0
+        MAX_SAMPLES = len(luts.tri_lut)
         try:
             while 1:
-                # Struct erforderlich, da Bytes erwartet werden und keine Ints oder ähnliches
-                print('Setting:')
-                if toggle:
-                    # Signed 16bit (Struct: shirt - "h"): -32768 .. 32767
-                    # 1.0V: f3276.7 = d3277 = 0x0CCD
-                    # 1.5V: f4915.05 = d4915 = 0x1333
-                    # 2.0V: f6553,4 = d6553 = 0x1999
-                    # 2.5V: f8191.75 = d8192 = 0x2000
-                    # 3.0V: f9830,1 = d9830 = 0x2666
-                    # 3.5V: f11468,45 = d11468 = 0x2CCC
-                    # 4.0V: f13106,8 = d13106 = 0x3332
-                    # 4.5V: f14745,15 = d14745 = 0x3999
-                    # 7.5V: f24575.25 = d24575 = 0x5FFF
-                    self._master.slaves[2].output = struct.pack('8h', 0x0CCD, 0x1999, 0x2666, 0x3332, 0x0CCD, 0x1999, 0x2666, 0x3332)
-                    print('EL4008: 1V, 2V, 3V, 4V, 1V, 2V, 3V, 4V')
-                else:
-                    self._master.slaves[2].output = struct.pack('8h', 0x1333, 0x2000, 0x2CCC, 0x3999, 0x1333, 0x2000, 0x2CCC, 0x3999)
-                    print('EL4008: 1.5V, 2.5V, 3.5V, 4.5V, 1.5V, 2.5V, 3.5V, 4.5V')
-                print('**********')
-                print('=================================================')
+                counter = counter +1
+                if counter >= MAX_SAMPLES:
+                    counter = 0
+                for module_index, this_module in enumerate(outputs.installed):
+                    output_buffer = []
+                    for c_phase_offset in this_module['phase_offsets']:
+                        output_buffer.append(luts.tri_lut[int(max(0, counter - c_phase_offset))])
+                    self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
+                # self.update_values(self._master.slaves)
+                time.sleep(0.001)
                 # Wait for propagation of physical signals (especially DO to DI)
                 time.sleep(0.01)
                                 # Invert value of toggle
@@ -269,7 +274,13 @@ class ThreadingExampleError(Exception):
 # Main fct
 if __name__ == '__main__':
 
-    print('Threading example started')
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    logging.debug('threaded example started')
+
+    for module in outputs.installed:
+    if len(module['phase_offsets']):
+        logging.debug(module['name'])
+
 
     if len(sys.argv) > 1:
         try:
