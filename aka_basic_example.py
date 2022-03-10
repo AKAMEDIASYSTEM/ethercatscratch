@@ -130,7 +130,7 @@ class BasicExample:
         self._master.in_op = True
         toggle = True
         counter = 0
-        MAX_SAMPLES = len(luts.tri_lut['lut']['lut'])
+        MAX_SAMPLES = len(luts.tri_lut['lut'])
         try:
             while 1:
                 counter = counter +1
