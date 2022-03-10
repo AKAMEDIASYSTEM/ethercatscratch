@@ -134,7 +134,7 @@ class BasicExample:
         try:
             while 1:
                 if(currentlyPlaying):
-                    logging.debug('currentlyPlaying')
+                    # logging.debug('currentlyPlaying')
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
                         for c_phase_offset in this_module['phase_offsets']:
