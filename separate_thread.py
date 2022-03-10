@@ -155,7 +155,7 @@ class ThreadingExample:
                     for c_phase_offset in this_module['phase_offsets']:
                         output_buffer.append(luts.tri_lut['lut'][int(max(0, counter - c_phase_offset))])
                     self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
-                # self.update_values(self._master.slaves)
+                self.update_values(self._master.slaves)
                 time.sleep(0.001)
                 # Wait for propagation of physical signals (especially DO to DI)
                 time.sleep(0.01)
