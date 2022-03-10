@@ -134,18 +134,19 @@ class BasicExample:
         try:
             while 1:
                 if(currentlyPlaying):
-                    counter = counter +1
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
                         for c_phase_offset in this_module['phase_offsets']:
                             output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                     self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
+                    counter = counter +1
                     if(counter >= MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
                 else:
                     currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
+                    logging.debug(currentAnimation['lut'])
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
                     # play silence_lut
