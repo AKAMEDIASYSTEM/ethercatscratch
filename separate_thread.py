@@ -144,6 +144,7 @@ class ThreadingExample:
         # Try the permanent loop
         counter = 0
         MAX_SAMPLES = len(luts.tri_lut['lut'])
+        logging.debug('starting pdo update loop with {} samples'.format(MAX_SAMPLES))
         try:
             while 1:
                 counter = counter +1
