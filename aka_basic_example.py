@@ -146,8 +146,8 @@ class BasicExample:
                 else:
                     currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
-                    logging.debug(currentAnimation['lut'])
                     MAX_SAMPLES = len(currentAnimation['lut'])
+                    logging.debug(MAX_SAMPLES)
                     currentlyPlaying = True
                     # play silence_lut
                     # roll the dice to see if we should start an animation
