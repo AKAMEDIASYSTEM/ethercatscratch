@@ -130,9 +130,10 @@ class BasicExample:
         print('in update_loop')
         self._master.in_op = True
         counter = 0
+        currentlyPlaying = False
         try:
             while 1:
-                if(counter):
+                if(currentlyPlaying):
                     counter = counter +1
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
@@ -141,10 +142,12 @@ class BasicExample:
                     self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     if(counter >= MAX_SAMPLES):
                         counter = 0
+                        currentlyPlaying = False
                 else:
                     currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
+                    currentlyPlaying = True
                     # play silence_lut
                     # roll the dice to see if we should start an animation
                         # if so, initialize animation by assigning it to the currentAnimation obj
