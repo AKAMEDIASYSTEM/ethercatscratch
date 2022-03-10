@@ -139,13 +139,13 @@ class BasicExample:
                         output_buffer = []
                         for c_phase_offset in this_module['phase_offsets']:
                             output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
-                    self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
+                        self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
-                    self.update_values(self._master.slaves)
-                    time.sleep(0.001)
+                    # self.update_values(self._master.slaves)
+                    
                 else:
                     currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
@@ -154,6 +154,7 @@ class BasicExample:
                     # play silence_lut
                     # roll the dice to see if we should start an animation
                         # if so, initialize animation by assigning it to the currentAnimation obj
+                time.sleep(0.001)
                 # self.update_values(self._master.slaves)
                 
 
