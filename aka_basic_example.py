@@ -135,9 +135,9 @@ class BasicExample:
                 if(counter):
                     counter = counter +1
                     for module_index, this_module in enumerate(outputs.installed):
-                    output_buffer = []
-                    for c_phase_offset in this_module['phase_offsets']:
-                        output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
+                        output_buffer = []
+                        for c_phase_offset in this_module['phase_offsets']:
+                            output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                     self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     if(counter >= MAX_SAMPLES):
                         counter = 0
