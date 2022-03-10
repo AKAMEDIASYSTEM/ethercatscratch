@@ -129,9 +129,9 @@ class BasicExample:
     def _pdo_update_loop(self):
         print('in update_loop')
         self._master.in_op = True
+        counter = 0
         try:
             while 1:
-                counter = 0
                 if(counter):
                     counter = counter +1
                     for module_index, this_module in enumerate(outputs.installed):
