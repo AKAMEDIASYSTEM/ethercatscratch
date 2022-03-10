@@ -144,12 +144,12 @@ class BasicExample:
                     if(counter >= MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
+                    self.update_values(self._master.slaves)
                     time.sleep(0.001)
                 else:
                     currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
-                    logging.debug(MAX_SAMPLES)
                     currentlyPlaying = True
                     # play silence_lut
                     # roll the dice to see if we should start an animation
