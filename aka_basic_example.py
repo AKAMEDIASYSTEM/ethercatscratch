@@ -130,7 +130,7 @@ class BasicExample:
         self._master.in_op = True
         toggle = True
         counter = 0
-        MAX_SAMPLES = len(luts.decay_lut)
+        MAX_SAMPLES = len(luts.tri_lut)
         try:
             while 1:
                 counter = counter +1
@@ -139,7 +139,7 @@ class BasicExample:
                 for module_index, this_module in enumerate(outputs.installed):
                     output_buffer = []
                     for c_phase_offset in this_module['phase_offsets']:
-                        output_buffer.append(luts.decay_lut[int(max(0, counter - c_phase_offset))])
+                        output_buffer.append(luts.tri_lut[int(max(0, counter - c_phase_offset))])
                     self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                 # self.update_values(self._master.slaves)
                 time.sleep(0.001)
