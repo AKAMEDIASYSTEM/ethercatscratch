@@ -81,7 +81,7 @@ class BasicExample:
                             output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
-                    if(counter >= MAX_SAMPLES):
+                    if(counter > MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
                         time.sleep(random.randint(10,30))
