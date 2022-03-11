@@ -79,7 +79,7 @@ class BasicExample:
                         output_buffer = []
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             # logging.debug(currentAnimation['involves'][module_index][phase_index])
-                            if currentAnimation['involves'][module_index][phase_index]:
+                            if not currentAnimation['involves'][module_index][phase_index]:
                                 output_buffer.append(0x00)
                             else:
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
@@ -89,7 +89,7 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        # sleep_interval = random.randint(1,2)
+                        sleep_interval = random.randint(1,2)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     # self.update_values(self._master.slaves)
