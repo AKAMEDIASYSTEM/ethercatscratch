@@ -89,7 +89,7 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(1,2)
+                        # sleep_interval = random.randint(1,2)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     # self.update_values(self._master.slaves)
