@@ -79,10 +79,11 @@ class BasicExample:
                         output_buffer = []
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             # logging.debug(currentAnimation['involves'][module_index][phase_index])
-                            if not currentAnimation['involves'][module_index][phase_index]:
-                                output_buffer.append(0x00)
-                            else:
+                            if currentAnimation['involves'][module_index][phase_index]:
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
+                            else:
+                                logging.debug('ignoring muscle {}'.format(phase_index))
+                                output_buffer.append(0x00)
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
