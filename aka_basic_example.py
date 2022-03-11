@@ -82,7 +82,7 @@ class BasicExample:
                             if currentAnimation['involves'][module_index][phase_index]:
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
-                                logging.debug('ignoring muscle {}'.format(phase_index))
+                                # logging.debug('ignoring muscle {}'.format(phase_index))
                                 output_buffer.append(0x00)
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
@@ -93,16 +93,13 @@ class BasicExample:
                         sleep_interval = random.randint(1,2)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
-                    # self.update_values(self._master.slaves)
                     
                 else:
                     currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
-                    # play silence_lut
-                    # roll the dice to see if we should start an animation
-                        # if so, initialize animation by assigning it to the currentAnimation obj
+
                 time.sleep(0.001)
                 # self.update_values(self._master.slaves)
                 
