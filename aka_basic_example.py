@@ -84,6 +84,7 @@ class BasicExample:
                     if(counter >= MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
+                        self.all_zero()
                         time.sleep(random.randint(10,30))
                     # self.update_values(self._master.slaves)
                     
@@ -103,6 +104,14 @@ class BasicExample:
             # ctrl-C abort handling
             print('stopped')
 
+    def all_zero(self):
+        logging.debug('all_zero()')
+        for module_index, this_module in enumerate(outputs.installed):
+            output_buffer = [0]*len(this_module['phase_offsets'])
+            # if it turns out current-driven valves need a middle value to be "off", that logic should
+            # go here
+            self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
+                    
     def run(self):
 
         self._master.open(self._ifname)
