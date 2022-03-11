@@ -58,66 +58,6 @@ class BasicExample:
                                        10: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
                                        }
 
-    def el4102_setup(self, slave_pos):
-        slave = self._master.slaves[slave_pos]
-        # print(self._expected_slave_layout[slave_pos].extra_value)
-        # well it turns out no SDO setup is required if we are not changing default behavior!
-        print('done setup EL4102')
-
-    def el4008_setup(self, slave_pos):
-        slave = self._master.slaves[slave_pos]
-        # print(self._expected_slave_layout[slave_pos].extra_value)
-        # well it turns out no SDO setup is required if we are not changing default behavior!
-        # slave.sdo_write(0x1c12, 0, struct.pack('B', 0))
-        # map_1c13_bytes = struct.pack('BxH', 1, 0x00)
-        # slave.sdo_write(0x1c13, map_1c13_bytes, True)
-        # slave.sdo_write(0x1011, 1, struct.pack('L',1684107116 ))
-        # slave.dc_sync(0, 10000000)
-        print('done setup EL4008')
-
-    def ek1100_setup(self, slave_pos):
-        slave = self._master.slaves[slave_pos]
-        # print(self._expected_slave_layout[slave_pos].extra_value)
-        # well it turns out no SDO setup is required if we are not changing default behavior!
-        print('done setup EK1100')
-
-    def el1259_setup(self, slave_pos):
-        slave = self._master.slaves[slave_pos]
-        # from the XML reference:
-
-        # writing "1" to 0x8001:register 2 means "enable manual operation"
-        # this makes sense because later in the demo code we toggle this output "manually"
-
-
-        # <AlternativeSmMapping>
-        #                                 <Name>Multi-Timestamping 8 Ch. 1x</Name>
-        #                                 <Sm No="2">
-        #  ...the rx_map_obj payload corresponds to this multi-timesampling preset
-
-        slave.sdo_write(0x8001, 2, struct.pack('B', 1))
-
-        rx_map_obj = [0x1603,
-                      0x1607,
-                      0x160B,
-                      0x160F,
-                      0x1611,
-                      0x1617,
-                      0x161B,
-                      0x161F,
-                      0x1620,
-                      0x1621,
-                      0x1622,
-                      0x1623,
-                      0x1624,
-                      0x1625,
-                      0x1626,
-                      0x1627]
-        rx_map_obj_bytes = struct.pack(
-            'Bx' + ''.join(['H' for i in range(len(rx_map_obj))]), len(rx_map_obj), *rx_map_obj)
-        slave.sdo_write(0x1c12, 0, rx_map_obj_bytes, True)
-
-        slave.dc_sync(1, 10000000)
-
     def _processdata_thread(self):
         while not self._pd_thread_stop_event.is_set():
             self._master.send_processdata()
@@ -144,6 +84,7 @@ class BasicExample:
                     if(counter >= MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
+                        time.sleep(random.randomint(10,30))
                     # self.update_values(self._master.slaves)
                     
                 else:
