@@ -78,14 +78,17 @@ class BasicExample:
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
                         for c_phase_offset in this_module['phase_offsets']:
-                            output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
+                            if currentAnimation['involves'][module_index][c_phase_offset]:
+                                output_buffer.append(0x00)
+                            else:
+                                output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(1,5)
+                        sleep_interval = random.randint(1,2)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     # self.update_values(self._master.slaves)
