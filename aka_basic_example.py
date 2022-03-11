@@ -84,7 +84,7 @@ class BasicExample:
                     if(counter >= MAX_SAMPLES):
                         counter = 0
                         currentlyPlaying = False
-                        time.sleep(random.randomInt(10,30))
+                        time.sleep(random.randint(10,30))
                     # self.update_values(self._master.slaves)
                     
                 else:
