@@ -83,7 +83,7 @@ class BasicExample:
                             logging.debug('muscleCounter is {}'.format(muscleCounter))
                             if currentAnimation['involves'][module_index][phase_index]:
                                 muscleCounter = muscleCounter + 1
-                                if muscleCounter is selectedMuscle:
+                                if muscleCounter == selectedMuscle:
                                     logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                     output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 else:
