@@ -83,7 +83,7 @@ class BasicExample:
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             # logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
-                            if (muscleCounter==self._muscle):
+                            if (muscleCounter==int(self._muscle)):
                                 logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
