@@ -244,7 +244,7 @@ if __name__ == '__main__':
 
     if len(sys.argv) > 1:
         try:
-            BasicExample(sys.argv[1]).run()
+            BasicExample('eth0').run()
         except BasicExampleError as expt:
             print('aka_basic_example failed: ' + expt.message)
             sys.exit(1)
