@@ -84,6 +84,7 @@ class BasicExample:
                             if currentAnimation['involves'][module_index][phase_index]:
                                 muscleCounter = muscleCounter + 1
                                 if muscleCounter is selectedMuscle:
+                                    logging.debug('muscleCounter is {}'.format(muscleCounter))
                                     output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 else:
                                     output_buffer.append(0x00)
