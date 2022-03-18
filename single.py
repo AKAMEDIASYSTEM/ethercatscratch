@@ -235,7 +235,7 @@ class BasicExampleError(Exception):
 if __name__ == '__main__':
 
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    logging.debug('testing single muscle {}'.format(sys.argv[2]))
+    logging.debug('testing single muscle {}'.format(sys.argv[1]))
 
     for module in outputs.installed:
         if len(module['phase_offsets']):
