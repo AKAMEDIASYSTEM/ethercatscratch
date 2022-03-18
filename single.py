@@ -34,8 +34,9 @@ class BasicExample:
     EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 0-10V 12-bit
 
 
-    def __init__(self, ifname):
+    def __init__(self, ifname, theMuscle):
         self._ifname = ifname
+        self._muscle = theMuscle
         self._pd_thread_stop_event = threading.Event()
         self._ch_thread_stop_event = threading.Event()
         self._actual_wkc = 0
@@ -80,9 +81,9 @@ class BasicExample:
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
-                            logging.debug('muscleCounter is {}'.format(muscleCounter))
+                            # logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
-                            if muscleCounter == selectedMuscle:
+                            if muscleCounter == self._muscle:
                                 logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
@@ -241,8 +242,8 @@ if __name__ == '__main__':
 
     if len(sys.argv) > 1:
         try:
-            selectedMuscle = sys.argv[2]
-            BasicExample(sys.argv[1]).run()
+            # selectedMuscle = sys.argv[2]
+            BasicExample(sys.argv[1], sys.argv[2]).run()
         except BasicExampleError as expt:
             print('aka_basic_example failed: ' + expt.message)
             sys.exit(1)
