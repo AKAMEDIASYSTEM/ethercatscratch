@@ -242,12 +242,11 @@ if __name__ == '__main__':
         if len(module['phase_offsets']):
             logging.debug(module['name'])
 
-    if len(sys.argv) > 1:
-        try:
-            BasicExample('eth0').run()
-        except BasicExampleError as expt:
-            print('aka_basic_example failed: ' + expt.message)
-            sys.exit(1)
+    try:
+        BasicExample('eth0').run()
+    except BasicExampleError as expt:
+        print('aka_basic_example failed: ' + expt.message)
+        sys.exit(1)
     else:
         print('usage: aka_basic_example ifname')
         sys.exit(1)
