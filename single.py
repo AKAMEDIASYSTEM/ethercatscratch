@@ -87,7 +87,7 @@ class BasicExample:
                                 logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
-                                logging.debug('muscleCounter NONMATCH {} {}'.format(muscleCounter, self._muscle))
+                                # logging.debug('muscleCounter NONMATCH {} {}'.format(muscleCounter, self._muscle))
                                 output_buffer.append(0x00)
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
