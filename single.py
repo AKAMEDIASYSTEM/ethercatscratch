@@ -82,6 +82,7 @@ class BasicExample:
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             logging.debug('muscleCounter is {}'.format(muscleCounter))
                             if currentAnimation['involves'][module_index][phase_index]:
+                                muscleCounter = muscleCounter + 1
                                 if muscleCounter is selectedMuscle:
                                     output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 else:
