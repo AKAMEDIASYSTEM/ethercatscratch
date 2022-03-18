@@ -242,6 +242,7 @@ if __name__ == '__main__':
 
     if len(sys.argv) > 1:
         try:
+            selectedMuscle = sys.argv[2]
             BasicExample(sys.argv[1]).run()
         except BasicExampleError as expt:
             print('aka_basic_example failed: ' + expt.message)
