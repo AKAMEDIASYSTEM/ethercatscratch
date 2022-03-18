@@ -76,9 +76,9 @@ class BasicExample:
             while 1:
                 if(currentlyPlaying):
                     # logging.debug('currentlyPlaying')
+                    muscleCounter = 0
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
-                        muscleCounter = 0
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             logging.debug('muscleCounter is {}'.format(muscleCounter))
                             if currentAnimation['involves'][module_index][phase_index]:
