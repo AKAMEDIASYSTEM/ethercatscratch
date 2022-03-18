@@ -88,7 +88,7 @@ class BasicExample:
                                 else:
                                     output_buffer.append(0x00)
                             else:
-                                logging.debug('ignoring muscle {}'.format(phase_index))
+                                # logging.debug('ignoring muscle {}'.format(phase_index))
                                 output_buffer.append(0x00)
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
