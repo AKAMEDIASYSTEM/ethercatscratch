@@ -129,7 +129,7 @@ class BasicExample:
             raise BasicExampleError('no slave found')
 
         for i, slave in enumerate(self._master.slaves):
-            logging.debug(i, slave)
+            logging.debug('Enumerating {} module as slave {}'.format(i, slave))
             if not ((slave.man == self.BECKHOFF_VENDOR_ID) and
                     (slave.id == self._expected_slave_layout[i].product_code)):
                 self._master.close()
