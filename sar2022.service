@@ -1,0 +1,11 @@
+[Unit]
+Description=SAR2022 launcher
+
+[Service]
+ExecStart=/usr/bin/python3 /home/pi/akatesting/ethercatscratch/aka_basic_example.py
+RestartSec=30
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
