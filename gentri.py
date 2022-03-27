@@ -2,9 +2,9 @@
 import math
 from numpy import interp
 
-NUM_SAMPLES = 1024
+NUM_SAMPLES = 512
 NUM_CYCLES = 4
-AMPLITUDE = 100
+AMPLITUDE = 32766
 
 out_lut = [0]*NUM_SAMPLES
 for cycleNumber in range(NUM_CYCLES):
