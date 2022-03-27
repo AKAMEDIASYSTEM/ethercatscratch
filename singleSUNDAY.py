@@ -1,6 +1,6 @@
-"""Toggles the state of a digital output on an EL1259.
+"""CLI script to play a slow sine wave through a single muscle.
 
-Usage: python basic_example.py <adapter>
+Usage: python single.py <adapter> <muscle_number>
 
 This example expects a physical slave layout according to
 _expected_slave_layout, see below.
@@ -34,8 +34,9 @@ class BasicExample:
     EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 0-10V 12-bit
 
 
-    def __init__(self, ifname):
+    def __init__(self, ifname, theMuscle):
         self._ifname = ifname
+        self._muscle = theMuscle
         self._pd_thread_stop_event = threading.Event()
         self._ch_thread_stop_event = threading.Event()
         self._actual_wkc = 0
@@ -46,16 +47,9 @@ class BasicExample:
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       2: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       3: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       4: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       5: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       6: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       7: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       8: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       9: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       10: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
+                                       1: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       3: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
                                        }
 
     def _processdata_thread(self):
@@ -70,19 +64,23 @@ class BasicExample:
         print('in update_loop')
         self._master.in_op = True
         counter = 0
+        muscleCounter = 0
         currentlyPlaying = False
         try:
             while 1:
                 if(currentlyPlaying):
-                    # logging.debug('currentlyPlaying')
-                    for module_index, this_module in enumerate(outputs.installed): # this should instead look up the phase_offset from luts2.py
+                    # logging.debug('looking for {}'.format(self._muscle))
+                    muscleCounter = 0
+                    for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
-                            # logging.debug(currentAnimation['involves'][module_index][phase_index])
-                            if currentAnimation['involves'][module_index][phase_index]:
+                            # logging.debug('muscleCounter is {}'.format(muscleCounter))
+                            muscleCounter = muscleCounter + 1
+                            if (muscleCounter==int(self._muscle)):
+                                # logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
-                                # logging.debug('ignoring muscle {}'.format(phase_index))
+                                # logging.debug('muscleCounter NONMATCH {} {}'.format(muscleCounter, self._muscle))
                                 output_buffer.append(0x00)
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
@@ -90,19 +88,18 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(1,10)
+                        sleep_interval = random.randint(1,2)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
                 else:
                     # currentAnimation = random.choice(luts.luts)
-                    currentAnimation = luts.luts[7]
+                    currentAnimation = luts.luts[0]
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
 
                 time.sleep(0.001)
-                # self.update_values(self._master.slaves)
                 
 
         except KeyboardInterrupt:
@@ -126,7 +123,7 @@ class BasicExample:
             raise BasicExampleError('no slave found')
 
         for i, slave in enumerate(self._master.slaves):
-            print(i, slave)
+            # logging.debug('Enumerating {} module as slave {}'.format(i, slave))
             if not ((slave.man == self.BECKHOFF_VENDOR_ID) and
                     (slave.id == self._expected_slave_layout[i].product_code)):
                 self._master.close()
@@ -175,11 +172,6 @@ class BasicExample:
 
         if not all_slaves_reached_op_state:
             raise BasicExampleError('not all slaves reached OP state')
-
-    def update_values(self, slaveArray):
-        '''update all slave output values.'''
-        # logging.debug('in update_values')
-        pass
 
     @staticmethod
     def _check_slave(slave, pos):
@@ -235,15 +227,15 @@ class BasicExampleError(Exception):
 
 if __name__ == '__main__':
 
-    print('aka_basic_example started')
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    logging.debug('testing single muscle {}'.format(sys.argv[1]))
 
     for module in outputs.installed:
         if len(module['phase_offsets']):
             logging.debug(module['name'])
 
     try:
-        BasicExample('eth0').run()
+        BasicExample('eth0', sys.argv[1]).run()
     except BasicExampleError as expt:
         print('aka_basic_example failed: ' + expt.message)
         sys.exit(1)
