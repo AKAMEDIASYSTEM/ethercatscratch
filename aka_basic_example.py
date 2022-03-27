@@ -78,8 +78,8 @@ class BasicExample:
                     for module_index, this_module in enumerate(outputs.installed): # this should instead look up the phase_offset from luts2.py
                         output_buffer = []
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
-                            # logging.debug(currentAnimation['involves'][module_index][phase_index])
-                            if currentAnimation['involves'][module_index][phase_index]:
+                            # logging.debug(currentAnimation['muscle_offsets'][module_index][phase_index])
+                            if currentAnimation['muscle_offsets'][module_index][phase_index]:
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
                                 # logging.debug('ignoring muscle {}'.format(phase_index))
