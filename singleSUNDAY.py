@@ -1,6 +1,6 @@
 """CLI script to play a slow sine wave through a single muscle.
 
-Usage: python single.py <adapter> <muscle_number>
+Usage: python singleSUNDAY.py <muscle_number>
 
 This example expects a physical slave layout according to
 _expected_slave_layout, see below.
