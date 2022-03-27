@@ -3,7 +3,7 @@ import math
 from numpy import interp
 
 NUM_SAMPLES = 512
-NUM_CYCLES = 4
+NUM_CYCLES = 8
 AMPLITUDE = 32766
 
 out_lut = [0]*NUM_SAMPLES
