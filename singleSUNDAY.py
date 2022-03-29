@@ -47,8 +47,8 @@ class BasicExample:
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       2: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       1: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       2: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        3: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
                                        }
 
