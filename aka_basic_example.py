@@ -46,16 +46,10 @@ class BasicExample:
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       2: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       3: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       4: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
-                                       5: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       6: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       7: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       8: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       9: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       10: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None)
+                                       1: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       2: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       3: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       4: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None)
                                        }
 
     def _processdata_thread(self):
