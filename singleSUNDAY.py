@@ -79,7 +79,7 @@ class BasicExample:
                             logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
                             if (muscleCounter==int(self._muscle)):
-                                # logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
+                                logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
                                 output_buffer.append(0x00)
