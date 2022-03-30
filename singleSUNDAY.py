@@ -78,7 +78,8 @@ class BasicExample:
                         output_buffer = []
                         # logging.debug(this_module)
                         # logging.debug('module_index is {}'.format(module_index))
-                        for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
+                        # for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
+                        for phase_index, c_phase_offset in enumerate(currentAnimation[module_index]['muscle_offsets']):
                             # logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
                             if (muscleCounter==int(self._muscle)):
