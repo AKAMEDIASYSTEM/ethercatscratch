@@ -72,10 +72,10 @@ class BasicExample:
                 if(currentlyPlaying):
                     logging.debug('looking for {}'.format(self._muscle))
                     muscleCounter = 0
-                    for module_index, this_module in enumerate(outputs.installed):
+                    for module_index, this_module in enumerate([outputs.installed if len(outputs.installed['phase_offsets'])]):
                         output_buffer = []
                         logging.debug(this_module)
-                        logging.debug('module_index is{}'.format(module_index))
+                        logging.debug('module_index is {}'.format(module_index))
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
