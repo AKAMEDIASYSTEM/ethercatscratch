@@ -63,7 +63,7 @@ class BasicExample:
 
     def _pdo_update_loop(self):
         print('in update_loop')
-        set_of_muscles = [1, 2]
+        set_of_muscles = [1, 2, 6]
         self._master.in_op = True
         counter = 0
         muscleCounter = 0
