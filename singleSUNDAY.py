@@ -75,6 +75,7 @@ class BasicExample:
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
                         logging.debug(this_module)
+                        logging.debug('module_index is{}'.format(module_index))
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
