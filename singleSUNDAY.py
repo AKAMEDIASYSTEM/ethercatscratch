@@ -63,6 +63,7 @@ class BasicExample:
 
     def _pdo_update_loop(self):
         print('in update_loop')
+        set_of_muscles = [1, 2]
         self._master.in_op = True
         counter = 0
         muscleCounter = 0
@@ -82,7 +83,8 @@ class BasicExample:
                         for c_phase_offset in currentAnimation['muscle_offsets'][module_index]:
                             # logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
-                            if (muscleCounter==int(self._muscle)):
+                            # if (muscleCounter==int(self._muscle)):
+                            if (muscleCounter in set_of_muscles):
                                 # logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 # logging.debug(output_buffer)
