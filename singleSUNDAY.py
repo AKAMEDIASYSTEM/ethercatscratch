@@ -70,24 +70,24 @@ class BasicExample:
         try:
             while 1:
                 if(currentlyPlaying):
-                    logging.debug('looking for {}'.format(self._muscle))
+                    # logging.debug('looking for {}'.format(self._muscle))
                     muscleCounter = 0
                     # active_modules = [module for i, module in enumerate(outputs.installed) if len(module['phase_offsets'])]
                     # for module_index, this_module in enumerate(active_modules):
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
-                        logging.debug(this_module)
-                        logging.debug('module_index is {}'.format(module_index))
+                        # logging.debug(this_module)
+                        # logging.debug('module_index is {}'.format(module_index))
                         for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                             # logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
                             if (muscleCounter==int(self._muscle)):
                                 # logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
-                                logging.debug(output_buffer)
+                                # logging.debug(output_buffer)
                             else:
                                 output_buffer.append(0x00)
-                                logging.debug(output_buffer)
+                                # logging.debug(output_buffer)
                         # logging.debug('writing to bus now')
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
