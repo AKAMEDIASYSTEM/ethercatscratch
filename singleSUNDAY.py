@@ -87,6 +87,7 @@ class BasicExample:
                             else:
                                 output_buffer.append(0x00)
                                 logging.debug(output_buffer)
+                        logging.debug('writing to bus now')
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
