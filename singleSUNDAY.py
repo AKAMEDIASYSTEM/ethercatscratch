@@ -63,7 +63,7 @@ class BasicExample:
 
     def _pdo_update_loop(self):
         print('in update_loop')
-        set_of_muscles = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12] # becuse EL4008 ch 7 and 8 are empty, muscle 7=ch9 (ch1 of EL4024)
+        set_of_muscles = [1, 2, 3, 4, 5, 6,7, 8, 9, 10, 11, 12] # becuse EL4008 ch 7 and 8 are empty, muscle 7=ch9 (ch1 of EL4024)
         self._master.in_op = True
         counter = 0
         muscleCounter = 0
