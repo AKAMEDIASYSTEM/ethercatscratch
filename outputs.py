@@ -10,6 +10,10 @@ installed = [
 
 },
 {
+	'name':'EL4008',
+	'phase_offsets': [30,30,10,10,7,7,40,40]
+},
+{
 	'name':'EK1100',
 	'phase_offsets': []
 
