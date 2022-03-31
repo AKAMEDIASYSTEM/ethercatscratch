@@ -120,7 +120,8 @@ class BasicExample:
         logging.debug('all_zero()')
         for module_index, this_module in enumerate(outputs.installed):
             if this_module['name']=="EL4024":
-                output_buffer = [0x3FFF]*len(this_module['phase_offsets'])
+                # output_buffer = [0x3FFF]*len(this_module['phase_offsets'])
+                output_buffer = [0]*len(this_module['phase_offsets'])
             else:
                 output_buffer = [0]*len(this_module['phase_offsets'])
 
