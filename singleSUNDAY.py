@@ -119,7 +119,11 @@ class BasicExample:
     def all_zero(self):
         logging.debug('all_zero()')
         for module_index, this_module in enumerate(outputs.installed):
-            output_buffer = [0]*len(this_module['phase_offsets'])
+            if this_module['name'] is "EL4024":
+                output_buffer = [0x3FFF]*len(this_module['phase_offsets'])
+            else:
+                output_buffer = [0]*len(this_module['phase_offsets'])
+
             # if it turns out current-driven valves need a middle value to be "off", that logic should
             # go here
             self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
