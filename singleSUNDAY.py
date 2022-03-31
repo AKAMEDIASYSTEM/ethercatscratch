@@ -98,7 +98,7 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(5,10)
+                        sleep_interval = random.randint(3,7)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
