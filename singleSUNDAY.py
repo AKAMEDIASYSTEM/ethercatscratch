@@ -64,7 +64,7 @@ class BasicExample:
 
     def _pdo_update_loop(self):
         print('in update_loop')
-        set_of_muscles = [0,1] # becuse EL4008 ch 7 and 8 are empty, muscle 7=ch9 (ch1 of EL4024)
+        set_of_muscles = [1] # becuse EL4008 ch 7 and 8 are empty, muscle 7=ch9 (ch1 of EL4024)
         self._master.in_op = True
         counter = 0
         muscleCounter = 0
@@ -86,11 +86,11 @@ class BasicExample:
                             muscleCounter = muscleCounter + 1
                             # if (muscleCounter==int(self._muscle)):
                             if (muscleCounter in set_of_muscles):
-                                logging.debug('muscleCounter MATCH module_index {} muscle {}'.format(module_index, muscleCounter))
+                                # logging.debug('muscleCounter MATCH module_index {} muscle {}'.format(module_index, muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 # logging.debug(output_buffer)
                             else:
-                                output_buffer.append(0x00)
+                                output_buffer.append(0x3FFF)
                                 # logging.debug(output_buffer)
                         # logging.debug('writing to bus now')
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
