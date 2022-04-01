@@ -86,7 +86,7 @@ class BasicExample:
                             muscleCounter = muscleCounter + 1
                             # if (muscleCounter==int(self._muscle)):
                             if (muscleCounter in set_of_muscles):
-                                # logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
+                                logging.debug('muscleCounter MATCH {}'.format(muscleCounter))
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 # logging.debug(output_buffer)
                             else:
