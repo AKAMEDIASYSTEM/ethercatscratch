@@ -5,13 +5,8 @@ installed = [
 
 },
 {
-	'name':'EK1100',
-	'phase_offsets': []
-
-},
-{
-	'name':'EL4008',
-	'phase_offsets': [30,30,10,10,7,7,40,40]
+	'name':'EL4024',
+	'phase_offsets': [1,2,3,4]
 },
 {
 	'name':'EK1100',
@@ -20,11 +15,20 @@ installed = [
 },
 {
 	'name':'EL4008',
-	'phase_offsets': [30,30,10,10,7,7,40,40]
+	'phase_offsets': [5,6,7,8,9,10,11,12]
+},
+{
+	'name':'EK1100',
+	'phase_offsets': []
+
+},
+{
+	'name':'EL4008',
+	'phase_offsets': [13,14,15,16,17,18,19,20]
 },
 {
 	'name':'EL4024',
-	'phase_offsets': [0,0,0,0]
+	'phase_offsets': [21,22,23,24]
 }
 ]
 
