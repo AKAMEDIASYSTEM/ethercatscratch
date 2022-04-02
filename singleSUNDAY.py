@@ -106,7 +106,7 @@ class BasicExample:
                     
                 else:
                     # currentAnimation = random.choice(luts.luts)
-                    currentAnimation = luts.luts[9]
+                    currentAnimation = luts.luts[10]
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
