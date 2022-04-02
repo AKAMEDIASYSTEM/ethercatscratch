@@ -105,8 +105,8 @@ class BasicExample:
                         time.sleep(sleep_interval)
                     
                 else:
-                    currentAnimation = random.choice(luts.luts)
-                    # currentAnimation = luts.luts[5]
+                    # currentAnimation = random.choice(luts.luts)
+                    currentAnimation = luts.luts[1]
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
