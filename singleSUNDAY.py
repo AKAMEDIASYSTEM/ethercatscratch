@@ -66,7 +66,7 @@ class BasicExample:
 
     def _pdo_update_loop(self):
         print('in update_loop')
-        set_of_muscles = [12,13,14,15,16,17,18,21,22] # becuse EL4008 ch 7 and 8 are BODY, muscle 7=ch9 (ch1 of EL4024)
+        set_of_muscles = [13,14,15,16,17,18,19,20, 21,22,23,24] # becuse EL4008 ch 7 and 8 are BODY, muscle 7=ch9 (ch1 of EL4024)
         self._master.in_op = True
         counter = 0
         muscleCounter = 0
@@ -80,9 +80,8 @@ class BasicExample:
                     # for module_index, this_module in enumerate(active_modules):
                     for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
-                        # logging.debug(this_module)
+                        # logging.debug('module {}'.format(this_module))
                         # logging.debug('module_index is {}'.format(module_index))
-                        # for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
                         for c_phase_offset in currentAnimation['muscle_offsets'][module_index]:
                             # logging.debug('muscleCounter is {}'.format(muscleCounter))
                             muscleCounter = muscleCounter + 1
