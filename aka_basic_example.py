@@ -89,13 +89,13 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(30,31)
+                        sleep_interval = random.randint(10,11)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
                 else:
-                    currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:])
-                    # currentAnimation = (luts.luts[4])
+                    # currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:])
+                    currentAnimation = (luts.luts[4])
                     # currentAnimation = luts.luts[7]
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
