@@ -34,7 +34,7 @@ class BasicExample:
     EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 0-10V 16-bit
     EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 0-10V 12-bit
 
-    SIGHS_LUT_BEGIN = 9 # sighs begin in the lut at index 9
+    SIGHS_LUT_BEGIN = 10 # sighs begin in the lut at this index
 
     def __init__(self, ifname, theMuscle):
         self._ifname = ifname
