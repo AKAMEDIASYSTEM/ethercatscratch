@@ -34,6 +34,7 @@ class BasicExample:
     EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 0-10V 16-bit
     EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 0-10V 12-bit
 
+    SIGHS_LUT_BEGIN = 9 # sighs begin in the lut at index 9
 
     def __init__(self, ifname, theMuscle):
         self._ifname = ifname
@@ -105,7 +106,7 @@ class BasicExample:
                         time.sleep(sleep_interval)
                     
                 else:
-                    currentAnimation = random.choice(luts.luts[8:]) # sighs start at 8th entry
+                    currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:]) # sighs start at 8th entry
                     # currentAnimation = luts.luts[12]
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
