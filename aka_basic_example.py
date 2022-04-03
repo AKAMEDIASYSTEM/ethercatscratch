@@ -46,10 +46,12 @@ class BasicExample:
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
-                                       1: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       1: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None),
                                        2: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
                                        3: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
-                                       4: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None)
+                                       4: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
+                                       5: SlaveSet('EL4008', self.EL4008_PRODUCT_CODE, None),
+                                       6: SlaveSet('EL4024', self.EL4024_PRODUCT_CODE, None)
                                        }
 
     def _processdata_thread(self):
@@ -69,15 +71,15 @@ class BasicExample:
             while 1:
                 if(currentlyPlaying):
                     # logging.debug('currentlyPlaying')
-                    for module_index, this_module in enumerate(outputs.installed): # this should instead look up the phase_offset from luts2.py
+                    for module_index, this_module in enumerate(outputs.installed):
                         output_buffer = []
-                        for phase_index, c_phase_offset in enumerate(this_module['phase_offsets']):
+                        for c_phase_offset in currentAnimation['muscle_offsets'][module_index]:
                             # logging.debug(currentAnimation['muscle_offsets'][module_index][phase_index])
                             if currentAnimation['muscle_offsets'][module_index][phase_index]:
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
                                 # logging.debug('ignoring muscle {}'.format(phase_index))
-                                output_buffer.append(0x00)
+                                output_buffer.append(0)
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
@@ -89,8 +91,8 @@ class BasicExample:
                         time.sleep(sleep_interval)
                     
                 else:
-                    # currentAnimation = random.choice(luts.luts)
-                    currentAnimation = luts.luts[7]
+                    currentAnimation = random.choice(luts.luts)
+                    # currentAnimation = luts.luts[7]
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
