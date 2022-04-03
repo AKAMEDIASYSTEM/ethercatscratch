@@ -71,16 +71,16 @@ class BasicExample:
             while 1:
                 if(currentlyPlaying):
                     # logging.debug('currentlyPlaying')
-                    for module_index, this_module in enumerate(outputs.installed):
+                    for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
                         output_buffer = []
-                        for c_phase_offset in currentAnimation['muscle_offsets'][module_index]:
+                        if len(currentAnimation['muscle_offsets'][module_index]):
+                            for c_phase_offset in currentAnimation['muscle_offsets'][module_index]:
                             # logging.debug(currentAnimation['muscle_offsets'][module_index][phase_index])
-                            if len(currentAnimation['muscle_offsets'][module_index]):
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
                                 # logging.debug('ignoring muscle {}'.format(phase_index))
                                 output_buffer.append(0)
-                        self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
+                            self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
                         counter = 0
