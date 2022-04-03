@@ -91,7 +91,7 @@ class BasicExample:
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 # logging.debug(output_buffer)
                             else:
-                                output_buffer.append(0x3FFF)
+                                output_buffer.append(0)
                                 # logging.debug(output_buffer)
                         # logging.debug('writing to bus now')
                         self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
@@ -105,8 +105,8 @@ class BasicExample:
                         time.sleep(sleep_interval)
                     
                 else:
-                    # currentAnimation = random.choice(luts.luts)
-                    currentAnimation = luts.luts[15]
+                    currentAnimation = random.choice(luts.luts[8:]) # sighs start at 8th entry
+                    # currentAnimation = luts.luts[12]
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
@@ -122,10 +122,10 @@ class BasicExample:
         logging.debug('all_zero()')
         for module_index, this_module in enumerate(outputs.installed):
             if this_module['name']=="EL4024":
-                output_buffer = [0x3FFF]*len(this_module['phase_offsets'])
+                output_buffer = [0]*len(this_module['phase_offsets'])
                 # output_buffer = [0]*len(this_module['phase_offsets'])
             else:
-                output_buffer = [0x3FFF]*len(this_module['phase_offsets'])
+                output_buffer = [0]*len(this_module['phase_offsets'])
             self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     
     def run(self):
