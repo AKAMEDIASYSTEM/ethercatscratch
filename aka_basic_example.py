@@ -16,7 +16,7 @@ from collections import namedtuple
 
 import pysoem
 import random
-import luts
+import lutsFastonly as luts
 import logging
 import json
 import outputs
