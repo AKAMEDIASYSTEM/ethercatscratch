@@ -75,7 +75,7 @@ class BasicExample:
                         output_buffer = []
                         for c_phase_offset in currentAnimation['muscle_offsets'][module_index]:
                             # logging.debug(currentAnimation['muscle_offsets'][module_index][phase_index])
-                            if currentAnimation['muscle_offsets'][module_index][phase_index]:
+                            if currentAnimation['muscle_offsets'][module_index][c_phase_offset]:
                                 output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                             else:
                                 # logging.debug('ignoring muscle {}'.format(phase_index))
