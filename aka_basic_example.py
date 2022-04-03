@@ -74,9 +74,9 @@ class BasicExample:
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
                         if len(currentAnimation['muscle_offsets'][module_index]):
                             output_buffer = []
-                            logging.debug('module {} has offsets to handle.'.format(module_index))
+                            # logging.debug('module {} has offsets to handle.'.format(module_index))
                             for phase_index, c_phase_offset in enumerate(currentAnimation['muscle_offsets'][module_index]):
-                                logging.debug('phase_offset_value is {}'.format(currentAnimation['muscle_offsets'][module_index][phase_index]))
+                                # logging.debug('phase_offset_value is {}'.format(currentAnimation['muscle_offsets'][module_index][phase_index]))
                                 if currentAnimation['muscle_offsets'][module_index][phase_index] >= 0:
                                     output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 else:
