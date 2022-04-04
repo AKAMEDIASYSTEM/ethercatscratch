@@ -9,8 +9,8 @@ installed = [
 	'phase_offsets': [1,2,3,4]
 },
 {
-	'name':'EL4024',
-	'phase_offsets': [1,2,3,4]
+	'name':'EL4102',
+	'phase_offsets': [1,2]
 },
 {
 	'name':'EK1100',
