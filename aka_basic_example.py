@@ -97,7 +97,7 @@ class BasicExample:
                     
                 else:
                     # currentAnimation = random.choice(luts.luts[:self.SIGHS_LUT_BEGIN])
-                    currentAnimation = (luts.luts[4])
+                    currentAnimation = (luts.luts[16:])
                     # currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
