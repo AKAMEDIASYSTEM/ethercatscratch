@@ -33,6 +33,10 @@ installed = [
 {
 	'name':'EL4024',
 	'phase_offsets': [21,22,23,24]
+},
+{
+	'name':'EL4024',
+	'phase_offsets': [21,22,23,24]
 }
 ]
 
