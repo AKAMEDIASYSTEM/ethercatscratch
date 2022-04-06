@@ -70,9 +70,9 @@ class BasicExample:
         self._master.in_op = True
         counter = 0
         currentlyPlaying = False
+        shouldAlternate = True
         try:
             while 1:
-                shouldAlternate = True
                 if(currentlyPlaying):
                     # logging.debug('currentlyPlaying')
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
