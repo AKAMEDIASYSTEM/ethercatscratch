@@ -72,6 +72,7 @@ class BasicExample:
         currentlyPlaying = False
         try:
             while 1:
+                shouldAlternate = True
                 if(currentlyPlaying):
                     # logging.debug('currentlyPlaying')
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
@@ -91,13 +92,17 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(10,11)
+                        sleep_interval = random.randint(6,5)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
                 else:
                     # currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:])
-                    currentAnimation = (luts.luts[17])
+                    if shouldAlternate:
+                        shouldAlternate = False
+                        currentAnimation = (luts.luts[17])
+                    else:
+                        currentAnimation = (luts.luts[21])
                     # currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
