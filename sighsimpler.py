@@ -46,8 +46,10 @@ BREATHE_OUT_START = BREATHE_IN_END + HOLD_BREATH_TIME
 BREATHE_OUT_END = BREATHE_OUT_START + (OUT_TIME*CHUNK_TIME)
 # print(BREATHE_OUT_END)
 RESET_TIME = 2048
+PROPAGATION_DELAY = 50 # ms propagation delay
+PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 
-out_lut = [0]*(BREATHE_OUT_END + RESET_TIME)
+out_lut = [0]*(BREATHE_OUT_END + RESET_TIME + PROPAGATION_TIME)
 
 # # exhale
 # for sampleNumber in range(0,INIT_EXHALE_DUR):
