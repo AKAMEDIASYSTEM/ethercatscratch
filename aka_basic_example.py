@@ -102,6 +102,7 @@ class BasicExample:
                         shouldAlternate = False
                         currentAnimation = (luts.luts[17])
                     else:
+                        shouldAlternate = True
                         currentAnimation = (luts.luts[-1])
                     # currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
