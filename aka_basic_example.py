@@ -102,7 +102,7 @@ class BasicExample:
                         shouldAlternate = False
                         currentAnimation = (luts.luts[17])
                     else:
-                        currentAnimation = (luts.luts[21])
+                        currentAnimation = (luts.luts[-1])
                     # currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
