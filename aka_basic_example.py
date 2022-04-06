@@ -96,7 +96,7 @@ class BasicExample:
                         time.sleep(sleep_interval)
                     
                 else:
-                    currentAnimation = random.choice(luts.luts[16:])
+                    currentAnimation = random.choice(luts.luts[0])
                     # currentAnimation = (luts.luts[16])
                     # currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
