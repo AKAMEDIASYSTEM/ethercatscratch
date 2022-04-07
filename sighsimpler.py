@@ -4,20 +4,22 @@ import math
 from numpy import interp
 import sys
 import logging
+import pyperclip as pc
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
-
 if len(sys.argv) > 1:
-	CHUNK_TIME = int(sys.argv[3])
+	CHUNK_TIME = int(sys.argv[4])
 	IN_TIME = int(sys.argv[1])
-	OUT_TIME = int(sys.argv[2])
+	HOLD_BREATH_TIME = int(sys.argv[2])
+	OUT_TIME = int(sys.argv[3])
 	logging.debug('Generating a sigh of beat {} samples that breathes in for {} and out for {}'.format(CHUNK_TIME, IN_TIME, OUT_TIME))
 else:
-	logging.debug('no args, so displaying a single-cycle 2048-sample triangle wave')
+	logging.debug('no args, so displaying a sigh breathing in for 3*1024 ms, and out for 2*1024 ms')
 	CHUNK_TIME = 1024
 	IN_TIME = 3
 	OUT_TIME = 2
+	HOLD_BREATH_TIME = 500
 AMPLITUDE = 32766
 '''
 interpolate from mid-to zero slowly, over 2048 seconds
@@ -27,9 +29,8 @@ then interpolate from full aplitude to zero over CHUNK_TIME*OUT_TIME cycles
 then interpolate from zero to mid-amplitude over CHUNK_TIME*(IN_TIME+OUT_TIME) cycles
 
 '''
-INIT_EXHALE_DUR = 2048
-INIT_HOLD_DUR = 5000
-HOLD_BREATH_TIME = 500
+# INIT_EXHALE_DUR = 2048
+# INIT_HOLD_DUR = 5000
 
 MAX_BREATHE_RATE = 3*AMPLITUDE/5
 MAX_EXHALE_RATE = 2*AMPLITUDE/5
@@ -41,7 +42,7 @@ BREATHE_IN_START = 0
 # print(BREATHE_IN_START)
 BREATHE_IN_END = BREATHE_IN_START + (CHUNK_TIME*IN_TIME)
 # print(BREATHE_IN_END)
-BREATHE_OUT_START = BREATHE_IN_END + HOLD_BREATH_TIME
+BREATHE_OUT_START = BREATHE_IN_END + (HOLD_BREATH_TIME*CHUNK_TIME)
 # print(BREATHE_OUT_START)
 BREATHE_OUT_END = BREATHE_OUT_START + (OUT_TIME*CHUNK_TIME)
 # print(BREATHE_OUT_END)
@@ -72,4 +73,5 @@ for sampleNumber in range( BREATHE_OUT_START,BREATHE_OUT_END):
 for sampleNumber in range(BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME):
 	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME], [MAX_EXHALE_RATE, 0]))
 
-print(out_lut)
+pc.copy(str(out_lut))
+print('ok, check your clipboard')

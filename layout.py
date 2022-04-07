@@ -5,7 +5,7 @@ import sys
 import pyperclip as pc
 
 # ARRAY OF ORDERS, TAIL IS LOWEST
-muscle_offsets_beckhoff = [[3,1,0,0],[1,2,-2,-2,-2,-2,-2,-2],[4,5,6,9,10,8,7,-2],[14,14,14,14,14,14,13,11],[14,14,14,14],[12,-2,-2,-2]]
+muscle_offsets_beckhoff = [[],[3,1,0,0],[1,2,-2,-2,-2,-2,-2,-2],[],[4,5,6,9,10,8,7,-2],[],[14,14,14,14,14,14,13,11],[14,14,14,14],[12,-2,-2,-2]]
 muscle_offsets = [3,1,0,0,1,2,-2,-2,-2,-2,-2,-2,4,5,6,9,10,8,7,-2,14,14,14,14,14,14,13,11,14,14,14,14,12,-2,-2,-2]
 
 # "starting at [X] rib and radiating outwards with [Y] propagation delay"

@@ -92,7 +92,7 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(10,11)
+                        sleep_interval = random.randint(5,6)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
@@ -100,7 +100,8 @@ class BasicExample:
                     # currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:])
                     if shouldAlternate:
                         shouldAlternate = False
-                        currentAnimation = random.choice(luts.luts[5:]) #was just 17
+                        # currentAnimation = random.choice(luts.luts[5:]) #was just 17
+                        currentAnimation = luts.luts[17]
                     else:
                         shouldAlternate = True
                         currentAnimation = (luts.luts[-1])
