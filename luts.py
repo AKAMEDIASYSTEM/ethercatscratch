@@ -1,4 +1,4 @@
-# [ din1 ] [4 BODY] [2 BODY] [ din2 ] [8 BODY] [ din3 ] [6 HEAD 2 BODY] [4 HEAD] [1 BODY]
+# [ din1 ] [4 BODY] [2 BODY - 6 BLANK] [ din2 ] [8 BODY] [ din3 ] [6 HEAD 2 BODY] [4 HEAD] [1 BODY 3 BLANK]
 luts=[
 {
 	'name':'tri_1cyc_2048_lut_50ms',
