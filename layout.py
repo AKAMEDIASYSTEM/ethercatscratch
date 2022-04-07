@@ -26,7 +26,7 @@ print('starting at rib {}, radiate a waveform with propagation delay {}'.format(
 
 for module in muscle_offsets_beckhoff:
 	for index, i in enumerate(module):
-		module[index] = abs(module[index] - initial)*delay
+		module[index] = (abs(module[index] - initial)*delay)
 
 pc.copy(str(muscle_offsets_beckhoff))
 print(muscle_offsets_beckhoff)
