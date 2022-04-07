@@ -101,7 +101,8 @@ class BasicExample:
                     if shouldAlternate:
                         shouldAlternate = False
                         # currentAnimation = random.choice(luts.luts[5:]) #was just 17
-                        currentAnimation = luts.luts[17]
+                        # currentAnimation = luts.luts[17]
+                        currentAnimation = luts.luts[3]
                     else:
                         shouldAlternate = True
                         currentAnimation = (luts.luts[-1])
