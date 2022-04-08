@@ -100,7 +100,7 @@ class BasicExample:
                     
                 else:
                     # currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:])
-                    if play_counter > len(set_to_play):
+                    if play_counter > (len(set_to_play) - 1):
                         play_counter = 0
                     currentAnimation = luts.luts[set_to_play[play_counter]]
                     play_counter = play_counter + 1
