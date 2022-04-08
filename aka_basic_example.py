@@ -1,9 +1,13 @@
-"""Toggles the state of a digital output on an EL1259.
+"""Send commands to a network of Beckhoff controllers. Input comes from luts.py, a table of look-up tables that describe animations.
 
-Usage: python basic_example.py <adapter>
+Usage: python aka_basic_example.py
 
-This example expects a physical slave layout according to
+Gratefully adapted from the pysoem library examples at https://github.com/bnjmnp/pysoem
+
+This script expects a physical slave layout according to
 _expected_slave_layout, see below.
+
+2022 AKA
 """
 
 import sys
@@ -93,7 +97,7 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(4,5)
+                        sleep_interval = random.randint(7,8)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
