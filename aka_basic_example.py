@@ -71,7 +71,7 @@ class BasicExample:
         counter = 0
         currentlyPlaying = False
         shouldAlternate = True
-        set_to_play = [-5, 16, 17, 10, 11, -6, -5]
+        set_to_play = [-5, -6, -5]
         play_counter = 0
         try:
             while 1:
