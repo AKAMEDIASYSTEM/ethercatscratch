@@ -71,6 +71,7 @@ class BasicExample:
         counter = 0
         currentlyPlaying = False
         shouldAlternate = True
+        set_to_play = [3, -1]
         try:
             while 1:
                 if(currentlyPlaying):
@@ -98,14 +99,10 @@ class BasicExample:
                     
                 else:
                     # currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:])
-                    if shouldAlternate:
-                        shouldAlternate = False
-                        # currentAnimation = random.choice(luts.luts[5:]) #was just 17
-                        # currentAnimation = luts.luts[17]
-                        currentAnimation = luts.luts[3]
-                    else:
-                        shouldAlternate = True
-                        currentAnimation = (luts.luts[-1])
+                    if play_counter > len(set_to_play):
+                        play_counter = 0
+                    currentAnimation = luts.luts[set_to_play[play_counter]]
+                    play_counter = play_counter + 1
                     # currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {}'.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
