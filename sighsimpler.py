@@ -15,7 +15,7 @@ if len(sys.argv) > 1:
 	OUT_TIME = int(sys.argv[3])
 	logging.debug('Generating a sigh of beat {} samples that breathes in for {} and out for {}'.format(CHUNK_TIME, IN_TIME, OUT_TIME))
 else:
-	logging.debug('no args, so displaying a sigh breathing in for 3*1024 ms, and out for 2*1024 ms')
+	logging.debug('no args. should be IN_TIME - HOLD_BREATH_TIME - OUT_TIME - CHUNK_TIME')
 	CHUNK_TIME = 1024
 	IN_TIME = 3
 	OUT_TIME = 2
