@@ -72,6 +72,7 @@ class BasicExample:
         currentlyPlaying = False
         shouldAlternate = True
         set_to_play = [3, -1]
+        play_counter = 0
         try:
             while 1:
                 if(currentlyPlaying):
