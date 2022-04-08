@@ -71,7 +71,7 @@ class BasicExample:
         counter = 0
         currentlyPlaying = False
         shouldAlternate = True
-        set_to_play = [5,0,1,2,3,3,3,4,18]
+        set_to_play = [-1,-1,-1,-1,5,0,1,2,3,3,3,4,18]
         play_counter = 0
         try:
             while 1:
@@ -93,7 +93,7 @@ class BasicExample:
                         counter = 0
                         currentlyPlaying = False
                         self.all_zero()
-                        sleep_interval = random.randint(5,6)
+                        sleep_interval = random.randint(4,5)
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
