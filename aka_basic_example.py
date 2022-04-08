@@ -109,7 +109,6 @@ class BasicExample:
                     currentlyPlaying = True
 
                 time.sleep(0.001)
-                # self.update_values(self._master.slaves)
                 
 
         except KeyboardInterrupt:
@@ -182,11 +181,6 @@ class BasicExample:
 
         if not all_slaves_reached_op_state:
             raise BasicExampleError('not all slaves reached OP state')
-
-    def update_values(self, slaveArray):
-        '''update all slave output values.'''
-        # logging.debug('in update_values')
-        pass
 
     @staticmethod
     def _check_slave(slave, pos):
