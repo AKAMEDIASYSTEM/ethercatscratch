@@ -14,7 +14,7 @@ muscle_offsets = [3,1,0,0,1,2,-2,-2,-2,-2,-2,-2,4,5,6,9,10,8,7,-2,14,14,14,14,14
 # then find the min in the whole set and re-adjust all offsets 
 # multiply this distance by the propagation
 
-# can -2 just be 0, nd we don't care?
+# can -2 just be 0, nd we don't care? ANSWER, no we don't - just have the system fire on these blank channels too for simplicity.
 
 if len(sys.argv) > 1:
  initial = int(sys.argv[1])
