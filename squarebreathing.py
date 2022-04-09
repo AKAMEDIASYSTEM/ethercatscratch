@@ -30,8 +30,8 @@ then interpolate from zero to mid-amplitude over CHUNK_TIME*(IN_TIME+OUT_TIME) c
 # INIT_EXHALE_DUR = 2048
 # INIT_HOLD_DUR = 5000
 
-MAX_BREATHE_RATE = int(3*AMPLITUDE/4) # trying 5/11 and 6/11 to be closer to midpoint, less fast flow, more time / motion-with-sound
-MAX_EXHALE_RATE = int(1*AMPLITUDE/4)
+MAX_BREATHE_RATE = int(6*AMPLITUDE/11) # trying 5/11 and 6/11 to be closer to midpoint, less fast flow, more time / motion-with-sound
+MAX_EXHALE_RATE = int(5*AMPLITUDE/11)
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
 # INIT_HOLD_END = INIT_EXHALE_DUR + INIT_HOLD_DUR
@@ -48,7 +48,8 @@ RESET_TIME = SQUARE_TIME
 PROPAGATION_DELAY = 50 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 # CYCLE_LENGTH = (BREATHE_OUT_END + RESET_TIME + PROPAGATION_TIME) # not doing reset time because suare breathing is in unison
-CYCLE_LENGTH = (BREATHE_OUT_END + RESET_TIME + SQUARE_TIME)
+# CYCLE_LENGTH = (BREATHE_OUT_END + RESET_TIME + SQUARE_TIME)
+CYCLE_LENGTH = (BREATHE_OUT_END + RESET_TIME)
 out_lut = [0]*CYCLE_LENGTH*NUM_CYCLES
 
 # # exhale
@@ -72,7 +73,7 @@ for i in range(NUM_CYCLES):
 	# reset to 0
 	for sampleNumber in range(BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME):
 		out_lut[i*CYCLE_LENGTH + sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME], [MAX_EXHALE_RATE, 0]))
-	for sampleNumber in range(BREATHE_OUT_END+RESET_TIME, BREATHE_OUT_END+RESET_TIME+SQUARE_TIME):
-		out_lut[i*CYCLE_LENGTH + sampleNumber] = 0
+	# for sampleNumber in range(BREATHE_OUT_END+RESET_TIME, BREATHE_OUT_END+RESET_TIME+SQUARE_TIME):
+	# 	out_lut[i*CYCLE_LENGTH + sampleNumber] = 0
 pc.copy(str(out_lut))
 print('ok, check your clipboard')
