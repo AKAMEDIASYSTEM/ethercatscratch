@@ -30,7 +30,7 @@ then interpolate from zero to mid-amplitude over CHUNK_TIME*(IN_TIME+OUT_TIME) c
 # INIT_EXHALE_DUR = 2048
 # INIT_HOLD_DUR = 5000
 
-MAX_BREATHE_RATE = 3*AMPLITUDE/5
+MAX_BREATHE_RATE = 2*AMPLITUDE/5
 MAX_EXHALE_RATE = 2*AMPLITUDE/5
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
@@ -47,9 +47,9 @@ BREATHE_OUT_END = BREATHE_OUT_START + (SQUARE_TIME)
 RESET_TIME = SQUARE_TIME
 PROPAGATION_DELAY = 50 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
-
-CYCLE_LENGTH = (BREATHE_OUT_END + RESET_TIME + PROPAGATION_TIME)
-out_lut = [0]* CYCLE_LENGTH * NUM_CYCLES
+# CYCLE_LENGTH = (BREATHE_OUT_END + RESET_TIME + PROPAGATION_TIME) # not doing reset time because suare breathing is in unison
+CYCLE_LENGTH = (BREATHE_OUT_END + RESET_TIME)
+out_lut = [0]*CYCLE_LENGTH*NUM_CYCLES
 
 # # exhale
 # for sampleNumber in range(0,INIT_EXHALE_DUR):
