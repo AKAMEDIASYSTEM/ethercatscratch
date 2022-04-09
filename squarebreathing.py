@@ -30,8 +30,8 @@ then interpolate from zero to mid-amplitude over CHUNK_TIME*(IN_TIME+OUT_TIME) c
 # INIT_EXHALE_DUR = 2048
 # INIT_HOLD_DUR = 5000
 
-MAX_BREATHE_RATE = int(6*AMPLITUDE/11) # trying 5/11 and 6/11 to be closer to midpoint, less fast flow, more time / motion-with-sound
-MAX_EXHALE_RATE = int(5*AMPLITUDE/11)
+MAX_BREATHE_RATE = int(3*AMPLITUDE/4) # trying 5/11 and 6/11 to be closer to midpoint, less fast flow, more time / motion-with-sound
+MAX_EXHALE_RATE = int(1*AMPLITUDE/4)
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
 # INIT_HOLD_END = INIT_EXHALE_DUR + INIT_HOLD_DUR
