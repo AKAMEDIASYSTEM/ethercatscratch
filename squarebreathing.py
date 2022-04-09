@@ -8,17 +8,22 @@ import pyperclip as pc
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
+AMPLITUDE = 32766 # (12-bits)
+MAX_BREATHE_RATE = int(6*AMPLITUDE/11) # trying 5/11 and 6/11 to be closer to midpoint, less fast flow, more time / motion-with-sound
+MAX_EXHALE_RATE = int(5*AMPLITUDE/11)
+
+
 if len(sys.argv) > 1:
 	SQUARE_TIME = int(sys.argv[1])
 	NUM_CYCLES = int(sys.argv[2])
-	logging.debug('Generating a square of breathing with chunk {} for {} cycles'.format(SQUARE_TIME, NUM_CYCLES))
+	logging.debug('Generating a square of breathing with chunk {} for {} cycles, MAX_BREATHE_RATE is {}'.format(SQUARE_TIME, NUM_CYCLES, MAX_BREATHE_RATE))
 else:
 	logging.debug('no args. Need a SQUARE_TIME')
 	CHUNK_TIME = 1024
 	IN_TIME = 3
 	OUT_TIME = 2
 	HOLD_BREATH_TIME = 500
-AMPLITUDE = 32766
+
 '''
 interpolate from mid-to zero slowly, over 2048 seconds
 THEN
@@ -29,9 +34,6 @@ then interpolate from zero to mid-amplitude over CHUNK_TIME*(IN_TIME+OUT_TIME) c
 '''
 # INIT_EXHALE_DUR = 2048
 # INIT_HOLD_DUR = 5000
-
-MAX_BREATHE_RATE = int(6*AMPLITUDE/11) # trying 5/11 and 6/11 to be closer to midpoint, less fast flow, more time / motion-with-sound
-MAX_EXHALE_RATE = int(5*AMPLITUDE/11)
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
 # INIT_HOLD_END = INIT_EXHALE_DUR + INIT_HOLD_DUR
