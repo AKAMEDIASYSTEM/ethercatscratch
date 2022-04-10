@@ -28,6 +28,10 @@ interpolate from mid-amplitude to full aplitude over CHUNK_TIME*IN_TIME cycles
 then interpolate from full aplitude to zero over CHUNK_TIME*OUT_TIME cycles
 then interpolate from zero to mid-amplitude over CHUNK_TIME*(IN_TIME+OUT_TIME) cycles
 
+
+tempnotes
+inhale too fast
+gap after exhale too long
 '''
 # INIT_EXHALE_DUR = 2048
 # INIT_HOLD_DUR = 5000
@@ -50,7 +54,7 @@ RESET_TIME = 0
 PROPAGATION_DELAY = 50 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 
-out_lut = [0]*(BREATHE_OUT_END + RESET_TIME + PROPAGATION_TIME)
+out_lut = [0]*(BREATHE_OUT_END + RESET_TIME)
 
 # # exhale
 # for sampleNumber in range(0,INIT_EXHALE_DUR):
