@@ -69,10 +69,10 @@ for sampleNumber in range(BREATHE_IN_START,BREATHE_IN_END):
 	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_IN_START,BREATHE_IN_END], [0,MAX_BREATHE_RATE]))
 # hold it
 for sampleNumber in range(BREATHE_IN_END, BREATHE_OUT_START):
-	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_IN_END,BREATHE_OUT_START], [MAX_BREATHE_RATE,MAX_EXHALE_RATE]))
+	out_lut[sampleNumber] = int(MAX_BREATHE_RATE)
 # breathe out
 for sampleNumber in range( BREATHE_OUT_START,BREATHE_OUT_END):
-	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_START,BREATHE_OUT_END], [MAX_EXHALE_RATE, 0]))
+	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_START,BREATHE_OUT_END], [MAX_BREATHE_RATE, 0]))
 # # reset to mid-amplitude
 # for sampleNumber in range(BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME):
 # 	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME], [MAX_EXHALE_RATE, 0]))
