@@ -32,7 +32,7 @@ then interpolate from zero to mid-amplitude over CHUNK_TIME*(IN_TIME+OUT_TIME) c
 # INIT_EXHALE_DUR = 2048
 # INIT_HOLD_DUR = 5000
 
-MAX_BREATHE_RATE = int(3*AMPLITUDE/5)
+MAX_BREATHE_RATE = int(4*AMPLITUDE/7) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
 MAX_EXHALE_RATE = int(5*AMPLITUDE/11)
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
