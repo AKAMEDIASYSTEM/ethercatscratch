@@ -54,7 +54,7 @@ RESET_TIME = 250
 PROPAGATION_DELAY = 50 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 
-out_lut = [0]*(BREATHE_OUT_END + RESET_TIME)
+out_lut = [0]*(BREATHE_OUT_END+1)
 
 # # exhale
 # for sampleNumber in range(0,INIT_EXHALE_DUR):
