@@ -37,7 +37,7 @@ gap after exhale too long
 # INIT_HOLD_DUR = 5000
 
 MAX_BREATHE_RATE = int(5*AMPLITUDE/9) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
-MAX_EXHALE_RATE = int(4*AMPLITUDE/11)
+MAX_EXHALE_RATE = int(5*AMPLITUDE/11)
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
 # INIT_HOLD_END = INIT_EXHALE_DUR + INIT_HOLD_DUR
