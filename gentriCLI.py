@@ -3,6 +3,7 @@ import math
 from numpy import interp
 import sys
 import logging
+import pyperclip as pc
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
@@ -25,4 +26,5 @@ for cycleNumber in range(NUM_CYCLES):
 		else:
 			out_lut[(cycleNumber*int(NUM_SAMPLES/NUM_CYCLES)) + counter] = int(interp(counter, [0,int(NUM_SAMPLES/NUM_CYCLES)], [2*AMPLITUDE,0]))
 
-print(out_lut)
+pc.copy(str(out_lut))
+# print(out_lut)
