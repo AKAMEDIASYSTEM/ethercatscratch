@@ -57,7 +57,7 @@ RESET_TIME = 125
 PROPAGATION_DELAY = 50 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 
-out_lut = [0]*(BREATHE_OUT_END + RESET_TIME +1)
+out_lut = [0]*(BREATHE_OUT_END +1)
 
 # # exhale
 # for sampleNumber in range(0,INIT_EXHALE_DUR):
@@ -75,10 +75,10 @@ for sampleNumber in range(BREATHE_IN_END, BREATHE_OUT_START):
 	out_lut[sampleNumber] = int(MAX_INHALE_RATE)
 # breathe out
 for sampleNumber in range( BREATHE_OUT_START,BREATHE_OUT_END):
-	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_START,BREATHE_OUT_END], [MAX_INHALE_RATE, AMPLITUDE/2]))
+	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_START,BREATHE_OUT_END], [MAX_INHALE_RATE, 0]))
 # # reset to mid-amplitude
-for sampleNumber in range(BREATHE_OUT_END, BREATHE_OUT_END + RESET_TIME):
-	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME], [AMPLITUDE/2, 0]))
+# for sampleNumber in range(BREATHE_OUT_END, BREATHE_OUT_END + RESET_TIME):
+	# out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME], [AMPLITUDE/2, 0]))
 
 pc.copy(str(out_lut))
 print('ok, check your clipboard')
