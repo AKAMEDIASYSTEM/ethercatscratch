@@ -24,6 +24,7 @@ import luts
 import logging
 import json
 import outputs
+import datetime as dt
 
 
 
@@ -34,7 +35,7 @@ class BasicExample:
     EL3002_PRODUCT_CODE = 0x0bba3052
     EL1259_PRODUCT_CODE = 0x04eb3052
     EL4024_PRODUCT_CODE = 0x0FB83052 # 4-chan 4mA-20mA 12-bit
-    EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 0-10V 16-bit
+    EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 0-10V 16-bit, need different message format so avoid using
     EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 0-10V 12-bit
     SIGHS_LUT_BEGIN = 11 # sighs begin in the lut at this index
 
