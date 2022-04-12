@@ -89,6 +89,7 @@ class BasicExample:
                             for phase_index, c_phase_offset in enumerate(currentAnimation['muscle_offsets'][module_index]):
                                 # logging.debug('phase_offset_value is {}'.format(currentAnimation['muscle_offsets'][module_index][phase_index]))
                                 if int(currentAnimation['muscle_offsets'][module_index][phase_index]) > -1:
+                                    logging.debug('buffer is {}'.format(output_buffer))
                                     output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 else:
                                     # logging.debug('ignoring muscle {} in module {} for animation {}'.format(phase_index, module_index, currentAnimation['name']))
