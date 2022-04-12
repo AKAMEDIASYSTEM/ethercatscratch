@@ -6,7 +6,10 @@
 # try this: kind of like dream1 breathing, but it happens kind of syncopated, cacophony
 # we like sigh_4_6_8_dream3_spreadoutOPT2
 # we like sigh_4_6_8_dream3_spreadoutORIG
-# make a long breathing cycle where the ribs breathe basically individually
+# make a long breathing cycle where the ribs breathe basically individually - DONE
+# we have a big breathe-in in the body (maybe HEAD too) and then one shake in the head
+
+
 
 luts=[
 {
