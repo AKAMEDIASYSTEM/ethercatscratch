@@ -94,6 +94,7 @@ class BasicExample:
                                 else:
                                     # logging.debug('ignoring muscle {} in module {} for animation {}'.format(phase_index, module_index, currentAnimation['name']))
                                     output_buffer.append(0)
+                            logging.debug('trying to send {}'.format(output_buffer))
                             self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
