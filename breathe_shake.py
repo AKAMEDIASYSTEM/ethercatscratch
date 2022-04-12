@@ -56,12 +56,13 @@ BREATHE_IN_END = BREATHE_IN_START + (CHUNK_TIME*IN_TIME)
 BREATHE_OUT_START = BREATHE_IN_END + (HOLD_BREATH_TIME*CHUNK_TIME)
 # print(BREATHE_OUT_START)
 BREATHE_OUT_END = BREATHE_OUT_START + (OUT_TIME*CHUNK_TIME)
+ANIMATION_END = BREATHE_OUT_END + INIT_TO_MID_TIME
 # print(BREATHE_OUT_END)
 RESET_TIME = 125
 PROPAGATION_DELAY = 50 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 
-out_lut = [0]*(BREATHE_OUT_END +1)
+out_lut = [0]*(ANIMATION_END +1)
 
 # # exhale
 # for sampleNumber in range(0,INIT_EXHALE_DUR):
@@ -81,7 +82,9 @@ for sampleNumber in range(BREATHE_IN_END, BREATHE_OUT_START):
 	out_lut[sampleNumber] = int(MAX_INHALE_RATE)
 # breathe out
 for sampleNumber in range( BREATHE_OUT_START,BREATHE_OUT_END):
-	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_START,BREATHE_OUT_END], [MAX_INHALE_RATE, 0]))
+	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_START,BREATHE_OUT_END], [MAX_INHALE_RATE, MAX_EXHALE_RATE]))
+for sampleNumber in range(BREATHE_OUT_END, ANIMATION_END):
+	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_END, ANIMATION_END], [MAX_EXHALE_RATE,0]))
 # # reset to mid-amplitude
 # for sampleNumber in range(BREATHE_OUT_END, BREATHE_OUT_END + RESET_TIME):
 	# out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_OUT_END, BREATHE_OUT_END+ RESET_TIME], [AMPLITUDE/2, 0]))
