@@ -82,10 +82,10 @@ class BasicExample:
             while 1:
                 if(currentlyPlaying):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
-                        logging.debug('thi smodule is {}'.format(this_module))
+                        logging.debug('this module is {}'.format(this_module))
                         if len(currentAnimation['muscle_offsets'][module_index]): # ie, ignore EK1100 modules
                             output_buffer = []
-                            # logging.debug('module {} has offsets to handle.'.format(module_index))
+                            logging.debug('module {} has offsets to handle.'.format(module_index))
                             for phase_index, c_phase_offset in enumerate(currentAnimation['muscle_offsets'][module_index]):
                                 # logging.debug('phase_offset_value is {}'.format(currentAnimation['muscle_offsets'][module_index][phase_index]))
                                 if int(currentAnimation['muscle_offsets'][module_index][phase_index]) > -1:
