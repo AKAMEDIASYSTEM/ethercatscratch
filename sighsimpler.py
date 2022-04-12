@@ -39,7 +39,7 @@ gap after exhale too long
 # note1 good used 5/9 amplitude for MAX_INHALE_RATE
 # note1 good used 5/11 for MAX_EXHALE_RATE
 
-MAX_INHALE_RATE = int(0.55*AMPLITUDE) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
+MAX_INHALE_RATE = int(0.60*AMPLITUDE) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
 MAX_EXHALE_RATE = int(0.45*AMPLITUDE)
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
@@ -54,7 +54,7 @@ BREATHE_OUT_START = BREATHE_IN_END + (HOLD_BREATH_TIME*CHUNK_TIME)
 BREATHE_OUT_END = BREATHE_OUT_START + (OUT_TIME*CHUNK_TIME)
 # print(BREATHE_OUT_END)
 RESET_TIME = 125
-PROPAGATION_DELAY = 50 # ms propagation delay
+PROPAGATION_DELAY = 0 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 
 out_lut = [0]*(BREATHE_OUT_END +1)
