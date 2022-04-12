@@ -82,6 +82,7 @@ class BasicExample:
             while 1:
                 if(currentlyPlaying):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
+                        logging.debug('thi smodule is {}'.format(this_module))
                         if len(currentAnimation['muscle_offsets'][module_index]): # ie, ignore EK1100 modules
                             output_buffer = []
                             # logging.debug('module {} has offsets to handle.'.format(module_index))
@@ -110,7 +111,7 @@ class BasicExample:
                     currentAnimation = luts.luts[set_to_play[play_counter]]
                     play_counter = play_counter + 1
                     # currentAnimation = random.choice(luts.luts)
-                    logging.debug('chose {} for output buffer {}'.format(currentAnimation['name'], output_buffer))
+                    logging.debug('chose {} '.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
 
