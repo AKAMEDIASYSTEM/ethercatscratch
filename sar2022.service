@@ -2,7 +2,7 @@
 Description=SAR2022 launcher
 
 [Service]
-ExecStart=/usr/bin/python3 /home/pi/akatesting/ethercatscratch/aka_basic_example.py
+ExecStart=/usr/bin/python3 /home/pi/akatesting/ethercatscratch/aka_teaching_tree.py
 RestartSec=30
 Restart=always
 User=root
