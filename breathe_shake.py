@@ -39,17 +39,17 @@ gap after exhale too long
 # note1 good used 5/9 amplitude for MAX_INHALE_RATE
 # note1 good used 5/11 for MAX_EXHALE_RATE
 
-MAX_INHALE_RATE = int(0.75*AMPLITUDE) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
+MAX_INHALE_RATE = int(0.55*AMPLITUDE) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
 MAX_EXHALE_RATE = int(0.45*AMPLITUDE)
 '''
 0.51 in is silent and motionless
-0.45 out
+0.45 out is effective and sounds good
 '''
 
-# INIT_HOLD_START = INIT_EXHALE_DUR
-# INIT_HOLD_END = INIT_EXHALE_DUR + INIT_HOLD_DUR
+INIT_TO_MID_TIME = 100
+# INIT_TO_MID_END = INIT_EXHALE_DUR + INIT_HOLD_DUR
 # BREATHE_IN_START = INIT_HOLD_END
-BREATHE_IN_START = 0
+BREATHE_IN_START = INIT_TO_MID_TIME
 # print(BREATHE_IN_START)
 BREATHE_IN_END = BREATHE_IN_START + (CHUNK_TIME*IN_TIME)
 # print(BREATHE_IN_END)
@@ -71,9 +71,11 @@ out_lut = [0]*(BREATHE_OUT_END +1)
 # for sampleNumber in range(INIT_HOLD_START, INIT_HOLD_END):
 # 	out_lut[sampleNumber] = int(AMPLITUDE/2-AMPLITUDE/10)
 
+for sampleNumber in range(0, INIT_TO_MID_TIME):
+	out_lut[sampleNumber] = int(interp(sampleNumber, [0, INIT_TO_MID_TIME], [0, AMPLITUDE*0.5]))
 # breathe in
 for sampleNumber in range(BREATHE_IN_START,BREATHE_IN_END):
-	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_IN_START,BREATHE_IN_END], [0,MAX_INHALE_RATE]))
+	out_lut[sampleNumber] = int(interp(sampleNumber, [BREATHE_IN_START,BREATHE_IN_END], [AMPLITUDE*0.5,MAX_INHALE_RATE]))
 # hold it
 for sampleNumber in range(BREATHE_IN_END, BREATHE_OUT_START):
 	out_lut[sampleNumber] = int(MAX_INHALE_RATE)
