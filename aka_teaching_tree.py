@@ -110,7 +110,7 @@ class BasicExample:
                     currentAnimation = luts.luts[set_to_play[play_counter]]
                     play_counter = play_counter + 1
                     # currentAnimation = random.choice(luts.luts)
-                    logging.debug('chose {}'.format(currentAnimation['name']))
+                    logging.debug('chose {} for output buffer {}'.format(currentAnimation['name'], output_buffer))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
 
