@@ -40,7 +40,7 @@ gap after exhale too long
 # note1 good used 5/11 for MAX_EXHALE_RATE
 
 MAX_INHALE_RATE = int(0.65*AMPLITUDE) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
-MAX_EXHALE_RATE = int(0.25*AMPLITUDE)
+MAX_EXHALE_RATE = int(0.35*AMPLITUDE)
 '''
 0.51 in is silent and motionless
 0.45 out is effective and sounds good
