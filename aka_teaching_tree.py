@@ -20,7 +20,7 @@ from collections import namedtuple
 
 import pysoem
 import random
-import luts_test as luts
+import luts
 import logging
 import json
 import outputs
@@ -82,19 +82,19 @@ class BasicExample:
             while 1:
                 if(currentlyPlaying):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
-                        logging.debug('this module is {}'.format(this_module))
+                        # logging.debug('this module is {}'.format(this_module))
                         if len(currentAnimation['muscle_offsets'][module_index]): # ie, ignore EK1100 modules
                             output_buffer = []
-                            logging.debug('module {} has offsets to handle.'.format(module_index))
+                            # logging.debug('module {} has offsets to handle.'.format(module_index))
                             for phase_index, c_phase_offset in enumerate(currentAnimation['muscle_offsets'][module_index]):
                                 # logging.debug('phase_offset_value is {}'.format(currentAnimation['muscle_offsets'][module_index][phase_index]))
                                 if int(currentAnimation['muscle_offsets'][module_index][phase_index]) > -1:
-                                    logging.debug('buffer is {}'.format(output_buffer))
+                                    # logging.debug('buffer is {}'.format(output_buffer))
                                     output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
                                 else:
                                     # logging.debug('ignoring muscle {} in module {} for animation {}'.format(phase_index, module_index, currentAnimation['name']))
                                     output_buffer.append(0)
-                            logging.debug('trying to send {}'.format(output_buffer))
+                            # logging.debug('trying to send {}'.format(output_buffer))
                             self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
                     counter = counter +1
                     if(counter >= MAX_SAMPLES):
