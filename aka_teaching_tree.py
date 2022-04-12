@@ -247,8 +247,10 @@ if __name__ == '__main__':
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
     for module in outputs.installed:
+        logging.debug(module['name'])
         if len(module['phase_offsets']):
-            logging.debug(module['name'])
+            # logging.debug(module['name'])
+            pass
 
     try:
         BasicExample('eth0').run()
