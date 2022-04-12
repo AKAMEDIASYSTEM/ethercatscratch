@@ -39,8 +39,12 @@ gap after exhale too long
 # note1 good used 5/9 amplitude for MAX_INHALE_RATE
 # note1 good used 5/11 for MAX_EXHALE_RATE
 
-MAX_INHALE_RATE = int(0.51*AMPLITUDE) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
+MAX_INHALE_RATE = int(0.55*AMPLITUDE) # 6*AMPLITUDE/11 a little too subtle, 3/5 a little too phaser-y, try 4/7?
 MAX_EXHALE_RATE = int(0.45*AMPLITUDE)
+'''
+0.51 in is silent and motionless
+0.45 out
+'''
 
 # INIT_HOLD_START = INIT_EXHALE_DUR
 # INIT_HOLD_END = INIT_EXHALE_DUR + INIT_HOLD_DUR
