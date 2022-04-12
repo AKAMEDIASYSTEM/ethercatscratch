@@ -30,6 +30,7 @@ print('starting at rib {}, radiate a waveform with propagation delay {}'.format(
 for module in muscle_offsets_beckhoff:
 	for index, i in enumerate(module):
 		if isRandom:
+			print('isRandom')
 			module[index] = (random.randint(10,100)*delay)
 		else:
 			module[index] = (abs(module[index] - initial)*delay)
