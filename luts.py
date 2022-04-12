@@ -4,7 +4,8 @@
 # dream 2 is sighsimpler_3_6_8_1000
 # dream 3 is sigh_4_6_8_note1_response_this_is_good_cacophony
 # try this: kind of like dream1 breathing, but it happens kind of syncopated, cacophony
-
+# we like sigh_4_6_8_dream3_spreadoutOPT1
+# we like sigh_4_6_8_dream3_spreadoutORIG
 # make a long breathing cycle where the ribs breathe basically individually
 
 luts=[
