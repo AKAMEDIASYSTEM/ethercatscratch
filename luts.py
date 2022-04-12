@@ -1,5 +1,6 @@
 # [ din1 ] [4 BODY] [2 BODY - 6 BLANK] [ din2 ] [8 BODY] [ din3 ] [6 HEAD 2 BODY] [4 HEAD] [1 BODY 3 BLANK]
 # save this one as random1 [shake_1cyc_300, bshake_30_5_25_100]
+# random2 is bshake_30_5_25_100 and then shake_1cyc_300
 
 luts=[
 {
