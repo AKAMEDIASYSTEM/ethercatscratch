@@ -1,13 +1,12 @@
 """Send commands to a network of Beckhoff controllers. Input comes from luts.py, a table of look-up tables that describe animations.
 
-Usage: python aka_basic_example.py
+Usage: python aka_teacing_tree.py
 
 Gratefully adapted from the pysoem library examples at https://github.com/bnjmnp/pysoem
 
-This script expects a physical slave layout according to
-_expected_slave_layout, see below.
+This script expects a physical slave layout according to _expected_slave_layout, see below.
 
-2022 AKA
+2022 AKA for Muhannad Shono
 """
 
 import sys
@@ -76,7 +75,7 @@ class BasicExample:
         counter = 0
         currentlyPlaying = False
         shouldAlternate = True
-        set_to_play = [4, 4, 4, 2] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
+        set_to_play = [0] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
         try:
             while 1:
