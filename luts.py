@@ -5,6 +5,8 @@
 # dream 3 is sigh_4_6_8_note1_response_this_is_good_cacophony
 # try this: kind of like dream1 breathing, but it happens kind of syncopated, cacophony
 
+# make a long breathing cycle where the ribs breathe basically individually
+
 luts=[
 {
 	'name':'sigh_4_6_8_dream3_spreadout',
