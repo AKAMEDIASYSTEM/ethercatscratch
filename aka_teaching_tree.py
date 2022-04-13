@@ -77,7 +77,7 @@ class BasicExample:
         shouldAlternate = True
         set_to_play = [1] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
-        currentAnimation = luts.luts[0]
+        currentAnimation = luts.luts[10]
         try:
             while 1:
                 if(currentlyPlaying):
