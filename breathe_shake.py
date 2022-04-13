@@ -59,10 +59,10 @@ BREATHE_OUT_END = BREATHE_OUT_START + (OUT_TIME*CHUNK_TIME)
 ANIMATION_END = BREATHE_OUT_END + INIT_TO_MID_TIME
 # print(BREATHE_OUT_END)
 IMPULSE_TIME = 125
-PROPAGATION_DELAY = 50 # ms propagation delay
+PROPAGATION_DELAY = 100 # ms propagation delay
 PROPAGATION_TIME = 13 * PROPAGATION_DELAY  # 13 is the number of rib-zones along which signal propagates
 
-out_lut = [0]*(ANIMATION_END +1)
+out_lut = [0]*(ANIMATION_END + PROPAGATION_DELAY+1)
 
 
 # quickly come from zero to do-nothing mid-amplitude
