@@ -9,7 +9,6 @@
 # we like sigh_4_6_8_dream3_spreadoutORIG
 # make a long breathing cycle where the ribs breathe basically individually - DONE
 # we have a big breathe-in in the body (maybe HEAD too) and then one shake in the head
-#   # 7 sighsimpler_3_6_8_1000 has a logn exhale but isn't "it". MS agrees it is nice, it might be the one we were searching for...
 
 MS: 
 dream2 is nicer at the front than dream1 so we should slightly prioritize dream2 over dream1
@@ -27,6 +26,7 @@ sigh_4_6_8_dream3_spreadoutORIG is not too liked because of HEAD weakness
 5: dream3
 6:
 
+at exactly NOON and THREE PM, play the random1 sequence
 
 sigh_4_6_8_dream3_spreadoutOPT3 is a LOSER
 '''
