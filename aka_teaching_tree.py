@@ -19,7 +19,7 @@ from collections import namedtuple
 
 import pysoem
 import random
-import luts
+import luts_finalcandidates as luts
 import logging
 import json
 import outputs
@@ -106,11 +106,16 @@ class BasicExample:
                         time.sleep(sleep_interval)
                     
                 else:
-                    # currentAnimation = random.choice(luts.luts[self.SIGHS_LUT_BEGIN:])
-                    if play_counter > (len(set_to_play) - 1):
-                        play_counter = 0
-                    currentAnimation = luts.luts[set_to_play[play_counter]]
-                    play_counter = play_counter + 1
+                    # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100 is followed by shake
+                    if (currentAnimation['name'] == 'bshake_30_5_25_100'):
+                        logging.debug('playing shake next')
+                        currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100
+                    else:
+                        currentAnimation = random.choice(luts.luts)
+                    # if play_counter > (len(set_to_play) - 1):
+                    #     play_counter = 0
+                    # currentAnimation = luts.luts[set_to_play[play_counter]]
+                    # play_counter = play_counter + 1
                     # currentAnimation = random.choice(luts.luts)
                     logging.debug('chose {} '.format(currentAnimation['name']))
                     MAX_SAMPLES = len(currentAnimation['lut'])
