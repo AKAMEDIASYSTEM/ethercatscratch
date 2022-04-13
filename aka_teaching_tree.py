@@ -72,7 +72,7 @@ class BasicExample:
     def _pdo_update_loop(self):
         print('in update_loop')
         self._master.in_op = True
-        counter = 0
+        sample_counter = 0
         currentlyPlaying = False
         shouldAlternate = True
         set_to_play = [1] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
@@ -90,15 +90,15 @@ class BasicExample:
                                 # logging.debug('phase_offset_value is {}'.format(currentAnimation['muscle_offsets'][module_index][phase_index]))
                                 if int(currentAnimation['muscle_offsets'][module_index][phase_index]) > -1:
                                     # logging.debug('buffer is {}'.format(output_buffer))
-                                    output_buffer.append(currentAnimation['lut'][int(max(0, counter - c_phase_offset))])
+                                    output_buffer.append(currentAnimation['lut'][int(max(0, sample_counter - c_phase_offset))])
                                 else:
                                     # logging.debug('ignoring muscle {} in module {} for animation {}'.format(phase_index, module_index, currentAnimation['name']))
                                     output_buffer.append(0)
                             # logging.debug('trying to send {}'.format(output_buffer))
                             self._master.slaves[module_index].output = struct.pack('{}h'.format(len(output_buffer)), *output_buffer)
-                    counter = counter +1
-                    if(counter >= MAX_SAMPLES):
-                        counter = 0
+                    sample_counter = sample_counter +1
+                    if(sample_counter >= MAX_SAMPLES):
+                        sample_counter = 0
                         currentlyPlaying = False
                         self.all_zero()
                         # sleep_interval = random.randint(7,8)
