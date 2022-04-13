@@ -77,6 +77,7 @@ class BasicExample:
         shouldAlternate = True
         set_to_play = [1] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
+        currentAnimation = luts.luts[0]
         plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
         try:
             while 1:
