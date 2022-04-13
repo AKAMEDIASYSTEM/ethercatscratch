@@ -75,7 +75,7 @@ class BasicExample:
         counter = 0
         currentlyPlaying = False
         shouldAlternate = True
-        set_to_play = [6] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
+        set_to_play = [16, 16, 16, 11] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
         try:
             while 1:
