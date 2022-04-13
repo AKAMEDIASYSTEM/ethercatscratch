@@ -77,7 +77,7 @@ class BasicExample:
         shouldAlternate = True
         set_to_play = [1] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
-        currentAnimation = luts.luts[10]
+        plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
         try:
             while 1:
                 if(currentlyPlaying):
@@ -100,6 +100,7 @@ class BasicExample:
                     if(sample_counter >= MAX_SAMPLES):
                         sample_counter = 0
                         currentlyPlaying = False
+                        plays_remaining = plays_remaining - 1
                         self.all_zero()
                         # sleep_interval = random.randint(7,8)
                         sleep_interval = 1.5
@@ -107,18 +108,17 @@ class BasicExample:
                         time.sleep(sleep_interval)
                     
                 else:
-                    # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100 is followed by shake
-                    if (currentAnimation['name'] == 'bshake_30_5_25_100'):
-                        logging.debug('playing shake next')
-                        currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100
-                    else:
-                        currentAnimation = random.choice(luts.luts)
-                    # if play_counter > (len(set_to_play) - 1):
-                    #     play_counter = 0
-                    # currentAnimation = luts.luts[set_to_play[play_counter]]
-                    # play_counter = play_counter + 1
-                    # currentAnimation = random.choice(luts.luts)
-                    logging.debug('chose {} '.format(currentAnimation['name']))
+                    if plays_remaining == 0:
+                        # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100 is followed by shake
+                        if (currentAnimation['name'] == 'bshake_30_5_25_100'):
+                            logging.debug('playing shake next')
+                            currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100
+                            plays_remaining = currentAnimation['min_play']
+                        else:
+                            currentAnimation = random.choice(luts.luts)
+                            plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['min_play'])*2) 
+    
+                    logging.debug('chose {} plays_remaining is {}'.format(currentAnimation['name'], plays_remaining))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
 
