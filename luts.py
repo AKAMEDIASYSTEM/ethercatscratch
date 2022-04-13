@@ -1,3 +1,4 @@
+'''
 # [ din1 ] [4 BODY] [2 BODY - 6 BLANK] [ din2 ] [8 BODY] [ din3 ] [6 HEAD 2 BODY] [4 HEAD] [1 BODY 3 BLANK]
 # save this one as random1 [shake_1cyc_300, bshake_30_5_25_100]
 # dreaming1 is sigh_4_6_8_note1_response_this_is_good
@@ -10,6 +11,15 @@
 # we have a big breathe-in in the body (maybe HEAD too) and then one shake in the head
 #   # 7 sighsimpler_3_6_8_1000 has a logn exhale but isn't "it". MS agrees it is nice, it might be the one we were searching for...
 
+MS: 
+dream2 is nicer at the front than dream1 so we should slightly prioritize dream2 over dream1
+dream3 is second-best, dream1 is the third-best
+"best" indicates how often we should see them
+
+
+
+
+'''
 luts=[
 {
 	'name':'sigh_4_6_8_dream3_spreadoutOPT3',
