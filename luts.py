@@ -15,7 +15,8 @@ MS:
 dream2 is nicer at the front than dream1 so we should slightly prioritize dream2 over dream1
 dream3 is second-best, dream1 is the third-best
 "best" indicates how often we should see them
-
+we like sigh_4_6_8_dream3_spreadoutOPT2 becomes number 2
+dream3 becomes number 4
 
 
 
