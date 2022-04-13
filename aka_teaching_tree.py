@@ -118,7 +118,7 @@ class BasicExample:
                         else:
                             currentAnimation = random.choice(luts.luts)
                             logging.debug('chose {}'.format(currentAnimation['name']))
-                            plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['min_play'])*2) 
+                            plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['max_play'])) 
     
                     logging.debug('playing {}, plays_remaining is {}'.format(currentAnimation['name'], plays_remaining))
                     MAX_SAMPLES = len(currentAnimation['lut'])
