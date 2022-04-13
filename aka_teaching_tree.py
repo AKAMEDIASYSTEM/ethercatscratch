@@ -117,9 +117,10 @@ class BasicExample:
                             plays_remaining = currentAnimation['min_play']
                         else:
                             currentAnimation = random.choice(luts.luts)
+                            logging.debug('chose {}'.format(currentAnimation['name']))
                             plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['min_play'])*2) 
     
-                    logging.debug('chose {} plays_remaining is {}'.format(currentAnimation['name'], plays_remaining))
+                    logging.debug('playing {}, plays_remaining is {}'.format(currentAnimation['name'], plays_remaining))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     currentlyPlaying = True
 
@@ -131,7 +132,7 @@ class BasicExample:
             print('stopped')
 
     def all_zero(self):
-        logging.debug('all_zero()')
+        # logging.debug('all_zero()')
         for module_index, this_module in enumerate(outputs.installed):
             output_buffer = [0]*len(this_module['phase_offsets'])
             # if it turns out current-driven valves need a middle value to be "off", that logic should
