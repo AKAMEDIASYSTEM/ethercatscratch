@@ -53,6 +53,7 @@ class BasicExample:
         self._daytime_triggered = False
         self._special_triggered = False
         self._currently_playing = False
+        self._plays_remaining = 0
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -83,7 +84,7 @@ class BasicExample:
         set_to_play = [1] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
         currentAnimation = self._current_lut[0]
-        plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
+        self._plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
         try:
             while 1:
                 self.check_time()
@@ -107,19 +108,19 @@ class BasicExample:
                     if(sample_counter >= MAX_SAMPLES):
                         sample_counter = 0
                         self._currently_playing = False
-                        plays_remaining = plays_remaining - 1
+                        self._plays_remaining = self._plays_remaining - 1
                         self.all_zero()
                         sleep_interval = 1.5
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
                 else:
-                    if plays_remaining == 0:
+                    if self._plays_remaining == 0:
                         # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100shake_comes_next is followed by shake
                         if (currentAnimation['name'] == 'bshake_30_5_25_100shake_comes_next'):
                             logging.debug('playing shake next')
                             currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100shake_comes_next
-                            plays_remaining = currentAnimation['min_play']
+                            self._plays_remaining = currentAnimation['min_play']
                         else:
                             if(self._special_triggered):
                                 logging.debug('setting the pre-shake animation')
@@ -128,9 +129,9 @@ class BasicExample:
                                 logging.debug('special trigger was false')
                                 currentAnimation = random.choice(self._current_lut)
                             logging.debug('chose {}'.format(currentAnimation['name']))
-                            plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['max_play'])) 
+                            self._plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['max_play'])) 
     
-                    logging.debug('playing {}, plays_remaining is {}'.format(currentAnimation['name'], plays_remaining))
+                    logging.debug('playing {}, self._plays_remaining is {}'.format(currentAnimation['name'], self._plays_remaining))
                     MAX_SAMPLES = len(currentAnimation['lut'])
                     self._currently_playing = True
 
@@ -225,12 +226,13 @@ class BasicExample:
                 self._daytime_triggered = True
                 self._morning_triggered = False
                 # self._special_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 34):
+        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 37):
             # special circumstance where we play the shake
                 if not self._special_triggered:
                     logging.debug('SPECIAL TIME')
                     self._special_triggered = True
                     self._currently_playing = False
+                    self._plays_remaining = 0
         else:
             self._special_triggered = False
 
