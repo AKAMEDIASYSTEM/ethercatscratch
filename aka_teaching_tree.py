@@ -223,10 +223,10 @@ class BasicExample:
         if ((this_time.hour == 11) or (this_time.hour == 3)) and (this_time.minute == 3):
             # special circumstance where we play the shake
                 if not self._special_triggered:
-                logging.debug('SPECIAL TIME')
-                self.currentAnimation = luts.shake[1]
-                self._daytime_triggered = False
-                self._morning_triggered = False
+                    logging.debug('SPECIAL TIME')
+                    self.currentAnimation = luts.shake[1]
+                    self._daytime_triggered = False
+                    self._morning_triggered = False
 
     @staticmethod
     def _check_slave(slave, pos):
