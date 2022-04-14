@@ -73,7 +73,7 @@ class BasicExample:
             time.sleep(0.001)
 
     def _pdo_update_loop(self):
-        print('in update_loop')
+        logging.debug('in update_loop')
         self._master.in_op = True
         sample_counter = 0
         currentlyPlaying = False
@@ -115,7 +115,7 @@ class BasicExample:
                 else:
                     if plays_remaining == 0:
                         # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100 is followed by shake
-                        if (currentAnimation['name'] == 'bshake_30_5_25_100'):
+                        if (currentAnimation['name'] == 'bshake_30_5_25_100shake_comes_next'):
                             logging.debug('playing shake next')
                             currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100
                             plays_remaining = currentAnimation['min_play']
@@ -217,6 +217,12 @@ class BasicExample:
                 self._current_lut = luts.day_luts
                 self._daytime_triggered = True
                 self._morning_triggered = False
+        if ((this_time.hour == 11) || (this_time.hour == 3)) and (this_time.minute <= 1):
+            # special circumstance where we play the shake
+            logging.debug('SPECIAL TIME')
+            self.currentAnimation = luts.shake[1]
+            self._daytime_triggered = False
+            self._morning_triggered = False
 
     @staticmethod
     def _check_slave(slave, pos):
