@@ -54,6 +54,7 @@ class BasicExample:
         self._special_triggered = False
         self._currently_playing = False
         self._plays_remaining = 0
+        self._should_play_shake = True
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -122,9 +123,10 @@ class BasicExample:
                             currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100shake_comes_next
                             self._plays_remaining = currentAnimation['min_play']
                         else:
-                            if(self._special_triggered):
+                            if(self._special_triggered and self._should_play_shake):
                                 logging.debug('setting the pre-shake animation')
                                 currentAnimation = luts.shake[1]
+                                self._should_play_shake = False
                             else:
                                 logging.debug('special trigger was false')
                                 currentAnimation = random.choice(self._current_lut)
@@ -212,6 +214,13 @@ class BasicExample:
     def check_time(self):
         '''Check the time and change self._current_lut depending on when we are in the day.'''
         this_time = dt.datetime.now()
+        if(this_time.month == 4 and this_time.day == 14):
+            if not self._demoday_triggered:
+                logging.debug('it is demo day')
+                self._current_lut = luts.demoday_lut
+                self._demoday_triggered = True
+            return
+
         if (this_time.hour == self.DAY_BEGIN_HOUR) and (this_time.minute <= self.DAY_BEGIN_MINUTE):
             if not self._morning_triggered:
                 logging.debug('setting the time-of-day to morning-time')
@@ -233,8 +242,10 @@ class BasicExample:
                     self._special_triggered = True
                     self._currently_playing = False
                     self._plays_remaining = 0
+                    self._should_play_shake = True
         else:
             self._special_triggered = False
+            self._should_play_shake = True
 
     @staticmethod
     def _check_slave(slave, pos):
