@@ -82,7 +82,6 @@ class BasicExample:
         try:
             while 1:
                 this_time = dt.datetime.now()
-                logging.debug('time is {} minutes'.format(this_time.minute))
                 if(currentlyPlaying):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
                         # logging.debug('this module is {}'.format(this_module))
