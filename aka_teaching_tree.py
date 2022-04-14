@@ -38,7 +38,7 @@ class BasicExample:
     EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 0-10V 12-bit
     SIGHS_LUT_BEGIN = 11 # sighs begin in the lut at this index
     DAY_BEGIN_HOUR = 10
-    DAY_BEGIN_MINUTE = 39
+    DAY_BEGIN_MINUTE = 42
 
 
     def __init__(self, ifname):
