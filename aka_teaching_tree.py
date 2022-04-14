@@ -217,7 +217,7 @@ class BasicExample:
                 self._current_lut = luts.day_luts
                 self._daytime_triggered = True
                 self._morning_triggered = False
-        if ((this_time.hour == 11) || (this_time.hour == 3)) and (this_time.minute <= 1):
+        if ((this_time.hour == 11) or (this_time.hour == 3)) and (this_time.minute <= 1):
             # special circumstance where we play the shake
             logging.debug('SPECIAL TIME')
             self.currentAnimation = luts.shake[1]
