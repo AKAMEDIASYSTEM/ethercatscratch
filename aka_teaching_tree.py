@@ -48,6 +48,8 @@ class BasicExample:
         self._master.in_op = False
         self._master.do_check_state = False
         self._current_lut = luts.luts
+        self._morning_triggered = False
+        self._daytime_triggered = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -81,7 +83,7 @@ class BasicExample:
         plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
         try:
             while 1:
-                this_time = dt.datetime.now()
+                self.check_time()
                 if(currentlyPlaying):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
                         # logging.debug('this module is {}'.format(this_module))
@@ -198,6 +200,22 @@ class BasicExample:
 
         if not all_slaves_reached_op_state:
             raise BasicExampleError('not all slaves reached OP state')
+
+    def check_time(self):
+        '''Check the time and change self._current_lut depending on when we are in the day.'''
+        this_time = dt.datetime.now()
+        if (this_time.hour == 10)
+            if not self._morning_triggered:
+                logging.debug('setting the trigger to morning-time')
+                self._current_lut = luts.morning_luts
+                self._morning_triggered = True
+                self._daytime_triggered = False
+        else:
+            if not self._daytime_triggered:
+                logging.debug('setting the trigger to day-time')
+                self._current_lut = luts.day_luts
+                self._daytime_triggered = True
+                self._morning_triggered = False
 
     @staticmethod
     def _check_slave(slave, pos):
