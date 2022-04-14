@@ -206,7 +206,7 @@ class BasicExample:
     def check_time(self):
         '''Check the time and change self._current_lut depending on when we are in the day.'''
         this_time = dt.datetime.now()
-        if (this_time.hour >= self.DAY_BEGIN_HOUR) and (this_time.minute >= self.DAY_BEGIN_MINUTE):
+        if (this_time.hour == self.DAY_BEGIN_HOUR) and (this_time.minute <= self.DAY_BEGIN_MINUTE):
             if not self._morning_triggered:
                 logging.debug('setting the trigger to morning-time')
                 self._current_lut = luts.morning_luts
