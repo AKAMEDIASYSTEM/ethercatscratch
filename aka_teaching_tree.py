@@ -52,6 +52,7 @@ class BasicExample:
         self._morning_triggered = False
         self._daytime_triggered = False
         self._special_triggered = False
+        self._currently_playing = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -77,7 +78,7 @@ class BasicExample:
         logging.debug('in update_loop')
         self._master.in_op = True
         sample_counter = 0
-        currentlyPlaying = False
+        # currentlyPlaying = False
         shouldAlternate = True
         set_to_play = [1] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
@@ -86,7 +87,7 @@ class BasicExample:
         try:
             while 1:
                 self.check_time()
-                if(currentlyPlaying):
+                if(self._currently_playing):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
                         # logging.debug('this module is {}'.format(this_module))
                         if len(currentAnimation['muscle_offsets'][module_index]): # ie, ignore EK1100 modules
@@ -105,29 +106,31 @@ class BasicExample:
                     sample_counter = sample_counter +1
                     if(sample_counter >= MAX_SAMPLES):
                         sample_counter = 0
-                        currentlyPlaying = False
+                        self._currently_playing = False
                         plays_remaining = plays_remaining - 1
                         self.all_zero()
-                        # sleep_interval = random.randint(7,8)
                         sleep_interval = 1.5
                         logging.debug('sleep for {} seconds'.format(sleep_interval))
                         time.sleep(sleep_interval)
                     
                 else:
                     if plays_remaining == 0:
-                        # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100 is followed by shake
+                        # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100shake_comes_next is followed by shake
                         if (currentAnimation['name'] == 'bshake_30_5_25_100shake_comes_next'):
                             logging.debug('playing shake next')
-                            currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100
+                            currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100shake_comes_next
                             plays_remaining = currentAnimation['min_play']
                         else:
-                            currentAnimation = random.choice(self._current_lut)
+                            if(self._special_triggered):
+                                currentAnimation = luts.shake[1]
+                            else:
+                                currentAnimation = random.choice(self._current_lut)
                             logging.debug('chose {}'.format(currentAnimation['name']))
                             plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['max_play'])) 
     
                     logging.debug('playing {}, plays_remaining is {}'.format(currentAnimation['name'], plays_remaining))
                     MAX_SAMPLES = len(currentAnimation['lut'])
-                    currentlyPlaying = True
+                    self._currently_playing = True
 
                 time.sleep(0.001)
                 
@@ -220,11 +223,11 @@ class BasicExample:
                 self._daytime_triggered = True
                 self._morning_triggered = False
                 self._special_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 7):
+        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 14):
             # special circumstance where we play the shake
                 if not self._special_triggered:
                     logging.debug('SPECIAL TIME')
-                    self.currentAnimation = luts.shake[1]
+                    self._currently_playing = False
                     self._daytime_triggered = True
                     self._morning_triggered = True
                     self._special_triggered = True
