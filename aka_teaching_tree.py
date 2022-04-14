@@ -131,7 +131,8 @@ class BasicExample:
                             else:
                                 logging.debug('choosing a new animation, special trigger was false')
                                 if not self._demoday_triggered:
-                                    currentAnimation = random.choice(self._current_lut)
+                                    # currentAnimation = random.choice(self._current_lut)
+                                    currentAnimation = self._current_lut[0]
                                 else:
                                     if play_counter > (len(self._current_lut) - 1):
                                         play_counter = 0
@@ -222,7 +223,7 @@ class BasicExample:
     def check_time(self):
         '''Check the time and change self._current_lut depending on when we are in the day.'''
         this_time = dt.datetime.now()
-        if(this_time.month == 4 and this_time.day == 14):
+        if(this_time.month == 4 and this_time.day == 21):
             if not self._demoday_triggered:
                 logging.debug('it is demo day')
                 self._current_lut = luts.demoday_lut
