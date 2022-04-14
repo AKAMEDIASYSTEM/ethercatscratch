@@ -81,6 +81,8 @@ class BasicExample:
         plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
         try:
             while 1:
+                this_time = dt.datetime.now()
+                logging.debug('time is {} minutes'.format(t.minute))
                 if(currentlyPlaying):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
                         # logging.debug('this module is {}'.format(this_module))
