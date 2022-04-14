@@ -156,11 +156,12 @@ class BasicExample:
     def pickone(self, randNum):
         ''' respect each animation's play_frequency by rolling dice.'''
         drawn = random.choice(self._current_lut)
-        print('picked {} with play_frequency {}'.format(drawn['name'], drawn['play_frequency']))
+        logging.debug('considering {} with play_frequency {} versus randNum {}'.format(drawn['name'], drawn['play_frequency'], randNum))
         if drawn['play_frequency'] < randNum:
-            print('{} met parameters'.format(drawn['name']))
+            logging.debug('returning {}'.format(drawn['name']))
             return drawn
         else:
+            logging.debug('rejected {} and rechoosing'.format(drawn['name']))
             return self.pickone(random.random())
 
     def all_zero(self):
