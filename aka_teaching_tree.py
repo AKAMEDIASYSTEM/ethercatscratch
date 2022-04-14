@@ -124,7 +124,6 @@ class BasicExample:
                             if(self._special_triggered):
                                 logging.debug('setting the pre-shake animation')
                                 currentAnimation = luts.shake[1]
-                                self._special_triggered = False
                             else:
                                 logging.debug('special trigger was false')
                                 currentAnimation = random.choice(self._current_lut)
@@ -226,10 +225,11 @@ class BasicExample:
                 self._daytime_triggered = True
                 self._morning_triggered = False
                 self._special_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 27):
+        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 29):
             # special circumstance where we play the shake
                 if not self._special_triggered:
                     logging.debug('SPECIAL TIME')
+                    self._special_triggered = True
         else:
             self._special_triggered = False
 
