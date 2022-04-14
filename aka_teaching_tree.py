@@ -47,6 +47,7 @@ class BasicExample:
         self._master = pysoem.Master()
         self._master.in_op = False
         self._master.do_check_state = False
+        self._current_lut = luts.luts
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -76,7 +77,7 @@ class BasicExample:
         shouldAlternate = True
         set_to_play = [1] # -4 'sigh_4_6_8_note1_response_this_is_good' is the good one
         play_counter = 0
-        currentAnimation = luts.luts[0]
+        currentAnimation = self._current_lut[0]
         plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
         try:
             while 1:
@@ -116,7 +117,7 @@ class BasicExample:
                             currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100
                             plays_remaining = currentAnimation['min_play']
                         else:
-                            currentAnimation = random.choice(luts.luts)
+                            currentAnimation = random.choice(self._current_lut)
                             logging.debug('chose {}'.format(currentAnimation['name']))
                             plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['max_play'])) 
     
