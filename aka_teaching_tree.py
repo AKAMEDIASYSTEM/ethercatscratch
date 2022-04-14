@@ -131,7 +131,8 @@ class BasicExample:
                             else:
                                 logging.debug('choosing a new animation, special trigger was false')
                                 if not self._demoday_triggered:
-                                    currentAnimation = random.choice(self._current_lut)
+                                    # currentAnimation = random.choice(self._current_lut)
+                                    currentAnimation = self.pickone(random.random())
                                 else:
                                     if play_counter > (len(self._current_lut) - 1):
                                         play_counter = 0
@@ -151,6 +152,15 @@ class BasicExample:
         except KeyboardInterrupt:
             # ctrl-C abort handling
             print('stopped')
+
+    def pickone(self, randNum):
+        drawn = random.choice(self._current_lut)
+        print('picked {}'.format(drawn['name']))
+        if drawn['play_frequency'] < randNum:
+            print('{} met parameters'.format(drawn['name']))
+            return drawn
+        else:
+            return pickone(randNum)
 
     def all_zero(self):
         # logging.debug('all_zero()')
