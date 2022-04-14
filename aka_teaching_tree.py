@@ -133,9 +133,9 @@ class BasicExample:
                                 if not self._demoday_triggered:
                                     currentAnimation = random.choice(self._current_lut)
                                 else:
-                                    logging.debug('it is demo day so incrementing to playcount {}'.format(play_counter))
                                     if play_counter > (len(self._current_lut) - 1):
                                         play_counter = 0
+                                    logging.debug('it is demo day so we are doing playcount which is {}'.format(play_counter))
                                     currentAnimation = self._current_lut[play_counter]
                                     play_counter = play_counter + 1
                             logging.debug('chose {}'.format(currentAnimation['name']))
