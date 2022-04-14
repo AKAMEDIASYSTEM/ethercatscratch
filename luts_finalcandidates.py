@@ -269,7 +269,7 @@ morning_luts=[
 	}
 ]
 
-demoday_luts=[
+demoday_lut=[
 {
 	'name':'sigh_4_6_8_note1_response_this_is_good_cacophony',
 	'min_play':1,
