@@ -51,6 +51,7 @@ class BasicExample:
         self._current_lut = luts.morning_luts
         self._morning_triggered = False
         self._daytime_triggered = False
+        self._special_triggered = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
@@ -211,18 +212,21 @@ class BasicExample:
                 self._current_lut = luts.morning_luts
                 self._morning_triggered = True
                 self._daytime_triggered = False
+                self._special_triggered = False
         else:
             if not self._daytime_triggered:
                 logging.debug('setting the trigger to day-time')
                 self._current_lut = luts.day_luts
                 self._daytime_triggered = True
                 self._morning_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 3)) and (this_time.minute <= 1):
+                self._special_triggered = False
+        if ((this_time.hour == 11) or (this_time.hour == 3)) and (this_time.minute == 3):
             # special circumstance where we play the shake
-            logging.debug('SPECIAL TIME')
-            self.currentAnimation = luts.shake[1]
-            self._daytime_triggered = False
-            self._morning_triggered = False
+                if not self._special_triggered:
+                logging.debug('SPECIAL TIME')
+                self.currentAnimation = luts.shake[1]
+                self._daytime_triggered = False
+                self._morning_triggered = False
 
     @staticmethod
     def _check_slave(slave, pos):
