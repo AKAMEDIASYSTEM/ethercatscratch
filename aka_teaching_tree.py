@@ -228,32 +228,34 @@ class BasicExample:
                 self._current_lut = luts.demoday_lut
                 self._demoday_triggered = True
             return
+        else:
+            self._current_lut = luts.day_luts
 
-        if (this_time.hour == self.DAY_BEGIN_HOUR) and (this_time.minute <= self.DAY_BEGIN_MINUTE):
-            if not self._morning_triggered:
-                logging.debug('setting the time-of-day to morning-time')
-                self._current_lut = luts.morning_luts
-                self._morning_triggered = True
-                self._daytime_triggered = False
+        # if (this_time.hour == self.DAY_BEGIN_HOUR) and (this_time.minute <= self.DAY_BEGIN_MINUTE):
+        #     if not self._morning_triggered:
+        #         logging.debug('setting the time-of-day to morning-time')
+        #         self._current_lut = luts.day_luts # NOTE we are not doing morning_luts at all any more
+        #         self._morning_triggered = True
+        #         self._daytime_triggered = False
+        #         # self._special_triggered = False
+        # else:
+        #     if not self._daytime_triggered:
+        #         logging.debug('setting the time-of-day to day-time')
+        #         self._current_lut = luts.day_luts
+        #         self._daytime_triggered = True
+        #         self._morning_triggered = False
                 # self._special_triggered = False
-        else:
-            if not self._daytime_triggered:
-                logging.debug('setting the time-of-day to day-time')
-                self._current_lut = luts.day_luts
-                self._daytime_triggered = True
-                self._morning_triggered = False
-                # self._special_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 37):
-            # special circumstance where we play the shake
-                if not self._special_triggered:
-                    logging.debug('SPECIAL TIME')
-                    self._special_triggered = True
-                    self._currently_playing = False
-                    self._plays_remaining = 0
-                    self._should_play_shake = True
-        else:
-            self._special_triggered = False
-            self._should_play_shake = True
+        # if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 37):
+        #     # special circumstance where we play the shake
+        #         if not self._special_triggered:
+        #             logging.debug('SPECIAL TIME')
+        #             self._special_triggered = True
+        #             self._currently_playing = False
+        #             self._plays_remaining = 0
+        #             self._should_play_shake = True
+        # else:
+        #     self._special_triggered = False
+        #     self._should_play_shake = True
 
     @staticmethod
     def _check_slave(slave, pos):
