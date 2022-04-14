@@ -155,7 +155,7 @@ class BasicExample:
 
     def pickone(self, randNum):
         drawn = random.choice(self._current_lut)
-        print('picked {}'.format(drawn['name']))
+        print('picked {} with play_frequency {}'.format(drawn['name'], drawn['play_frequency']))
         if drawn['play_frequency'] < randNum:
             print('{} met parameters'.format(drawn['name']))
             return drawn
