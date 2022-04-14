@@ -154,6 +154,7 @@ class BasicExample:
             print('stopped')
 
     def pickone(self, randNum):
+        ''' respect each animation's play_frequency by rolling dice.'''
         drawn = random.choice(self._current_lut)
         print('picked {} with play_frequency {}'.format(drawn['name'], drawn['play_frequency']))
         if drawn['play_frequency'] < randNum:
