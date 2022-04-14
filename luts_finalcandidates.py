@@ -146,7 +146,7 @@ day_luts=[
 	},
 {
 	'name':'square_2048_unison_aka_likes',
-	'min_play':3,
+	'min_play':1,
 	'max_play':8,
 	'candidate for 21st': True,
 	'play freq':'medium',
