@@ -220,13 +220,13 @@ class BasicExample:
                 self._daytime_triggered = True
                 self._morning_triggered = False
                 self._special_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 3)) and (this_time.minute == 5):
+        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 7):
             # special circumstance where we play the shake
                 if not self._special_triggered:
                     logging.debug('SPECIAL TIME')
                     self.currentAnimation = luts.shake[1]
-                    self._daytime_triggered = False
-                    self._morning_triggered = False
+                    self._daytime_triggered = True
+                    self._morning_triggered = True
                     self._special_triggered = True
 
     @staticmethod
