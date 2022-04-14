@@ -37,6 +37,8 @@ class BasicExample:
     EL4102_PRODUCT_CODE = 0x10063052 # 2-chan 0-10V 16-bit, need different message format so avoid using
     EL4008_PRODUCT_CODE = 0x0FA83052 # 8-chan 0-10V 12-bit
     SIGHS_LUT_BEGIN = 11 # sighs begin in the lut at this index
+    DAY_BEGIN_HOUR = 10
+    DAY_BEGIN_MINUTE = 39
 
 
     def __init__(self, ifname):
@@ -204,7 +206,7 @@ class BasicExample:
     def check_time(self):
         '''Check the time and change self._current_lut depending on when we are in the day.'''
         this_time = dt.datetime.now()
-        if (this_time.hour == 10):
+        if (this_time.hour >= DAY_BEGIN_HOUR) and (this_time.minute >= DAY_BEGIN_MINUTE):
             if not self._morning_triggered:
                 logging.debug('setting the trigger to morning-time')
                 self._current_lut = luts.morning_luts
