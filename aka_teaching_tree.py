@@ -161,7 +161,7 @@ class BasicExample:
             print('{} met parameters'.format(drawn['name']))
             return drawn
         else:
-            return pickone(randNum)
+            return self.pickone(random.random())
 
     def all_zero(self):
         # logging.debug('all_zero()')
