@@ -217,15 +217,15 @@ class BasicExample:
                 self._current_lut = luts.morning_luts
                 self._morning_triggered = True
                 self._daytime_triggered = False
-                self._special_triggered = False
+                # self._special_triggered = False
         else:
             if not self._daytime_triggered:
                 logging.debug('setting the time-of-day to day-time')
                 self._current_lut = luts.day_luts
                 self._daytime_triggered = True
                 self._morning_triggered = False
-                self._special_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 29):
+                # self._special_triggered = False
+        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 31):
             # special circumstance where we play the shake
                 if not self._special_triggered:
                     logging.debug('SPECIAL TIME')
