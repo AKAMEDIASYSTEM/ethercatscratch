@@ -52,6 +52,7 @@ class BasicExample:
         self._morning_triggered = False
         self._daytime_triggered = False
         self._special_triggered = False
+        self._demoday_triggered = False
         self._currently_playing = False
         self._plays_remaining = 0
         self._should_play_shake = True
@@ -128,8 +129,14 @@ class BasicExample:
                                 currentAnimation = luts.shake[1]
                                 self._should_play_shake = False
                             else:
-                                logging.debug('special trigger was false')
-                                currentAnimation = random.choice(self._current_lut)
+                                logging.debug('choosing a new animaiton, special trigger was false')
+                                if not self._demoday_triggered:
+                                    currentAnimation = random.choice(self._current_lut)
+                                else:
+                                    logging.debug('it is demo day so incrementing to playcount {}'.format(play_counter))
+                                    if play_counter > (len(self._current_lut) - 1):
+                                        play_counter = 0
+                                    currentAnimation = self._current_lut[play_counter]
                             logging.debug('chose {}'.format(currentAnimation['name']))
                             self._plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['max_play'])) 
     
