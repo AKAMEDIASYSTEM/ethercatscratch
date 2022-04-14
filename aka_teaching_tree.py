@@ -47,7 +47,6 @@ class BasicExample:
         self._master = pysoem.Master()
         self._master.in_op = False
         self._master.do_check_state = False
-        self.currentAnimation = {}
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
         # 56 outputs with 4024s ganged together on one DIN
         self._expected_slave_layout = {0: SlaveSet('EK1100', self.EK1100_PRODUCT_CODE, None),
