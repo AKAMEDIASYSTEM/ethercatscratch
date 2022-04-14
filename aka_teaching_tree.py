@@ -47,7 +47,7 @@ class BasicExample:
         self._master = pysoem.Master()
         self._master.in_op = False
         self._master.do_check_state = False
-        self._current_lut = luts.luts
+        self._current_lut = luts.morning_luts
         self._morning_triggered = False
         self._daytime_triggered = False
         SlaveSet = namedtuple('SlaveSet', 'name product_code config_func')
