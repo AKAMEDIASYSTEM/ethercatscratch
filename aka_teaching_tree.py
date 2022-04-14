@@ -48,7 +48,7 @@ class BasicExample:
         self._master = pysoem.Master()
         self._master.in_op = False
         self._master.do_check_state = False
-        self._current_lut = luts.morning_luts
+        self._current_lut = luts.day_luts
         self._morning_triggered = False
         self._daytime_triggered = False
         self._special_triggered = False
@@ -89,7 +89,7 @@ class BasicExample:
         self._plays_remaining = 0 # when we choose an animation we set this to random.randint(min_plays, min_plays*3)
         try:
             while 1:
-                self.check_time()
+                # self.check_time() # removing all check_time logic, as we decided to go back to simpler form
                 if(self._currently_playing):
                     for module_index, this_module in enumerate(currentAnimation['muscle_offsets']):
                         # logging.debug('this module is {}'.format(this_module))
@@ -234,7 +234,7 @@ class BasicExample:
     def check_time(self):
         '''Check the time and change self._current_lut depending on when we are in the day.'''
         this_time = dt.datetime.now()
-        if(this_time.month == 4 and this_time.day == 21):
+        if(this_time.month == 4 and this_time.day == 12): # 
             if not self._demoday_triggered:
                 logging.debug('it is demo day')
                 self._current_lut = luts.demoday_lut
