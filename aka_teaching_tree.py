@@ -131,8 +131,7 @@ class BasicExample:
                             else:
                                 logging.debug('choosing a new animation, special trigger was false')
                                 if not self._demoday_triggered:
-                                    # currentAnimation = random.choice(self._current_lut)
-                                    currentAnimation = self._current_lut[0]
+                                    currentAnimation = random.choice(self._current_lut)
                                 else:
                                     if play_counter > (len(self._current_lut) - 1):
                                         play_counter = 0
