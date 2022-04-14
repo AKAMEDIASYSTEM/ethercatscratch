@@ -225,14 +225,16 @@ class BasicExample:
                 self._daytime_triggered = True
                 self._morning_triggered = False
                 self._special_triggered = False
-        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 18):
+        if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 20):
             # special circumstance where we play the shake
                 if not self._special_triggered:
                     logging.debug('SPECIAL TIME')
                     self._currently_playing = False
                     self._daytime_triggered = True
                     self._morning_triggered = True
-                    self._special_triggered = True
+                    # self._special_triggered = True
+        else:
+            self._special_triggered = False
 
     @staticmethod
     def _check_slave(slave, pos):
