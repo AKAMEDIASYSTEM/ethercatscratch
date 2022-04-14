@@ -157,7 +157,7 @@ class BasicExample:
         ''' respect each animation's play_frequency by rolling dice.'''
         drawn = random.choice(self._current_lut)
         logging.debug('considering {} with play_frequency {} versus randNum {}'.format(drawn['name'], drawn['play_frequency'], randNum))
-        if drawn['play_frequency'] < randNum:
+        if drawn['play_frequency'] >= randNum:
             logging.debug('returning {}'.format(drawn['name']))
             return drawn
         else:
