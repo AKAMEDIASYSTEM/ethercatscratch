@@ -118,27 +118,13 @@ class BasicExample:
                     
                 else:
                     if self._plays_remaining == 0:
-                        # when choosing a new animation, random1 is the only bunched one, make sure bshake_30_5_25_100shake_comes_next is followed by shake
-                        if (currentAnimation['name'] == 'bshake_30_5_25_100shake_comes_next'):
+                        if (currentAnimation['name'] == 'bshake_30_5_25_100'):
                             logging.debug('playing shake next')
                             currentAnimation = luts.shake[0] # the only shake in the luts file is played after bshake_30_5_25_100shake_comes_next
                             self._plays_remaining = currentAnimation['min_play']
                         else:
-                            if(self._special_triggered and self._should_play_shake):
-                                logging.debug('setting the pre-shake animation')
-                                currentAnimation = luts.shake[1]
-                                self._should_play_shake = False
-                            else:
-                                logging.debug('choosing a new animation, special trigger was false')
-                                if not self._demoday_triggered:
-                                    # currentAnimation = random.choice(self._current_lut)
-                                    currentAnimation = self.pickone(random.random())
-                                else:
-                                    if play_counter > (len(self._current_lut) - 1):
-                                        play_counter = 0
-                                    logging.debug('it is demo day so we are doing playcount which is {}'.format(play_counter))
-                                    currentAnimation = self._current_lut[play_counter]
-                                    play_counter = play_counter + 1
+                            logging.debug('choosing a new animation') 
+                            currentAnimation = self.pickone(random.random())
                             logging.debug('chose {}'.format(currentAnimation['name']))
                             self._plays_remaining = random.randint(int(currentAnimation['min_play']), int(currentAnimation['max_play'])) 
     
@@ -231,43 +217,7 @@ class BasicExample:
         if not all_slaves_reached_op_state:
             raise BasicExampleError('not all slaves reached OP state')
 
-    def check_time(self):
-        '''Check the time and change self._current_lut depending on when we are in the day.'''
-        this_time = dt.datetime.now()
-        if(this_time.month == 4 and this_time.day == 12): # 
-            if not self._demoday_triggered:
-                logging.debug('it is demo day')
-                self._current_lut = luts.demoday_lut
-                self._demoday_triggered = True
-            return
-        else:
-            self._current_lut = luts.day_luts
 
-        # if (this_time.hour == self.DAY_BEGIN_HOUR) and (this_time.minute <= self.DAY_BEGIN_MINUTE):
-        #     if not self._morning_triggered:
-        #         logging.debug('setting the time-of-day to morning-time')
-        #         self._current_lut = luts.day_luts # NOTE we are not doing morning_luts at all any more
-        #         self._morning_triggered = True
-        #         self._daytime_triggered = False
-        #         # self._special_triggered = False
-        # else:
-        #     if not self._daytime_triggered:
-        #         logging.debug('setting the time-of-day to day-time')
-        #         self._current_lut = luts.day_luts
-        #         self._daytime_triggered = True
-        #         self._morning_triggered = False
-                # self._special_triggered = False
-        # if ((this_time.hour == 11) or (this_time.hour == 15)) and (this_time.minute == 37):
-        #     # special circumstance where we play the shake
-        #         if not self._special_triggered:
-        #             logging.debug('SPECIAL TIME')
-        #             self._special_triggered = True
-        #             self._currently_playing = False
-        #             self._plays_remaining = 0
-        #             self._should_play_shake = True
-        # else:
-        #     self._special_triggered = False
-        #     self._should_play_shake = True
 
     @staticmethod
     def _check_slave(slave, pos):
